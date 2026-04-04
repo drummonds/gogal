@@ -1,0 +1,21 @@
+# Build artifacts
+*.wasm
+dist/
+
+# Generated docs
+docs/*.html
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Test
+.coverage
+*.test

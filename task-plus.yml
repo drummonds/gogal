@@ -1,0 +1,11 @@
+type: library
+check: [task check]
+changelog_format: keepachangelog
+pages_build:
+    - task docs:build
+pages_deploy:
+    - site: h3-gogal
+      type: statichost
+remotes:
+    - origin
+    - github
