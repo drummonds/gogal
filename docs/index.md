@@ -13,12 +13,12 @@ Pure Go SVG chart library with CSS-only interactivity and HTMX integration.
 
 | # | Name | What it demonstrates |
 |---|------|---------------------|
-| 01 | Sparkline | Minimal inline chart, no axes |
-| 02 | Static Line | Full chart with axes, legend, CSS tooltips |
-| 03 | Multi-Series | Multiple series, color cycling, dual axis modes |
-| 04 | Bar Chart | Vertical, horizontal, grouped, stacked |
-| 05 | Interactive HTMX | Legend toggling, axis switching |
-| 06 | Live SSE | Real-time data updates |
-| 07 | Scatter | XY scatter plots |
-| 08 | WASM Demo | Charts running in the browser |
-| 09 | Dashboard | Multiple charts, shared data |
+| [01](01_sparkline/) | Sparkline | Minimal inline chart, no axes |
+| [02](02_static_line/) | Static Line | Full chart with axes, legend, CSS tooltips |
+| [03](03_multi_series/) | Multi-Series | Multiple series, color cycling, dual axis modes |
+| [04](04_bar_chart/) | Bar Chart | Vertical, horizontal, grouped, stacked *(planned)* |
+| [05](05_htmx/) | Interactive HTMX | Legend toggling via HTMX + WithHiddenSeries |
+| [06](06_live_sse/) | Live SSE | Real-time chart updates via Server-Sent Events |
+| [07](07_scatter/) | Scatter | XY scatter plots *(planned)* |
+| [08](08_wasm/) | WASM Demo | Full chart running in the browser |
+| [09](09_dashboard/) | Dashboard | Multiple charts, themes, sizes on one page |

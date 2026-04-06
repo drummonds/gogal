@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>02 — Static Line - gogal</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <style>
+        pre {
+            background-color: #2b2b2b;
+            color: #f8f8f2;
+            padding: 1.25em 1.5em;
+            overflow-x: auto;
+        }
+        pre code {
+            color: inherit;
+            background: none;
+            padding: 0;
+            font-size: 0.875em;
+        }
+        code {
+            background-color: #f5f5f5;
+            color: #e83e8c;
+            padding: 0.125em 0.375em;
+            border-radius: 3px;
+        }
+        pre.mermaid {
+            background-color: #ffffff;
+            color: #333;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar is-primary">
+        <div class="navbar-brand">
+            <a class="navbar-item has-text-weight-bold" href="index.html">gogal</a>
+        </div>
+    </nav>
+    <section class="section">
+        <div class="container">
+            <nav class="breadcrumb" aria-label="breadcrumbs">
+                <ul>
+                    <li class="is-active"><a href="#" aria-current="page">Internal Docs</a></li>
+                    <li class="is-active"><a href="#" aria-current="page">02 — Static Line</a></li>
+                </ul>
+            </nav>
+
+            <div class="content">
+                <style>
+section.section > .container > nav.breadcrumb { display: none; }
+.annotation { border-left: 3px solid #3273dc; background: #f0f4ff; padding: 0.75em 1em; margin: 0.75em 0; border-radius: 0 4px 4px 0; font-size: 0.9em; }
+.annotation strong { color: #3273dc; }
+.screenshot { border: 1px solid #dbdbdb; border-radius: 4px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); overflow: hidden; padding: 1em; background: #fff; }
+.example-nav { background: #f5f5f5; border-radius: 4px; padding: 0.5em 1em; margin-bottom: 1.5em; font-size: 0.9em; }
+.example-nav a { margin-right: 0.75em; }
+.example-nav strong { color: #363636; }
+</style>
+<nav class="breadcrumb" aria-label="breadcrumbs">
+<ul>
+<li><a href="../index.html">gogal</a></li>
+<li><a href="../index.html#examples">Examples</a></li>
+<li class="is-active"><a href="#" aria-current="page">02 — Static Line</a></li>
+</ul>
+</nav>
+<div class="example-nav">
+<a href="../01_sparkline/">01</a> |
+<strong>02</strong> |
+<a href="../03_multi_series/">03</a> |
+<a href="../04_bar_chart/">04</a> |
+<a href="../05_htmx/">05</a> |
+<a href="../06_live_sse/">06</a> |
+<a href="../07_scatter/">07</a> |
+<a href="../08_wasm/">08</a> |
+<a href="../09_dashboard/">09</a>
+</div>
+<h1 id="02--static-line">02 — Static Line</h1>
+<p>A full line chart with all the trimmings: axes with titles, grid lines, legend, CSS tooltips on hover, and entry animation. The data points are irregularly spaced in time (real weather-station readings, not one-per-hour) to show how gogal handles uneven temporal spacing on the X axis.</p>
+<div class="columns">
+<div class="column is-8">
+<figure class="screenshot">
+<img src="02_static_line.svg" alt="Static line chart with axes, grid, and tooltips">
+<figcaption class="has-text-centered has-text-grey is-size-7 mt-2">Temperature over 24 hours — full static chart</figcaption>
+</figure>
+</div>
+<div class="column">
+<div class="buttons">
+<a target="_blank" href="https://codeberg.org/hum3/gogal/src/branch/main/examples/02_static_line" class="button is-light">Source on Codeberg</a>
+</div>
+</div>
+</div>
+<hr>
+<h2 id="the-code">The code</h2>
+<pre><code class="language-go">// Irregular time spacing — not every hour
+measurements := []struct{ hour, min int; temp float64 }{
+    {0, 0, 11.2}, {1, 15, 10.5}, {2, 45, 9.8}, /* ... */
+}
+for _, m := range measurements {
+    t := time.Date(2024, 6, 15, m.hour, m.min, 0, 0, time.UTC)
+    points = append(points, gogal.DataPoint{Time: t, Y: m.temp, Label: fmt.Sprintf(&quot;%.1f°C&quot;, m.temp)})
+}
+
+chart := gogal.NewLineChart(
+    gogal.WithVariant(gogal.Static),
+    gogal.WithTitle(&quot;Temperature — 15 June 2024&quot;),
+    gogal.WithXTitle(&quot;Hour&quot;),
+    gogal.WithYTitle(&quot;°C&quot;),
+    gogal.WithGrid(true),
+    gogal.WithTooltips(true),
+    gogal.WithAnimate(true),
+    gogal.WithSmooth(true),
+    gogal.WithTimeFormat(&quot;15:04&quot;),
+    gogal.WithYFormat(&quot;%.0f&quot;),
+)
+chart.Add(&quot;Temperature&quot;, points)
+</code></pre>
+<div class="annotation">
+<strong>WithVariant(gogal.Static)</strong> is the default — it enables axes, legend, grid, and tooltips. You don't need to specify it explicitly, but it makes the intent clear when reading the code.
+</div>
+<div class="annotation">
+<strong>WithTitle / WithXTitle / WithYTitle</strong> add text labels to the chart and axes. Titles are positioned automatically based on the chart margins.
+</div>
+<div class="annotation">
+<strong>WithGrid(true)</strong> draws horizontal grid lines aligned to Y-axis ticks. Grid lines use the theme's grid colour and sit behind the data.
+</div>
+<div class="annotation">
+<strong>WithTooltips(true)</strong> enables CSS-only tooltips — hover over any data point to see its label. No JavaScript required. The tooltip content comes from the <code>Label</code> field of each <code>DataPoint</code>.
+</div>
+<div class="annotation">
+<strong>WithAnimate(true)</strong> adds a CSS stroke-dashoffset animation — the line draws itself on page load. Pure CSS, no JavaScript.
+</div>
+<div class="annotation">
+<strong>WithTimeFormat / WithYFormat</strong> control tick label formatting. <code>TimeFormat</code> uses Go's time layout; <code>YFormat</code> uses Printf syntax.
+</div>
+<p><a href="https://codeberg.org/hum3/gogal/src/branch/main/examples/02_static_line/go/main.go">Full source on Codeberg</a></p>
+<hr>
+<h2 id="running-it">Running it</h2>
+<pre><code class="language-bash">task example:02
+</code></pre>
+<p>Outputs SVG to stdout and serves at <code>http://localhost:1341</code>.</p>
+<hr>
+<h2 id="api-reference">API reference</h2>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>WithVariant(gogal.Static)</code></td>
+<td>Full chart with axes, legend, tooltips</td>
+</tr>
+<tr>
+<td><code>WithTitle(s)</code></td>
+<td>Chart title</td>
+</tr>
+<tr>
+<td><code>WithXTitle(s)</code> / <code>WithYTitle(s)</code></td>
+<td>Axis titles</td>
+</tr>
+<tr>
+<td><code>WithGrid(true)</code></td>
+<td>Horizontal grid lines</td>
+</tr>
+<tr>
+<td><code>WithTooltips(true)</code></td>
+<td>CSS hover tooltips</td>
+</tr>
+<tr>
+<td><code>WithAnimate(true)</code></td>
+<td>Stroke-dash entry animation</td>
+</tr>
+<tr>
+<td><code>WithTimeFormat(layout)</code></td>
+<td>X-axis tick format (Go time)</td>
+</tr>
+<tr>
+<td><code>WithYFormat(fmt)</code></td>
+<td>Y-axis tick format (Printf)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="data">Data</h2>
+<table>
+<thead>
+<tr>
+<th>Time</th>
+<th>Temp (°C)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>00:00</td>
+<td>11.2</td>
+</tr>
+<tr>
+<td>01:15</td>
+<td>10.5</td>
+</tr>
+<tr>
+<td>02:45</td>
+<td>9.8</td>
+</tr>
+<tr>
+<td>03:10</td>
+<td>9.1</td>
+</tr>
+<tr>
+<td>04:50</td>
+<td>8.7</td>
+</tr>
+<tr>
+<td>06:05</td>
+<td>9.4</td>
+</tr>
+<tr>
+<td>07:00</td>
+<td>11.0</td>
+</tr>
+<tr>
+<td>07:40</td>
+<td>12.3</td>
+</tr>
+<tr>
+<td>08:30</td>
+<td>14.1</td>
+</tr>
+<tr>
+<td>09:55</td>
+<td>16.8</td>
+</tr>
+<tr>
+<td>10:20</td>
+<td>18.5</td>
+</tr>
+<tr>
+<td>11:00</td>
+<td>20.1</td>
+</tr>
+<tr>
+<td>12:35</td>
+<td>22.4</td>
+</tr>
+<tr>
+<td>13:10</td>
+<td>23.0</td>
+</tr>
+<tr>
+<td>14:00</td>
+<td>22.7</td>
+</tr>
+<tr>
+<td>14:45</td>
+<td>21.9</td>
+</tr>
+<tr>
+<td>15:50</td>
+<td>20.6</td>
+</tr>
+<tr>
+<td>16:30</td>
+<td>19.2</td>
+</tr>
+<tr>
+<td>17:15</td>
+<td>17.8</td>
+</tr>
+<tr>
+<td>18:40</td>
+<td>15.9</td>
+</tr>
+<tr>
+<td>19:00</td>
+<td>14.3</td>
+</tr>
+<tr>
+<td>20:25</td>
+<td>13.1</td>
+</tr>
+<tr>
+<td>21:50</td>
+<td>12.0</td>
+</tr>
+<tr>
+<td>23:10</td>
+<td>11.4</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p><a href="../index.html">Back to examples</a> | <a href="https://codeberg.org/hum3/gogal/src/branch/main/examples/02_static_line">Source on Codeberg</a> | <a href="https://pkg.go.dev/codeberg.org/hum3/gogal">API docs</a></p>
+
+            </div>
+        </div>
+    </section>
+</body>
+</html>

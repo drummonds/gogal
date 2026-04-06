@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>07 — Scatter - gogal</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <style>
+        pre {
+            background-color: #2b2b2b;
+            color: #f8f8f2;
+            padding: 1.25em 1.5em;
+            overflow-x: auto;
+        }
+        pre code {
+            color: inherit;
+            background: none;
+            padding: 0;
+            font-size: 0.875em;
+        }
+        code {
+            background-color: #f5f5f5;
+            color: #e83e8c;
+            padding: 0.125em 0.375em;
+            border-radius: 3px;
+        }
+        pre.mermaid {
+            background-color: #ffffff;
+            color: #333;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar is-primary">
+        <div class="navbar-brand">
+            <a class="navbar-item has-text-weight-bold" href="index.html">gogal</a>
+        </div>
+    </nav>
+    <section class="section">
+        <div class="container">
+            <nav class="breadcrumb" aria-label="breadcrumbs">
+                <ul>
+                    <li class="is-active"><a href="#" aria-current="page">Internal Docs</a></li>
+                    <li class="is-active"><a href="#" aria-current="page">07 — Scatter</a></li>
+                </ul>
+            </nav>
+
+            <div class="content">
+                <style>
+section.section > .container > nav.breadcrumb { display: none; }
+.annotation { border-left: 3px solid #3273dc; background: #f0f4ff; padding: 0.75em 1em; margin: 0.75em 0; border-radius: 0 4px 4px 0; font-size: 0.9em; }
+.annotation strong { color: #3273dc; }
+.example-nav { background: #f5f5f5; border-radius: 4px; padding: 0.5em 1em; margin-bottom: 1.5em; font-size: 0.9em; }
+.example-nav a { margin-right: 0.75em; }
+.example-nav strong { color: #363636; }
+</style>
+<nav class="breadcrumb" aria-label="breadcrumbs">
+<ul>
+<li><a href="../index.html">gogal</a></li>
+<li><a href="../index.html#examples">Examples</a></li>
+<li class="is-active"><a href="#" aria-current="page">07 — Scatter</a></li>
+</ul>
+</nav>
+<div class="example-nav">
+<a href="../01_sparkline/">01</a> |
+<a href="../02_static_line/">02</a> |
+<a href="../03_multi_series/">03</a> |
+<a href="../04_bar_chart/">04</a> |
+<a href="../05_htmx/">05</a> |
+<a href="../06_live_sse/">06</a> |
+<strong>07</strong> |
+<a href="../08_wasm/">08</a> |
+<a href="../09_dashboard/">09</a>
+</div>
+<h1 id="07--scatter">07 — Scatter</h1>
+<p><strong>Planned for Phase 3.</strong> Scatter charts will render XY data as points without connecting lines, with optional size and colour mapping per point.</p>
+<hr>
+<h2 id="planned-api">Planned API</h2>
+<pre><code class="language-go">chart := gogal.NewScatterChart(
+    gogal.WithTitle(&quot;Height vs Weight&quot;),
+    gogal.WithXTitle(&quot;Height (cm)&quot;),
+    gogal.WithYTitle(&quot;Weight (kg)&quot;),
+    gogal.WithGrid(true),
+)
+chart.Add(&quot;Male&quot;, malePoints)
+chart.Add(&quot;Female&quot;, femalePoints)
+</code></pre>
+<div class="annotation">
+<strong>Per-point styling</strong> — scatter charts will use <code>DataPoint.Color</code> for individual point colours and a new <code>Size</code> field for bubble charts.
+</div>
+<h2 id="features-planned">Features planned</h2>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Basic scatter</td>
+<td>Points plotted at X,Y coordinates</td>
+</tr>
+<tr>
+<td>Multi-series</td>
+<td>Colour-coded series with legend</td>
+</tr>
+<tr>
+<td>Bubble</td>
+<td>Point size mapped to a third variable</td>
+</tr>
+<tr>
+<td>Tooltips</td>
+<td>Hover to see point labels</td>
+</tr>
+</tbody>
+</table>
+<p>See <a href="../ROADMAP.html">ROADMAP</a> for timeline.</p>
+<hr>
+<p><a href="../index.html">Back to examples</a> | <a href="https://pkg.go.dev/codeberg.org/hum3/gogal">API docs</a></p>
+
+            </div>
+        </div>
+    </section>
+</body>
+</html>

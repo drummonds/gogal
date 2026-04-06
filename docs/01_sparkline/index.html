@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>01 — Sparkline - gogal</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <style>
+        pre {
+            background-color: #2b2b2b;
+            color: #f8f8f2;
+            padding: 1.25em 1.5em;
+            overflow-x: auto;
+        }
+        pre code {
+            color: inherit;
+            background: none;
+            padding: 0;
+            font-size: 0.875em;
+        }
+        code {
+            background-color: #f5f5f5;
+            color: #e83e8c;
+            padding: 0.125em 0.375em;
+            border-radius: 3px;
+        }
+        pre.mermaid {
+            background-color: #ffffff;
+            color: #333;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar is-primary">
+        <div class="navbar-brand">
+            <a class="navbar-item has-text-weight-bold" href="index.html">gogal</a>
+        </div>
+    </nav>
+    <section class="section">
+        <div class="container">
+            <nav class="breadcrumb" aria-label="breadcrumbs">
+                <ul>
+                    <li class="is-active"><a href="#" aria-current="page">Internal Docs</a></li>
+                    <li class="is-active"><a href="#" aria-current="page">01 — Sparkline</a></li>
+                </ul>
+            </nav>
+
+            <div class="content">
+                <style>
+/* Hide the broken default breadcrumb from md2html */
+section.section > .container > nav.breadcrumb { display: none; }
+.annotation { border-left: 3px solid #3273dc; background: #f0f4ff; padding: 0.75em 1em; margin: 0.75em 0; border-radius: 0 4px 4px 0; font-size: 0.9em; }
+.annotation strong { color: #3273dc; }
+.screenshot { border: 1px solid #dbdbdb; border-radius: 4px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); overflow: hidden; padding: 1em; background: #fff; }
+.example-nav { background: #f5f5f5; border-radius: 4px; padding: 0.5em 1em; margin-bottom: 1.5em; font-size: 0.9em; }
+.example-nav a { margin-right: 0.75em; }
+.example-nav strong { color: #363636; }
+</style>
+<nav class="breadcrumb" aria-label="breadcrumbs">
+<ul>
+<li><a href="../index.html">gogal</a></li>
+<li><a href="../index.html#examples">Examples</a></li>
+<li class="is-active"><a href="#" aria-current="page">01 — Sparkline</a></li>
+</ul>
+</nav>
+<div class="example-nav">
+<strong>01</strong> |
+<a href="../02_static_line/">02</a> |
+<a href="../03_multi_series/">03</a> |
+<a href="../04_bar_chart/">04</a> |
+<a href="../05_htmx/">05</a> |
+<a href="../06_live_sse/">06</a> |
+<a href="../07_scatter/">07</a> |
+<a href="../08_wasm/">08</a> |
+<a href="../09_dashboard/">09</a>
+</div>
+<h1 id="01--sparkline">01 — Sparkline</h1>
+<p>A sparkline is a tiny inline chart — no axes, no labels, no legend. It shows a trend at a glance, designed to sit inside a paragraph or table cell. This is the simplest thing you can build with gogal: generate data, create a chart, render SVG.</p>
+<div class="columns">
+<div class="column is-7">
+<figure class="screenshot">
+<p style="font-family: system-ui; font-size: 14px; margin: 0;">
+  Current temperature: <img src="01_regular.svg" alt="Regular sparkline" style="vertical-align: middle; width: 200px; height: 30px;">
+</p>
+<p style="font-family: system-ui; font-size: 14px; margin: 0.5em 0 0;">
+  Smooth variant: <img src="01_smooth.svg" alt="Smooth sparkline" style="vertical-align: middle; width: 200px; height: 30px;">
+</p>
+<p style="font-family: system-ui; font-size: 14px; margin: 0.5em 0 0;">
+  Wider: <img src="01_wide.svg" alt="Wide sparkline" style="vertical-align: middle; width: 400px; height: 40px;">
+</p>
+<figcaption class="has-text-centered has-text-grey is-size-7 mt-2">Three sparkline variants: regular, smooth (Catmull-Rom), and wider</figcaption>
+</figure>
+</div>
+<div class="column">
+<div class="buttons">
+<a href="demo.html" class="button is-primary">Launch WASM Demo</a>
+<a target="_blank" href="https://codeberg.org/hum3/gogal/src/branch/main/examples/01_sparkline" class="button is-light">Source on Codeberg</a>
+</div>
+</div>
+</div>
+<hr>
+<h2 id="the-code">The code</h2>
+<p>The entire example fits in one file. Generate data, configure the chart, render SVG:</p>
+<pre><code class="language-go">package main
+
+import (
+    &quot;fmt&quot;
+    &quot;math&quot;
+    &quot;net/http&quot;
+
+    &quot;codeberg.org/hum3/gogal&quot;
+)
+
+func main() {
+    // Generate sample data: a sine wave with noise
+    var points []gogal.DataPoint
+    for i := 0; i &lt; 50; i++ {
+        x := float64(i)
+        y := math.Sin(x*0.3)*10 + 20 + math.Sin(x*1.1)*3
+        points = append(points, gogal.DataPoint{X: x, Y: y})
+    }
+
+    // Create a sparkline
+    chart := gogal.NewLineChart(
+        gogal.WithVariant(gogal.Sparkline),
+        gogal.WithSize(200, 30),
+    )
+    chart.Add(&quot;temperature&quot;, points)
+
+    // Write SVG to stdout
+    svg, _ := chart.RenderString()
+    fmt.Println(svg)
+
+    // Also serve on HTTP with three variants
+    fmt.Println(&quot;Serving sparkline at http://localhost:1340&quot;)
+    http.HandleFunc(&quot;/&quot;, func(w http.ResponseWriter, r *http.Request) {
+        w.Header().Set(&quot;Content-Type&quot;, &quot;text/html&quot;)
+        fmt.Fprint(w, `&lt;p&gt;Current temperature: `)
+        chart.Render(w)
+        fmt.Fprint(w, `&lt;/p&gt;`)
+        // ... smooth and wide variants follow
+    })
+    http.ListenAndServe(&quot;:1340&quot;, nil)
+}
+</code></pre>
+<div class="annotation">
+<strong>gogal.NewLineChart()</strong> creates a line chart. <code>WithVariant(gogal.Sparkline)</code> strips it down to the bare minimum — no axes, labels, or legend. <code>WithSize(200, 30)</code> sets the SVG viewBox dimensions in pixels.
+</div>
+<div class="annotation">
+<strong>chart.Add()</strong> adds a named data series. For sparklines, the name is only used internally — there's no legend to display it. Each <code>DataPoint</code> has X (position) and Y (value) fields.
+</div>
+<div class="annotation">
+<strong>Render vs RenderString</strong> — <code>Render(w)</code> writes SVG directly to any <code>io.Writer</code> (HTTP response, file, etc.). <code>RenderString()</code> returns the SVG as a string. Both produce identical output. Use <code>Render</code> when streaming to avoid allocating the full SVG in memory.
+</div>
+<div class="annotation">
+<strong>WithSmooth(true)</strong> enables Catmull-Rom to Bezier curve interpolation, producing smooth paths instead of straight line segments between points. Compare the regular and smooth variants above — same data, different visual feel.
+</div>
+<p><a href="https://codeberg.org/hum3/gogal/src/branch/main/examples/01_sparkline/go/main.go">Full source on Codeberg</a></p>
+<hr>
+<h2 id="running-it">Running it</h2>
+<pre><code class="language-bash">task example:01
+</code></pre>
+<p>This outputs SVG to stdout and starts an HTTP server at <code>http://localhost:1340</code> showing three sparkline variants (regular, smooth, wider).</p>
+<hr>
+<h2 id="api-reference">API reference</h2>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>gogal.NewLineChart(opts...)</code></td>
+<td>Create a line chart with functional options</td>
+</tr>
+<tr>
+<td><code>gogal.WithVariant(gogal.Sparkline)</code></td>
+<td>Minimal inline chart, no axes/labels/legend</td>
+</tr>
+<tr>
+<td><code>gogal.WithSize(w, h)</code></td>
+<td>Set SVG viewBox dimensions</td>
+</tr>
+<tr>
+<td><code>gogal.WithSmooth(true)</code></td>
+<td>Enable Catmull-Rom curve smoothing</td>
+</tr>
+<tr>
+<td><code>chart.Add(name, points)</code></td>
+<td>Add a named data series</td>
+</tr>
+<tr>
+<td><code>chart.Render(w)</code></td>
+<td>Write SVG to an <code>io.Writer</code></td>
+</tr>
+<tr>
+<td><code>chart.RenderString()</code></td>
+<td>Return SVG as a string</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p><a href="../index.html">Back to examples</a> | <a href="https://codeberg.org/hum3/gogal/src/branch/main/examples/01_sparkline">Source on Codeberg</a> | <a href="https://pkg.go.dev/codeberg.org/hum3/gogal">API docs</a></p>
+
+            </div>
+        </div>
+    </section>
+</body>
+</html>

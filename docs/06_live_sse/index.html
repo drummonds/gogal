@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>06 — Live SSE - gogal</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <style>
+        pre {
+            background-color: #2b2b2b;
+            color: #f8f8f2;
+            padding: 1.25em 1.5em;
+            overflow-x: auto;
+        }
+        pre code {
+            color: inherit;
+            background: none;
+            padding: 0;
+            font-size: 0.875em;
+        }
+        code {
+            background-color: #f5f5f5;
+            color: #e83e8c;
+            padding: 0.125em 0.375em;
+            border-radius: 3px;
+        }
+        pre.mermaid {
+            background-color: #ffffff;
+            color: #333;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar is-primary">
+        <div class="navbar-brand">
+            <a class="navbar-item has-text-weight-bold" href="index.html">gogal</a>
+        </div>
+    </nav>
+    <section class="section">
+        <div class="container">
+            <nav class="breadcrumb" aria-label="breadcrumbs">
+                <ul>
+                    <li class="is-active"><a href="#" aria-current="page">Internal Docs</a></li>
+                    <li class="is-active"><a href="#" aria-current="page">06 — Live SSE</a></li>
+                </ul>
+            </nav>
+
+            <div class="content">
+                <style>
+section.section > .container > nav.breadcrumb { display: none; }
+.annotation { border-left: 3px solid #3273dc; background: #f0f4ff; padding: 0.75em 1em; margin: 0.75em 0; border-radius: 0 4px 4px 0; font-size: 0.9em; }
+.annotation strong { color: #3273dc; }
+.screenshot { border: 1px solid #dbdbdb; border-radius: 4px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); overflow: hidden; padding: 1em; background: #fff; }
+.example-nav { background: #f5f5f5; border-radius: 4px; padding: 0.5em 1em; margin-bottom: 1.5em; font-size: 0.9em; }
+.example-nav a { margin-right: 0.75em; }
+.example-nav strong { color: #363636; }
+</style>
+<nav class="breadcrumb" aria-label="breadcrumbs">
+<ul>
+<li><a href="../index.html">gogal</a></li>
+<li><a href="../index.html#examples">Examples</a></li>
+<li class="is-active"><a href="#" aria-current="page">06 — Live SSE</a></li>
+</ul>
+</nav>
+<div class="example-nav">
+<a href="../01_sparkline/">01</a> |
+<a href="../02_static_line/">02</a> |
+<a href="../03_multi_series/">03</a> |
+<a href="../04_bar_chart/">04</a> |
+<a href="../05_htmx/">05</a> |
+<strong>06</strong> |
+<a href="../07_scatter/">07</a> |
+<a href="../08_wasm/">08</a> |
+<a href="../09_dashboard/">09</a>
+</div>
+<h1 id="06--live-sse">06 — Live SSE</h1>
+<p>Real-time chart updates via Server-Sent Events. The server pushes a re-rendered SVG every 2 seconds as new data arrives. The browser replaces the chart with a single <code>EventSource</code> listener — no polling, no WebSocket, no HTMX.</p>
+<div class="columns">
+<div class="column is-8">
+<figure class="screenshot">
+<img src="06_live.svg" alt="Live chart with 30 data points">
+<figcaption class="has-text-centered has-text-grey is-size-7 mt-2">Snapshot after 30 data points (chart updates every 2s)</figcaption>
+</figure>
+</div>
+<div class="column">
+<div class="buttons">
+<a target="_blank" href="https://codeberg.org/hum3/gogal/src/branch/main/examples/06_live_sse" class="button is-light">Source on Codeberg</a>
+</div>
+</div>
+</div>
+<hr>
+<h2 id="the-pattern">The pattern</h2>
+<h3 id="server-sse-endpoint">Server: SSE endpoint</h3>
+<p>The <code>/events</code> handler keeps the connection open and pushes a new SVG each tick. The data window slides — only the last 30 points are kept.</p>
+<pre><code class="language-go">http.HandleFunc(&quot;/events&quot;, func(w http.ResponseWriter, r *http.Request) {
+    w.Header().Set(&quot;Content-Type&quot;, &quot;text/event-stream&quot;)
+    w.Header().Set(&quot;Cache-Control&quot;, &quot;no-cache&quot;)
+
+    flusher := w.(http.Flusher)
+    tick := time.NewTicker(2 * time.Second)
+    defer tick.Stop()
+
+    var points []gogal.DataPoint
+    for {
+        select {
+        case &lt;-r.Context().Done():
+            return
+        case now := &lt;-tick.C:
+            points = append(points, gogal.DataPoint{Time: now, Y: newValue()})
+            if len(points) &gt; 30 {
+                points = points[len(points)-30:]
+            }
+
+            chart := gogal.NewLineChart(
+                gogal.WithVariant(gogal.Static),
+                gogal.WithTitle(&quot;Live Sensor Data&quot;),
+                gogal.WithGrid(true),
+                gogal.WithSmooth(true),
+            )
+            chart.Add(&quot;Sensor&quot;, points)
+
+            var buf bytes.Buffer
+            chart.Render(&amp;buf)
+            // SSE format: each line prefixed with &quot;data:&quot;
+            svg := strings.ReplaceAll(buf.String(), &quot;\n&quot;, &quot;\ndata:&quot;)
+            fmt.Fprintf(w, &quot;data:%s\n\n&quot;, svg)
+            flusher.Flush()
+        }
+    }
+})
+</code></pre>
+<div class="annotation">
+<strong>Full SVG replacement</strong> — each SSE event contains a complete SVG. The chart is small (~2-5 KB) so this is efficient and avoids the complexity of incremental DOM patching. The browser simply replaces innerHTML.
+</div>
+<div class="annotation">
+<strong>Sliding window</strong> — keeping the last 30 points prevents unbounded memory growth and keeps the chart readable. The time axis auto-scales to the visible window.
+</div>
+<h3 id="client-eventsource">Client: EventSource</h3>
+<pre><code class="language-html">&lt;div id=&quot;chart&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+const source = new EventSource('/events');
+source.onmessage = function(e) {
+    document.getElementById('chart').innerHTML = e.data;
+};
+&lt;/script&gt;
+</code></pre>
+<div class="annotation">
+<strong>Three lines of JavaScript</strong> — <code>EventSource</code> handles reconnection automatically. If the server restarts, the browser reconnects and the chart resumes.
+</div>
+<p><a href="https://codeberg.org/hum3/gogal/src/branch/main/examples/06_live_sse/go/main.go">Full source on Codeberg</a></p>
+<hr>
+<h2 id="running-it">Running it</h2>
+<pre><code class="language-bash">task example:06
+</code></pre>
+<p>Serves at <code>http://localhost:1345</code>. The chart starts empty and fills in over ~60 seconds.</p>
+<hr>
+<p><a href="../index.html">Back to examples</a> | <a href="https://codeberg.org/hum3/gogal/src/branch/main/examples/06_live_sse">Source on Codeberg</a> | <a href="https://pkg.go.dev/codeberg.org/hum3/gogal">API docs</a></p>
+
+            </div>
+        </div>
+    </section>
+</body>
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>09 — Dashboard - gogal</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <style>
+        pre {
+            background-color: #2b2b2b;
+            color: #f8f8f2;
+            padding: 1.25em 1.5em;
+            overflow-x: auto;
+        }
+        pre code {
+            color: inherit;
+            background: none;
+            padding: 0;
+            font-size: 0.875em;
+        }
+        code {
+            background-color: #f5f5f5;
+            color: #e83e8c;
+            padding: 0.125em 0.375em;
+            border-radius: 3px;
+        }
+        pre.mermaid {
+            background-color: #ffffff;
+            color: #333;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar is-primary">
+        <div class="navbar-brand">
+            <a class="navbar-item has-text-weight-bold" href="index.html">gogal</a>
+        </div>
+    </nav>
+    <section class="section">
+        <div class="container">
+            <nav class="breadcrumb" aria-label="breadcrumbs">
+                <ul>
+                    <li class="is-active"><a href="#" aria-current="page">Internal Docs</a></li>
+                    <li class="is-active"><a href="#" aria-current="page">09 — Dashboard</a></li>
+                </ul>
+            </nav>
+
+            <div class="content">
+                <style>
+section.section > .container > nav.breadcrumb { display: none; }
+.annotation { border-left: 3px solid #3273dc; background: #f0f4ff; padding: 0.75em 1em; margin: 0.75em 0; border-radius: 0 4px 4px 0; font-size: 0.9em; }
+.annotation strong { color: #3273dc; }
+.screenshot { border: 1px solid #dbdbdb; border-radius: 4px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); overflow: hidden; padding: 1em; background: #fff; }
+.example-nav { background: #f5f5f5; border-radius: 4px; padding: 0.5em 1em; margin-bottom: 1.5em; font-size: 0.9em; }
+.example-nav a { margin-right: 0.75em; }
+.example-nav strong { color: #363636; }
+</style>
+<nav class="breadcrumb" aria-label="breadcrumbs">
+<ul>
+<li><a href="../index.html">gogal</a></li>
+<li><a href="../index.html#examples">Examples</a></li>
+<li class="is-active"><a href="#" aria-current="page">09 — Dashboard</a></li>
+</ul>
+</nav>
+<div class="example-nav">
+<a href="../01_sparkline/">01</a> |
+<a href="../02_static_line/">02</a> |
+<a href="../03_multi_series/">03</a> |
+<a href="../04_bar_chart/">04</a> |
+<a href="../05_htmx/">05</a> |
+<a href="../06_live_sse/">06</a> |
+<a href="../07_scatter/">07</a> |
+<a href="../08_wasm/">08</a> |
+<strong>09</strong>
+</div>
+<h1 id="09--dashboard">09 — Dashboard</h1>
+<p>Multiple charts on one page with different sizes, themes, and configurations. This shows how gogal charts compose — each is an independent SVG with its own scale, theme, and options.</p>
+<div class="columns">
+<div class="column is-6">
+<figure class="screenshot">
+<img src="09_light.svg" alt="Temperature chart — light theme">
+<figcaption class="has-text-centered has-text-grey is-size-7 mt-2">Light theme (default)</figcaption>
+</figure>
+</div>
+<div class="column is-6">
+<figure class="screenshot" style="background: #2b2b2b;">
+<img src="09_dark.svg" alt="Humidity chart — dark theme">
+<figcaption class="has-text-centered has-text-grey is-size-7 mt-2">Dark theme</figcaption>
+</figure>
+</div>
+</div>
+<div class="buttons">
+<a target="_blank" href="https://codeberg.org/hum3/gogal/src/branch/main/examples/09_dashboard" class="button is-light">Source on Codeberg</a>
+</div>
+<hr>
+<h2 id="the-pattern">The pattern</h2>
+<p>Each chart is created independently. Mix and match sizes, themes, and configurations — gogal produces self-contained SVGs that don't interfere with each other.</p>
+<pre><code class="language-go">// Temperature — light theme, 500x300
+tc := gogal.NewLineChart(
+    gogal.WithSize(500, 300),
+    gogal.WithGrid(true),
+    gogal.WithSmooth(true),
+    gogal.WithYFormat(&quot;%.0f°C&quot;),
+)
+tc.Add(&quot;Temperature&quot;, temp)
+tc.Render(w)
+
+// Humidity — dark theme, 500x300
+hc := gogal.NewLineChart(
+    gogal.WithSize(500, 300),
+    gogal.WithTheme(gogal.ThemeDark),
+    gogal.WithGrid(true),
+    gogal.WithSmooth(true),
+    gogal.WithYFormat(&quot;%.0f%%&quot;),
+)
+hc.Add(&quot;Humidity&quot;, humidity)
+hc.Render(w)
+</code></pre>
+<div class="annotation">
+<strong>WithTheme(gogal.ThemeDark)</strong> switches to a dark background with light text and grid lines. The 10-colour data palette is shared between themes. You can also create custom themes by constructing a <code>Theme</code> struct.
+</div>
+<div class="annotation">
+<strong>WithSize(w, h)</strong> sets the SVG viewBox. Use CSS <code>width</code>/<code>max-width</code> on the container to control the rendered size — the SVG scales responsively.
+</div>
+<h3 id="mixed-chart-types-on-one-page">Mixed chart types on one page</h3>
+<p>The dashboard also includes:</p>
+<ul>
+<li>A <strong>multi-series ordinal chart</strong> spanning the full width</li>
+<li><strong>Sparklines</strong> for quick at-a-glance metrics</li>
+</ul>
+<pre><code class="language-go">// Full-width multi-series with ordinal axis
+all := gogal.NewLineChart(
+    gogal.WithSize(1060, 350),
+    gogal.WithAxisMode(gogal.Ordinal),
+    gogal.WithLegend(true),
+)
+all.Add(&quot;Temperature (°C)&quot;, temp)
+all.Add(&quot;Humidity (%)&quot;, humidity)
+all.Add(&quot;Pressure (hPa)&quot;, pressure)
+
+// Compact sparklines
+sp := gogal.NewLineChart(
+    gogal.WithVariant(gogal.Sparkline),
+    gogal.WithSize(150, 25),
+    gogal.WithSmooth(true),
+)
+sp.Add(&quot;Temp&quot;, temp)
+</code></pre>
+<div class="annotation">
+<strong>Layout is your responsibility</strong> — gogal produces SVGs, you arrange them with HTML/CSS. Use CSS Grid, Flexbox, or tables. Each chart is a self-contained block element.
+</div>
+<p><a href="https://codeberg.org/hum3/gogal/src/branch/main/examples/09_dashboard/go/main.go">Full source on Codeberg</a></p>
+<hr>
+<h2 id="running-it">Running it</h2>
+<pre><code class="language-bash">task example:09
+</code></pre>
+<p>Serves at <code>http://localhost:1348</code>.</p>
+<hr>
+<h2 id="api-reference">API reference</h2>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>WithTheme(gogal.ThemeDark)</code></td>
+<td>Dark background theme</td>
+</tr>
+<tr>
+<td><code>WithTheme(gogal.ThemeLight)</code></td>
+<td>Light theme (default)</td>
+</tr>
+<tr>
+<td><code>WithSize(w, h)</code></td>
+<td>SVG viewBox dimensions</td>
+</tr>
+<tr>
+<td><code>WithLegend(true)</code></td>
+<td>Force legend display</td>
+</tr>
+<tr>
+<td><code>gogal.ThemeDark</code> / <code>gogal.ThemeLight</code></td>
+<td>Built-in theme presets</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p><a href="../index.html">Back to examples</a> | <a href="https://codeberg.org/hum3/gogal/src/branch/main/examples/09_dashboard">Source on Codeberg</a> | <a href="https://pkg.go.dev/codeberg.org/hum3/gogal">API docs</a></p>
+
+            </div>
+        </div>
+    </section>
+</body>
+</html>

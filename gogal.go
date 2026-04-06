@@ -31,7 +31,13 @@ func NewLineChart(opts ...Option) *Chart {
 }
 
 // Add adds a data series to the chart.
+// If a DataPoint has Time set but X is zero, X is auto-populated from the Unix timestamp.
 func (c *Chart) Add(name string, points []DataPoint) *Chart {
+	for i := range points {
+		if points[i].X == 0 && !points[i].Time.IsZero() {
+			points[i].X = float64(points[i].Time.Unix())
+		}
+	}
 	c.series = append(c.series, Series{
 		Name:   name,
 		Points: points,

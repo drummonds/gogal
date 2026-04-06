@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>08 — WASM Demo - gogal</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <style>
+        pre {
+            background-color: #2b2b2b;
+            color: #f8f8f2;
+            padding: 1.25em 1.5em;
+            overflow-x: auto;
+        }
+        pre code {
+            color: inherit;
+            background: none;
+            padding: 0;
+            font-size: 0.875em;
+        }
+        code {
+            background-color: #f5f5f5;
+            color: #e83e8c;
+            padding: 0.125em 0.375em;
+            border-radius: 3px;
+        }
+        pre.mermaid {
+            background-color: #ffffff;
+            color: #333;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar is-primary">
+        <div class="navbar-brand">
+            <a class="navbar-item has-text-weight-bold" href="index.html">gogal</a>
+        </div>
+    </nav>
+    <section class="section">
+        <div class="container">
+            <nav class="breadcrumb" aria-label="breadcrumbs">
+                <ul>
+                    <li class="is-active"><a href="#" aria-current="page">Internal Docs</a></li>
+                    <li class="is-active"><a href="#" aria-current="page">08 — WASM Demo</a></li>
+                </ul>
+            </nav>
+
+            <div class="content">
+                <style>
+section.section > .container > nav.breadcrumb { display: none; }
+.annotation { border-left: 3px solid #3273dc; background: #f0f4ff; padding: 0.75em 1em; margin: 0.75em 0; border-radius: 0 4px 4px 0; font-size: 0.9em; }
+.annotation strong { color: #3273dc; }
+.screenshot { border: 1px solid #dbdbdb; border-radius: 4px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); overflow: hidden; padding: 1em; background: #fff; }
+.example-nav { background: #f5f5f5; border-radius: 4px; padding: 0.5em 1em; margin-bottom: 1.5em; font-size: 0.9em; }
+.example-nav a { margin-right: 0.75em; }
+.example-nav strong { color: #363636; }
+</style>
+<nav class="breadcrumb" aria-label="breadcrumbs">
+<ul>
+<li><a href="../index.html">gogal</a></li>
+<li><a href="../index.html#examples">Examples</a></li>
+<li class="is-active"><a href="#" aria-current="page">08 — WASM Demo</a></li>
+</ul>
+</nav>
+<div class="example-nav">
+<a href="../01_sparkline/">01</a> |
+<a href="../02_static_line/">02</a> |
+<a href="../03_multi_series/">03</a> |
+<a href="../04_bar_chart/">04</a> |
+<a href="../05_htmx/">05</a> |
+<a href="../06_live_sse/">06</a> |
+<a href="../07_scatter/">07</a> |
+<strong>08</strong> |
+<a href="../09_dashboard/">09</a>
+</div>
+<h1 id="08--wasm-demo">08 — WASM Demo</h1>
+<p>A full multi-series chart rendered entirely in the browser via WebAssembly. The gogal library compiles to WASM with zero changes — same <code>NewLineChart</code>, <code>Add</code>, <code>RenderString</code> API. No server required.</p>
+<div class="columns">
+<div class="column is-8">
+<figure class="screenshot">
+<img src="08_wasm.svg" alt="Multi-series chart rendered via WASM">
+<figcaption class="has-text-centered has-text-grey is-size-7 mt-2">Full static chart — identical output whether server-rendered or WASM</figcaption>
+</figure>
+</div>
+<div class="column">
+<div class="buttons">
+<a href="demo.html" class="button is-primary">Launch WASM Demo</a>
+<a target="_blank" href="https://codeberg.org/hum3/gogal/src/branch/main/examples/08_wasm" class="button is-light">Source on Codeberg</a>
+</div>
+</div>
+</div>
+<hr>
+<h2 id="the-wasm-entry-point">The WASM entry point</h2>
+<p>A <code>main_wasm.go</code> file (build-tagged <code>js &amp;&amp; wasm</code>) exports a <code>goRender()</code> function that returns SVG HTML. The JS glue calls it once on load.</p>
+<pre><code class="language-go">//go:build js &amp;&amp; wasm
+
+package main
+
+import (
+    &quot;syscall/js&quot;
+    &quot;codeberg.org/hum3/gogal&quot;
+)
+
+func render() string {
+    chart := gogal.NewLineChart(
+        gogal.WithVariant(gogal.Static),
+        gogal.WithTitle(&quot;Weather — 15 June 2024 (WASM)&quot;),
+        gogal.WithGrid(true),
+        gogal.WithSmooth(true),
+    )
+    chart.Add(&quot;Temperature (°C)&quot;, temp)
+    chart.Add(&quot;Humidity (%)&quot;, humidity)
+    svg, _ := chart.RenderString()
+    return svg
+}
+
+func main() {
+    js.Global().Set(&quot;goRender&quot;, js.FuncOf(func(this js.Value, args []js.Value) any {
+        return render()
+    }))
+    js.Global().Call(&quot;wasmReady&quot;)
+    select {}
+}
+</code></pre>
+<div class="annotation">
+<strong>Same API, different target</strong> — the chart code is identical to server-rendered examples. Only the entry point differs: instead of <code>Render(w)</code> to an HTTP response, you call <code>RenderString()</code> and return it to JavaScript.
+</div>
+<div class="annotation">
+<strong>Build tags</strong> — <code>main.go</code> has <code>//go:build !js</code> (server mode) and <code>main_wasm.go</code> has <code>//go:build js && wasm</code>. The Go compiler picks the right file based on <code>GOOS=js GOARCH=wasm</code>.
+</div>
+<h3 id="building">Building</h3>
+<pre><code class="language-bash">GOOS=js GOARCH=wasm go build -o main.wasm .
+</code></pre>
+<p>Or via the Taskfile:</p>
+<pre><code class="language-bash">task docs:build-wasm
+</code></pre>
+<div class="annotation">
+<strong>Binary size</strong> — a gogal WASM binary is ~2.6 MB. Since gogal has zero dependencies, the binary is mostly the Go runtime. TinyGo could reduce this further (not yet tested).
+</div>
+<h3 id="javascript-glue">JavaScript glue</h3>
+<pre><code class="language-javascript">window.wasmReady = function() {
+    document.getElementById('output').innerHTML = goRender();
+};
+
+const go = new Go();
+WebAssembly.instantiateStreaming(fetch('main.wasm'), go.importObject)
+    .then(result =&gt; go.run(result.instance));
+</code></pre>
+<p><a href="https://codeberg.org/hum3/gogal/src/branch/main/examples/08_wasm/go/">Full source on Codeberg</a></p>
+<hr>
+<h2 id="running-it">Running it</h2>
+<p>Server mode:</p>
+<pre><code class="language-bash">task example:08
+</code></pre>
+<p>WASM mode: open <code>docs/08_wasm/demo.html</code> in a browser (needs an HTTP server for WASM loading).</p>
+<hr>
+<p><a href="../index.html">Back to examples</a> | <a href="https://codeberg.org/hum3/gogal/src/branch/main/examples/08_wasm">Source on Codeberg</a> | <a href="https://pkg.go.dev/codeberg.org/hum3/gogal">API docs</a></p>
+
+            </div>
+        </div>
+    </section>
+</body>
+</html>

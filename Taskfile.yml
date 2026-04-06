@@ -38,6 +38,13 @@ tasks:
       - rm -f docs/*.html
       - find examples -name "*.wasm" -delete 2>/dev/null || true
 
+  docs:all:
+    desc: Generate all assets then build docs HTML
+    cmds:
+      - task: docs:screenshots
+      - task: docs:build-wasm
+      - task: docs:build
+
   docs:build:
     desc: Build documentation (markdown to HTML)
     cmds:
@@ -46,6 +53,43 @@ tasks:
       - task-plus md2html --file ROADMAP.md --dst docs
       - task-plus md2html --file RESEARCH.md --dst docs
       - task-plus md2html --file docs/index.md --dst docs
+      # Example documentation pages
+      - task-plus md2html --file examples/01_sparkline/index.md --dst docs/01_sparkline
+      - task-plus md2html --file examples/02_static_line/index.md --dst docs/02_static_line
+      - task-plus md2html --file examples/03_multi_series/index.md --dst docs/03_multi_series
+      - task-plus md2html --file examples/04_bar_chart/index.md --dst docs/04_bar_chart
+      - task-plus md2html --file examples/05_htmx/index.md --dst docs/05_htmx
+      - task-plus md2html --file examples/06_live_sse/index.md --dst docs/06_live_sse
+      - task-plus md2html --file examples/07_scatter/index.md --dst docs/07_scatter
+      - task-plus md2html --file examples/08_wasm/index.md --dst docs/08_wasm
+      - task-plus md2html --file examples/09_dashboard/index.md --dst docs/09_dashboard
+
+  docs:build-wasm:
+    desc: Build WASM binaries and copy demo assets
+    cmds:
+      # Example 01 — Sparkline
+      - mkdir -p docs/01_sparkline
+      - cd examples/01_sparkline/go && GOOS=js GOARCH=wasm go build -o ../../../docs/01_sparkline/main.wasm .
+      - cp "$(go env GOROOT)/lib/wasm/wasm_exec.js" docs/01_sparkline/
+      - cp examples/01_sparkline/templates/index.html docs/01_sparkline/demo.html
+      - cp examples/01_sparkline/templates/app.js docs/01_sparkline/
+      # Example 08 — WASM Demo
+      - mkdir -p docs/08_wasm
+      - cd examples/08_wasm/go && GOOS=js GOARCH=wasm go build -o ../../../docs/08_wasm/main.wasm .
+      - cp "$(go env GOROOT)/lib/wasm/wasm_exec.js" docs/08_wasm/
+      - cp examples/08_wasm/templates/index.html docs/08_wasm/demo.html
+      - cp examples/08_wasm/templates/app.js docs/08_wasm/
+
+  docs:screenshots:
+    desc: Regenerate example screenshot SVGs
+    cmds:
+      - cd examples/01_sparkline/go && go run gen_screenshot.go
+      - cd examples/02_static_line/go && go run gen_screenshot.go
+      - cd examples/03_multi_series/go && go run gen_screenshot.go
+      - cd examples/05_htmx/go && go run gen_screenshot.go
+      - cd examples/06_live_sse/go && go run gen_screenshot.go
+      - cd examples/08_wasm/go && go run gen_screenshot.go
+      - cd examples/09_dashboard/go && go run gen_screenshot.go
 
   # Go example tasks (wildcard)
   example:*:
