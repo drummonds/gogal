@@ -1,0 +1,197 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 300" role="img">
+  <style>
+    .tooltip { display: none; pointer-events: none; }
+    .data-point:hover .tooltip { display: block; }
+    .point { transition: r 0.15s; }
+    .data-point:hover .point { r: 5; }
+    .line { transition: stroke-width 0.2s; }
+  </style>
+  <rect x="0.00" y="0.00" width="500.00" height="300.00" fill="#ffffff"/>
+  <g class="grid">
+  <line x1="60.00" y1="233.62" x2="480.00" y2="233.62" stroke="#e0e0e0" stroke-width="0.5"/>
+  <line x1="60.00" y1="203.83" x2="480.00" y2="203.83" stroke="#e0e0e0" stroke-width="0.5"/>
+  <line x1="60.00" y1="174.04" x2="480.00" y2="174.04" stroke="#e0e0e0" stroke-width="0.5"/>
+  <line x1="60.00" y1="144.26" x2="480.00" y2="144.26" stroke="#e0e0e0" stroke-width="0.5"/>
+  <line x1="60.00" y1="114.47" x2="480.00" y2="114.47" stroke="#e0e0e0" stroke-width="0.5"/>
+  <line x1="60.00" y1="84.68" x2="480.00" y2="84.68" stroke="#e0e0e0" stroke-width="0.5"/>
+  <line x1="60.00" y1="54.89" x2="480.00" y2="54.89" stroke="#e0e0e0" stroke-width="0.5"/>
+  </g>
+  <g class="y-axis">
+  <line x1="60.00" y1="40.00" x2="60.00" y2="250.00" stroke="#666666" stroke-width="1"/>
+  <line x1="56.00" y1="233.62" x2="60.00" y2="233.62" stroke="#666666" stroke-width="1"/>
+  <text x="52.00" y="237.62" text-anchor="end" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">10</text>
+  <line x1="56.00" y1="203.83" x2="60.00" y2="203.83" stroke="#666666" stroke-width="1"/>
+  <text x="52.00" y="207.83" text-anchor="end" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">12</text>
+  <line x1="56.00" y1="174.04" x2="60.00" y2="174.04" stroke="#666666" stroke-width="1"/>
+  <text x="52.00" y="178.04" text-anchor="end" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">14</text>
+  <line x1="56.00" y1="144.26" x2="60.00" y2="144.26" stroke="#666666" stroke-width="1"/>
+  <text x="52.00" y="148.26" text-anchor="end" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">16</text>
+  <line x1="56.00" y1="114.47" x2="60.00" y2="114.47" stroke="#666666" stroke-width="1"/>
+  <text x="52.00" y="118.47" text-anchor="end" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">18</text>
+  <line x1="56.00" y1="84.68" x2="60.00" y2="84.68" stroke="#666666" stroke-width="1"/>
+  <text x="52.00" y="88.68" text-anchor="end" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">20</text>
+  <line x1="56.00" y1="54.89" x2="60.00" y2="54.89" stroke="#666666" stroke-width="1"/>
+  <text x="52.00" y="58.89" text-anchor="end" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">22</text>
+  </g>
+  <g class="x-axis">
+  <line x1="60.00" y1="250.00" x2="480.00" y2="250.00" stroke="#666666" stroke-width="1"/>
+  <line x1="111.63" y1="250.00" x2="111.63" y2="254.00" stroke="#666666" stroke-width="1"/>
+  <text x="111.63" y="266.00" text-anchor="middle" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">1.718e+09</text>
+  <line x1="210.92" y1="250.00" x2="210.92" y2="254.00" stroke="#666666" stroke-width="1"/>
+  <text x="210.92" y="266.00" text-anchor="middle" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">1.718e+09</text>
+  <line x1="310.21" y1="250.00" x2="310.21" y2="254.00" stroke="#666666" stroke-width="1"/>
+  <text x="310.21" y="266.00" text-anchor="middle" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">1.718e+09</text>
+  <line x1="409.50" y1="250.00" x2="409.50" y2="254.00" stroke="#666666" stroke-width="1"/>
+  <text x="409.50" y="266.00" text-anchor="middle" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">1.718e+09</text>
+  </g>
+  <g class="series-0">
+  <path d="M60.00,215.74 C63.97,217.73 75.39,223.94 83.83,227.66 C92.27,231.38 102.20,234.36 110.64,238.09 C119.08,241.81 126.52,248.51 134.47,250.00 C142.41,251.49 150.60,251.74 158.30,247.02 C165.99,242.30 175.43,230.14 180.64,221.70 C185.85,213.26 183.87,206.31 189.57,196.38 C195.28,186.45 207.20,173.79 214.89,162.13 C222.59,150.46 230.28,136.81 235.74,126.38 C241.21,115.96 243.69,108.01 247.66,99.57 C251.63,91.13 253.87,83.44 259.57,75.74 C265.28,68.05 274.47,59.36 281.91,53.40 C289.36,47.45 298.79,40.99 304.26,40.00 C309.72,39.01 309.22,43.23 314.68,47.45 C320.14,51.67 329.33,58.37 337.02,65.32 C344.72,72.27 353.40,79.47 360.85,89.15 C368.30,98.83 374.26,113.23 381.70,123.40 C389.15,133.58 397.59,141.77 405.53,150.21 C413.48,158.65 421.42,165.85 429.36,174.04 C437.30,182.23 444.75,193.16 453.19,199.36 C461.63,205.57 475.53,209.29 480.00,211.28" fill="none" stroke="#4e79a7" stroke-width="2" class="line"/>
+  <g class="data-point" aria-label="11.2°C">
+  <circle cx="60.00" cy="215.74" r="3.0" fill="#4e79a7" class="point"/>
+  <g class="tooltip">
+  <rect x="68.00" y="195.74" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
+  <text x="72.00" y="208.74" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">11.2°C</text>
+  </g>
+  </g>
+  <g class="data-point" aria-label="10.4°C">
+  <circle cx="83.83" cy="227.66" r="3.0" fill="#4e79a7" class="point"/>
+  <g class="tooltip">
+  <rect x="91.83" y="207.66" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
+  <text x="95.83" y="220.66" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">10.4°C</text>
+  </g>
+  </g>
+  <g class="data-point" aria-label="9.7°C">
+  <circle cx="110.64" cy="238.09" r="3.0" fill="#4e79a7" class="point"/>
+  <g class="tooltip">
+  <rect x="118.64" y="218.09" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
+  <text x="122.64" y="231.09" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">9.7°C</text>
+  </g>
+  </g>
+  <g class="data-point" aria-label="8.9°C">
+  <circle cx="134.47" cy="250.00" r="3.0" fill="#4e79a7" class="point"/>
+  <g class="tooltip">
+  <rect x="142.47" y="230.00" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
+  <text x="146.47" y="243.00" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">8.9°C</text>
+  </g>
+  </g>
+  <g class="data-point" aria-label="9.1°C">
+  <circle cx="158.30" cy="247.02" r="3.0" fill="#4e79a7" class="point"/>
+  <g class="tooltip">
+  <rect x="166.30" y="227.02" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
+  <text x="170.30" y="240.02" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">9.1°C</text>
+  </g>
+  </g>
+  <g class="data-point" aria-label="10.8°C">
+  <circle cx="180.64" cy="221.70" r="3.0" fill="#4e79a7" class="point"/>
+  <g class="tooltip">
+  <rect x="188.64" y="201.70" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
+  <text x="192.64" y="214.70" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">10.8°C</text>
+  </g>
+  </g>
+  <g class="data-point" aria-label="12.5°C">
+  <circle cx="189.57" cy="196.38" r="3.0" fill="#4e79a7" class="point"/>
+  <g class="tooltip">
+  <rect x="197.57" y="176.38" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
+  <text x="201.57" y="189.38" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">12.5°C</text>
+  </g>
+  </g>
+  <g class="data-point" aria-label="14.8°C">
+  <circle cx="214.89" cy="162.13" r="3.0" fill="#4e79a7" class="point"/>
+  <g class="tooltip">
+  <rect x="222.89" y="142.13" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
+  <text x="226.89" y="155.13" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">14.8°C</text>
+  </g>
+  </g>
+  <g class="data-point" aria-label="17.2°C">
+  <circle cx="235.74" cy="126.38" r="3.0" fill="#4e79a7" class="point"/>
+  <g class="tooltip">
+  <rect x="243.74" y="106.38" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
+  <text x="247.74" y="119.38" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">17.2°C</text>
+  </g>
+  </g>
+  <g class="data-point" aria-label="19.0°C">
+  <circle cx="247.66" cy="99.57" r="3.0" fill="#4e79a7" class="point"/>
+  <g class="tooltip">
+  <rect x="255.66" y="79.57" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
+  <text x="259.66" y="92.57" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">19.0°C</text>
+  </g>
+  </g>
+  <g class="data-point" aria-label="20.6°C">
+  <circle cx="259.57" cy="75.74" r="3.0" fill="#4e79a7" class="point"/>
+  <g class="tooltip">
+  <rect x="267.57" y="55.74" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
+  <text x="271.57" y="68.74" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">20.6°C</text>
+  </g>
+  </g>
+  <g class="data-point" aria-label="22.1°C">
+  <circle cx="281.91" cy="53.40" r="3.0" fill="#4e79a7" class="point"/>
+  <g class="tooltip">
+  <rect x="289.91" y="33.40" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
+  <text x="293.91" y="46.40" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">22.1°C</text>
+  </g>
+  </g>
+  <g class="data-point" aria-label="23.0°C">
+  <circle cx="304.26" cy="40.00" r="3.0" fill="#4e79a7" class="point"/>
+  <g class="tooltip">
+  <rect x="312.26" y="20.00" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
+  <text x="316.26" y="33.00" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">23.0°C</text>
+  </g>
+  </g>
+  <g class="data-point" aria-label="22.5°C">
+  <circle cx="314.68" cy="47.45" r="3.0" fill="#4e79a7" class="point"/>
+  <g class="tooltip">
+  <rect x="322.68" y="27.45" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
+  <text x="326.68" y="40.45" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">22.5°C</text>
+  </g>
+  </g>
+  <g class="data-point" aria-label="21.3°C">
+  <circle cx="337.02" cy="65.32" r="3.0" fill="#4e79a7" class="point"/>
+  <g class="tooltip">
+  <rect x="345.02" y="45.32" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
+  <text x="349.02" y="58.32" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">21.3°C</text>
+  </g>
+  </g>
+  <g class="data-point" aria-label="19.7°C">
+  <circle cx="360.85" cy="89.15" r="3.0" fill="#4e79a7" class="point"/>
+  <g class="tooltip">
+  <rect x="368.85" y="69.15" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
+  <text x="372.85" y="82.15" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">19.7°C</text>
+  </g>
+  </g>
+  <g class="data-point" aria-label="17.4°C">
+  <circle cx="381.70" cy="123.40" r="3.0" fill="#4e79a7" class="point"/>
+  <g class="tooltip">
+  <rect x="389.70" y="103.40" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
+  <text x="393.70" y="116.40" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">17.4°C</text>
+  </g>
+  </g>
+  <g class="data-point" aria-label="15.6°C">
+  <circle cx="405.53" cy="150.21" r="3.0" fill="#4e79a7" class="point"/>
+  <g class="tooltip">
+  <rect x="413.53" y="130.21" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
+  <text x="417.53" y="143.21" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">15.6°C</text>
+  </g>
+  </g>
+  <g class="data-point" aria-label="14.0°C">
+  <circle cx="429.36" cy="174.04" r="3.0" fill="#4e79a7" class="point"/>
+  <g class="tooltip">
+  <rect x="437.36" y="154.04" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
+  <text x="441.36" y="167.04" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">14.0°C</text>
+  </g>
+  </g>
+  <g class="data-point" aria-label="12.3°C">
+  <circle cx="453.19" cy="199.36" r="3.0" fill="#4e79a7" class="point"/>
+  <g class="tooltip">
+  <rect x="461.19" y="179.36" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
+  <text x="465.19" y="192.36" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">12.3°C</text>
+  </g>
+  </g>
+  <g class="data-point" aria-label="11.5°C">
+  <circle cx="480.00" cy="211.28" r="3.0" fill="#4e79a7" class="point"/>
+  <g class="tooltip">
+  <rect x="488.00" y="191.28" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
+  <text x="492.00" y="204.28" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">11.5°C</text>
+  </g>
+  </g>
+  </g>
+</svg>

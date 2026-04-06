@@ -2,6 +2,8 @@ type: library
 check: [task check]
 changelog_format: keepachangelog
 pages_build:
+    - task docs:screenshots
+    - task docs:build-wasm
     - task docs:build
 pages_deploy:
     - site: h3-gogal

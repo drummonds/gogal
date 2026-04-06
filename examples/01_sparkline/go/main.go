@@ -1,3 +1,5 @@
+//go:build !js
+
 // Example 01: Sparkline
 //
 // Demonstrates the simplest gogal usage: a minimal inline chart
