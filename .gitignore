@@ -20,3 +20,7 @@ Thumbs.db
 .coverage
 *.test
 .task/
+.tp-release-comment
+CHANGELOG.html
+README.html
+
