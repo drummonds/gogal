@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-04-06
+
+ - Adding setttings
+
 ## [0.1.0] - 2026-04-05
 
  - Adding favicon
