@@ -1,5 +1,4 @@
 <style>
-section.section > .container > nav.breadcrumb { display: none; }
 .annotation { border-left: 3px solid #3273dc; background: #f0f4ff; padding: 0.75em 1em; margin: 0.75em 0; border-radius: 0 4px 4px 0; font-size: 0.9em; }
 .annotation strong { color: #3273dc; }
 .screenshot { border: 1px solid #dbdbdb; border-radius: 4px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); overflow: hidden; padding: 1em; background: #fff; }
@@ -8,16 +7,9 @@ section.section > .container > nav.breadcrumb { display: none; }
 .example-nav strong { color: #363636; }
 </style>
 
-<nav class="breadcrumb" aria-label="breadcrumbs">
-<ul>
-<li><a href="../index.html">gogal</a></li>
-<li><a href="../index.html#examples">Examples</a></li>
-<li class="is-active"><a href="#" aria-current="page">09 — Dashboard</a></li>
-</ul>
-</nav>
-
 <div class="example-nav">
 <a href="../01_sparkline/">01</a> |
+<a href="../01a_axis_formats/">01a</a> |
 <a href="../02_static_line/">02</a> |
 <a href="../03_multi_series/">03</a> |
 <a href="../04_bar_chart/">04</a> |

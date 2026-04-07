@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Example 01a — Axis Formats - gogal</title>
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <title>01a — Axis Formats - gogal</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <style>
         pre {
@@ -35,35 +35,151 @@
 <body>
     <nav class="navbar is-primary">
         <div class="navbar-brand">
-            <a class="navbar-item has-text-weight-bold" href="index.html">gogal</a>
+            <a class="navbar-item has-text-weight-bold" href="../index.html">gogal</a>
         </div>
     </nav>
     <section class="section">
         <div class="container">
             <nav class="breadcrumb" aria-label="breadcrumbs">
                 <ul>
-                    <li class="is-active"><a href="#" aria-current="page">Internal Docs</a></li>
-                    <li class="is-active"><a href="#" aria-current="page">Example 01a — Axis Formats</a></li>
+                    <li><a href="../index.html">Home</a></li>
+                    <li class="is-active"><a href="#" aria-current="page">01a — Axis Formats</a></li>
                 </ul>
             </nav>
 
             <div class="content">
-                <h1 id="example-01a--axis-formats">Example 01a — Axis Formats</h1>
-<p>Visual test of axis tick formatting across different data ranges.</p>
+                <style>
+.annotation { border-left: 3px solid #3273dc; background: #f0f4ff; padding: 0.75em 1em; margin: 0.75em 0; border-radius: 0 4px 4px 0; font-size: 0.9em; }
+.annotation strong { color: #3273dc; }
+.screenshot { border: 1px solid #dbdbdb; border-radius: 4px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); overflow: hidden; padding: 1em; background: #fff; }
+.example-nav { background: #f5f5f5; border-radius: 4px; padding: 0.5em 1em; margin-bottom: 1.5em; font-size: 0.9em; }
+.example-nav a { margin-right: 0.75em; }
+.example-nav strong { color: #363636; }
+</style>
+<div class="example-nav">
+<a href="../01_sparkline/">01</a> |
+<strong>01a</strong> |
+<a href="../02_static_line/">02</a> |
+<a href="../03_multi_series/">03</a> |
+<a href="../04_bar_chart/">04</a> |
+<a href="../05_htmx/">05</a> |
+<a href="../06_live_sse/">06</a> |
+<a href="../07_scatter/">07</a> |
+<a href="../08_wasm/">08</a> |
+<a href="../09_dashboard/">09</a>
+</div>
+<h1 id="01a--axis-formats">01a — Axis Formats</h1>
+<p>Visual test of axis tick formatting across different data ranges. This gallery shows how gogal formats axis ticks for numeric, scientific, temporal, and ordinal data.</p>
+<div class="columns">
+<div class="column is-8">
+<figure class="screenshot">
+<img src="01a_complete.svg" alt="Axis format gallery">
+<figcaption class="has-text-centered has-text-grey is-size-7 mt-1">All axis format examples</figcaption>
+</figure>
+</div>
+<div class="column">
+<div class="buttons">
+<a href="demo.html" class="button is-primary">Launch WASM Demo</a>
+<a target="_blank" href="https://codeberg.org/hum3/gogal/src/branch/main/examples/01a_axis_formats" class="button is-light">Source on Codeberg</a>
+</div>
+</div>
+</div>
+<hr>
 <h2 id="what-it-demonstrates">What it demonstrates</h2>
-<p>A gallery of charts showing how gogal formats axis ticks for:</p>
-<ul>
-<li><strong>Numeric</strong>: small integers, decimals, hundreds, large ranges, negative ranges, narrow ranges</li>
-<li><strong>Scientific</strong>: very small (1e-6) and very large (1e9) values</li>
-<li><strong>Temporal</strong>: hours, days, months, years</li>
-<li><strong>Ordinal</strong>: weekday labels, named categories</li>
-</ul>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Input Range</th>
+<th>Expected tick labels</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Small integers</td>
+<td>0-10</td>
+<td>0, 2, 4, 6, 8, 10</td>
+</tr>
+<tr>
+<td>Decimals</td>
+<td>0-1</td>
+<td>0, 0.2, 0.4, ...</td>
+</tr>
+<tr>
+<td>Hundreds</td>
+<td>0-500</td>
+<td>0, 100, 200, ...</td>
+</tr>
+<tr>
+<td>Large</td>
+<td>0-100k</td>
+<td>0, 20000, 40000, ...</td>
+</tr>
+<tr>
+<td>Scientific small</td>
+<td>1e-6 to 1e-3</td>
+<td>1e-06, ...</td>
+</tr>
+<tr>
+<td>Scientific large</td>
+<td>1e6 to 1e9</td>
+<td>1e+06, ...</td>
+</tr>
+<tr>
+<td>Negative</td>
+<td>-50 to 50</td>
+<td>-40, -20, 0, 20, 40</td>
+</tr>
+<tr>
+<td>Narrow</td>
+<td>10.0-10.5</td>
+<td>10, 10.1, 10.2, ...</td>
+</tr>
+<tr>
+<td>Temporal (hours)</td>
+<td>24h</td>
+<td>00:00, 04:00, ...</td>
+</tr>
+<tr>
+<td>Temporal (days)</td>
+<td>30d</td>
+<td>Jun 01, Jun 10, ...</td>
+</tr>
+<tr>
+<td>Temporal (months)</td>
+<td>12 months</td>
+<td>Jan, Feb, Mar, ...</td>
+</tr>
+<tr>
+<td>Temporal (years)</td>
+<td>2020-2030</td>
+<td>2020, 2022, 2024, ...</td>
+</tr>
+<tr>
+<td>Ordinal (weekdays)</td>
+<td>Mon-Sun</td>
+<td>Mon, Tue, ...</td>
+</tr>
+<tr>
+<td>Ordinal (categories)</td>
+<td>Named items</td>
+<td>Alpha, Beta, ...</td>
+</tr>
+</tbody>
+</table>
+<div class="annotation">
+<strong>Temporal axis</strong> uses <code>TemporalScale</code> which formats Unix timestamp ticks as human-readable times via Go's <code>time.Format()</code>. Set the format with <code>WithTimeFormat("15:04")</code>.
+</div>
+<div class="annotation">
+<strong>Ordinal axis</strong> uses <code>OrdinalScale</code> which maps discrete indices to equal-width bands. Labels come from <code>DataPoint.Label</code> when no <code>Time</code> is set.
+</div>
+<hr>
 <h2 id="running">Running</h2>
-<pre><code>task example:01a
+<pre><code class="language-bash">task example:01a
 </code></pre>
-<p>Opens at <a href="http://localhost:1339">http://localhost:1339</a>.</p>
-<h2 id="screenshot">Screenshot</h2>
-<p><img src="01a_axis_formats/01a_axis_formats.svg" alt="Axis formats"></p>
+<p>Serves at <a href="http://localhost:1339">http://localhost:1339</a>.</p>
+<hr>
+<p><a href="../index.html">Back to examples</a> | <a href="https://codeberg.org/hum3/gogal/src/branch/main/examples/01a_axis_formats">Source on Codeberg</a></p>
 
             </div>
         </div>

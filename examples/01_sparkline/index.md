@@ -1,6 +1,4 @@
 <style>
-/* Hide the broken default breadcrumb from md2html */
-section.section > .container > nav.breadcrumb { display: none; }
 .annotation { border-left: 3px solid #3273dc; background: #f0f4ff; padding: 0.75em 1em; margin: 0.75em 0; border-radius: 0 4px 4px 0; font-size: 0.9em; }
 .annotation strong { color: #3273dc; }
 .screenshot { border: 1px solid #dbdbdb; border-radius: 4px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); overflow: hidden; padding: 1em; background: #fff; }
@@ -9,16 +7,9 @@ section.section > .container > nav.breadcrumb { display: none; }
 .example-nav strong { color: #363636; }
 </style>
 
-<nav class="breadcrumb" aria-label="breadcrumbs">
-<ul>
-<li><a href="../index.html">gogal</a></li>
-<li><a href="../index.html#examples">Examples</a></li>
-<li class="is-active"><a href="#" aria-current="page">01 — Sparkline</a></li>
-</ul>
-</nav>
-
 <div class="example-nav">
 <strong>01</strong> |
+<a href="../01a_axis_formats/">01a</a> |
 <a href="../02_static_line/">02</a> |
 <a href="../03_multi_series/">03</a> |
 <a href="../04_bar_chart/">04</a> |
@@ -33,96 +24,67 @@ section.section > .container > nav.breadcrumb { display: none; }
 
 A sparkline is a tiny inline chart — no axes, no labels, no legend. It shows a trend at a glance, designed to sit inside a paragraph or table cell. This is the simplest thing you can build with gogal: generate data, create a chart, render SVG.
 
-<div class="columns">
-<div class="column is-7">
-<figure class="screenshot">
-<p style="font-family: system-ui; font-size: 14px; margin: 0;">
-  Current temperature: <img src="01_regular.svg" alt="Regular sparkline" style="vertical-align: middle; width: 200px; height: 30px;">
-</p>
-<p style="font-family: system-ui; font-size: 14px; margin: 0.5em 0 0;">
-  Smooth variant: <img src="01_smooth.svg" alt="Smooth sparkline" style="vertical-align: middle; width: 200px; height: 30px;">
-</p>
-<p style="font-family: system-ui; font-size: 14px; margin: 0.5em 0 0;">
-  Wider: <img src="01_wide.svg" alt="Wide sparkline" style="vertical-align: middle; width: 400px; height: 40px;">
-</p>
-<figcaption class="has-text-centered has-text-grey is-size-7 mt-2">Three sparkline variants: regular, smooth (Catmull-Rom), and wider</figcaption>
+<div class="columns is-vcentered">
+<div class="column is-5">
+<figure class="image screenshot">
+<img src="01_polling.svg" alt="During generation — partial sparkline">
+<figcaption class="has-text-centered has-text-grey is-size-7 mt-1">During generation</figcaption>
 </figure>
 </div>
-<div class="column">
+<div class="column is-narrow has-text-centered">&#x27A1;</div>
+<div class="column is-5">
+<figure class="image screenshot">
+<img src="01_complete.svg" alt="After completion — full sparkline">
+<figcaption class="has-text-centered has-text-grey is-size-7 mt-1">Complete</figcaption>
+</figure>
+</div>
+</div>
+
 <div class="buttons">
 <a href="demo.html" class="button is-primary">Launch WASM Demo</a>
 <a target="_blank" href="https://codeberg.org/hum3/gogal/src/branch/main/examples/01_sparkline" class="button is-light">Source on Codeberg</a>
-</div>
-</div>
 </div>
 
 ---
 
 ## The code
 
-The entire example fits in one file. Generate data, configure the chart, render SVG:
+The model function generates points one at a time, updating the sparkline after each. Uses lofigui for interactive WASM and server modes:
 
 ```go
-package main
-
-import (
-    "fmt"
-    "math"
-    "net/http"
-
-    "codeberg.org/hum3/gogal"
-)
-
-func main() {
-    // Generate sample data: a sine wave with noise
+func model(app *lofigui.App) {
+    const nPoints = 7
     var points []gogal.DataPoint
-    for i := 0; i < 50; i++ {
-        x := float64(i)
-        y := math.Sin(x*0.3)*10 + 20 + math.Sin(x*1.1)*3
-        points = append(points, gogal.DataPoint{X: x, Y: y})
+    y := 20.0
+
+    for i := range nPoints {
+        y += rand.Float64()*10 - 5
+        points = append(points, gogal.DataPoint{X: float64(i), Y: y})
+
+        lofigui.Reset()
+        lofigui.HTML(`<p>Sparkline: ` + renderSparkline(points, false) + `</p>`)
+        lofigui.HTML(`<p>Smooth: ` + renderSparkline(points, true) + `</p>`)
+
+        if i < nPoints-1 {
+            app.Sleep(500 * time.Millisecond)
+        }
     }
-
-    // Create a sparkline
-    chart := gogal.NewLineChart(
-        gogal.WithVariant(gogal.Sparkline),
-        gogal.WithSize(200, 30),
-    )
-    chart.Add("temperature", points)
-
-    // Write SVG to stdout
-    svg, _ := chart.RenderString()
-    fmt.Println(svg)
-
-    // Also serve on HTTP with three variants
-    fmt.Println("Serving sparkline at http://localhost:1340")
-    http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-        w.Header().Set("Content-Type", "text/html")
-        fmt.Fprint(w, `<p>Current temperature: `)
-        chart.Render(w)
-        fmt.Fprint(w, `</p>`)
-        // ... smooth and wide variants follow
-    })
-    http.ListenAndServe(":1340", nil)
 }
 ```
 
 <div class="annotation">
-<strong>gogal.NewLineChart()</strong> creates a line chart. <code>WithVariant(gogal.Sparkline)</code> strips it down to the bare minimum — no axes, labels, or legend. <code>WithSize(200, 30)</code> sets the SVG viewBox dimensions in pixels.
+<strong>Sequential generation</strong> — each iteration adds one point, calls <code>lofigui.Reset()</code> to clear the buffer, then re-renders the sparkline with the growing dataset. The browser polls for updates, showing the chart grow in real time.
 </div>
 
 <div class="annotation">
-<strong>chart.Add()</strong> adds a named data series. For sparklines, the name is only used internally — there's no legend to display it. Each <code>DataPoint</code> has X (position) and Y (value) fields.
+<strong>app.Sleep()</strong> pauses between points. The lofigui framework handles rendering in the browser during the pause, so each intermediate state is visible.
 </div>
 
 <div class="annotation">
-<strong>Render vs RenderString</strong> — <code>Render(w)</code> writes SVG directly to any <code>io.Writer</code> (HTTP response, file, etc.). <code>RenderString()</code> returns the SVG as a string. Both produce identical output. Use <code>Render</code> when streaming to avoid allocating the full SVG in memory.
+<strong>WithSmooth(true)</strong> enables Catmull-Rom to Bezier curve interpolation, producing smooth paths instead of straight line segments between points.
 </div>
 
-<div class="annotation">
-<strong>WithSmooth(true)</strong> enables Catmull-Rom to Bezier curve interpolation, producing smooth paths instead of straight line segments between points. Compare the regular and smooth variants above — same data, different visual feel.
-</div>
-
-[Full source on Codeberg](https://codeberg.org/hum3/gogal/src/branch/main/examples/01_sparkline/go/main.go)
+[Full source on Codeberg](https://codeberg.org/hum3/gogal/src/branch/main/examples/01_sparkline/go/model.go)
 
 ---
 
@@ -132,7 +94,7 @@ func main() {
 task example:01
 ```
 
-This outputs SVG to stdout and starts an HTTP server at `http://localhost:1340` showing three sparkline variants (regular, smooth, wider).
+Starts the lofigui server at `http://localhost:1340`. Click Start to generate a random sparkline — watch it grow point by point.
 
 ---
 

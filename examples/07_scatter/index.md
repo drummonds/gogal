@@ -1,5 +1,4 @@
 <style>
-section.section > .container > nav.breadcrumb { display: none; }
 .annotation { border-left: 3px solid #3273dc; background: #f0f4ff; padding: 0.75em 1em; margin: 0.75em 0; border-radius: 0 4px 4px 0; font-size: 0.9em; }
 .annotation strong { color: #3273dc; }
 .example-nav { background: #f5f5f5; border-radius: 4px; padding: 0.5em 1em; margin-bottom: 1.5em; font-size: 0.9em; }
@@ -7,16 +6,9 @@ section.section > .container > nav.breadcrumb { display: none; }
 .example-nav strong { color: #363636; }
 </style>
 
-<nav class="breadcrumb" aria-label="breadcrumbs">
-<ul>
-<li><a href="../index.html">gogal</a></li>
-<li><a href="../index.html#examples">Examples</a></li>
-<li class="is-active"><a href="#" aria-current="page">07 — Scatter</a></li>
-</ul>
-</nav>
-
 <div class="example-nav">
 <a href="../01_sparkline/">01</a> |
+<a href="../01a_axis_formats/">01a</a> |
 <a href="../02_static_line/">02</a> |
 <a href="../03_multi_series/">03</a> |
 <a href="../04_bar_chart/">04</a> |

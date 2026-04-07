@@ -48,22 +48,22 @@ tasks:
   docs:build:
     desc: Build documentation (markdown to HTML)
     cmds:
-      - task-plus md2html --file README.md --dst docs
-      - task-plus md2html --file CHANGELOG.md --dst docs
-      - task-plus md2html --file ROADMAP.md --dst docs
-      - task-plus md2html --file RESEARCH.md --dst docs
-      - task-plus md2html --file docs/index.md --dst docs
+      - task-plus md2html --label gogal --file README.md --dst docs
+      - task-plus md2html --label gogal --file CHANGELOG.md --dst docs
+      - task-plus md2html --label gogal --file ROADMAP.md --dst docs
+      - task-plus md2html --label gogal --file RESEARCH.md --dst docs
+      - task-plus md2html --label gogal --file docs/index.md --dst docs
       # Example documentation pages
-      - task-plus md2html --file examples/01_sparkline/index.md --dst docs/01_sparkline
-      - task-plus md2html --file examples/01a_axis_formats/index.md --dst docs/01a_axis_formats
-      - task-plus md2html --file examples/02_static_line/index.md --dst docs/02_static_line
-      - task-plus md2html --file examples/03_multi_series/index.md --dst docs/03_multi_series
-      - task-plus md2html --file examples/04_bar_chart/index.md --dst docs/04_bar_chart
-      - task-plus md2html --file examples/05_htmx/index.md --dst docs/05_htmx
-      - task-plus md2html --file examples/06_live_sse/index.md --dst docs/06_live_sse
-      - task-plus md2html --file examples/07_scatter/index.md --dst docs/07_scatter
-      - task-plus md2html --file examples/08_wasm/index.md --dst docs/08_wasm
-      - task-plus md2html --file examples/09_dashboard/index.md --dst docs/09_dashboard
+      - task-plus md2html --label gogal --file examples/01_sparkline/index.md --dst docs/01_sparkline
+      - task-plus md2html --label gogal --file examples/01a_axis_formats/index.md --dst docs/01a_axis_formats
+      - task-plus md2html --label gogal --file examples/02_static_line/index.md --dst docs/02_static_line
+      - task-plus md2html --label gogal --file examples/03_multi_series/index.md --dst docs/03_multi_series
+      - task-plus md2html --label gogal --file examples/04_bar_chart/index.md --dst docs/04_bar_chart
+      - task-plus md2html --label gogal --file examples/05_htmx/index.md --dst docs/05_htmx
+      - task-plus md2html --label gogal --file examples/06_live_sse/index.md --dst docs/06_live_sse
+      - task-plus md2html --label gogal --file examples/07_scatter/index.md --dst docs/07_scatter
+      - task-plus md2html --label gogal --file examples/08_wasm/index.md --dst docs/08_wasm
+      - task-plus md2html --label gogal --file examples/09_dashboard/index.md --dst docs/09_dashboard
 
   docs:build-wasm:
     desc: Build WASM binaries and copy demo assets
@@ -98,6 +98,44 @@ tasks:
       - cd examples/06_live_sse/go && go run gen_screenshot.go
       - cd examples/08_wasm/go && go run gen_screenshot.go
       - cd examples/09_dashboard/go && go run gen_screenshot.go
+
+  docs:capture:01:
+    desc: Capture screenshots for example 01 documentation
+    dir: examples/01_sparkline/go
+    cmds:
+      - |
+        LOFIGUI_HOLD=1 go run . &
+        SERVER_PID=$!
+        trap "kill $SERVER_PID 2>/dev/null" EXIT
+        for i in $(seq 1 30); do
+          curl -sf http://localhost:1340/ > /dev/null 2>&1 && break
+          sleep 0.5
+        done
+        sleep 2
+        url2svg --url http://localhost:1340 -o ../../../docs/01_sparkline/01_polling.svg
+        sleep 3
+        url2svg --url http://localhost:1340 -o ../../../docs/01_sparkline/01_complete.svg
+
+  docs:capture:01a:
+    desc: Capture screenshot for example 01a documentation
+    dir: examples/01a_axis_formats/go
+    cmds:
+      - |
+        LOFIGUI_HOLD=1 go run . &
+        SERVER_PID=$!
+        trap "kill $SERVER_PID 2>/dev/null" EXIT
+        for i in $(seq 1 30); do
+          curl -sf http://localhost:1339/ > /dev/null 2>&1 && break
+          sleep 0.5
+        done
+        sleep 2
+        url2svg --url http://localhost:1339 -o ../../../docs/01a_axis_formats/01a_complete.svg
+
+  docs:capture:
+    desc: Capture all example screenshots via url2svg
+    cmds:
+      - task: docs:capture:01
+      - task: docs:capture:01a
 
   # Go example tasks (wildcard)
   example:*:
