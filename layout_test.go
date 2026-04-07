@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"strings"
 	"testing"
+	"time"
 )
 
 func TestSparklineLayout(t *testing.T) {
@@ -254,5 +255,171 @@ func TestRenderString(t *testing.T) {
 	}
 	if !strings.HasPrefix(svg, "<svg") {
 		t.Error("RenderString should return SVG")
+	}
+}
+
+func makeTimePoints(hours []float64, ys []float64) []DataPoint {
+	pts := make([]DataPoint, len(hours))
+	for i, h := range hours {
+		hr := int(h)
+		min := int((h - float64(hr)) * 60)
+		pts[i] = DataPoint{
+			Time:  time.Date(2024, 6, 15, hr, min, 0, 0, time.UTC),
+			Y:     ys[i],
+			Label: "tooltip",
+		}
+	}
+	return pts
+}
+
+func TestOrdinalLayout_PointsWithinPlotArea(t *testing.T) {
+	temp := makeTimePoints(
+		[]float64{0, 1, 2, 3, 4},
+		[]float64{10, 12, 14, 11, 13},
+	)
+	hum := makeTimePoints(
+		[]float64{0, 2, 4},
+		[]float64{80, 70, 75},
+	)
+
+	chart := NewLineChart(
+		WithVariant(Static),
+		WithAxisMode(Ordinal),
+		WithSize(800, 400),
+		WithTimeFormat("15:04"),
+	)
+	chart.Add("Temp", temp)
+	chart.Add("Humidity", hum)
+
+	layout := chart.Layout()
+
+	for i, s := range layout.Series {
+		for j, p := range s.Points {
+			if p.X < layout.PlotArea.X-1 || p.X > layout.PlotArea.X+layout.PlotArea.Width+1 {
+				t.Errorf("series[%d].point[%d].X = %.1f, outside plot area [%.1f, %.1f]",
+					i, j, p.X, layout.PlotArea.X, layout.PlotArea.X+layout.PlotArea.Width)
+			}
+			if p.Y < layout.PlotArea.Y-1 || p.Y > layout.PlotArea.Y+layout.PlotArea.Height+1 {
+				t.Errorf("series[%d].point[%d].Y = %.1f, outside plot area [%.1f, %.1f]",
+					i, j, p.Y, layout.PlotArea.Y, layout.PlotArea.Y+layout.PlotArea.Height)
+			}
+		}
+	}
+}
+
+func TestOrdinalLayout_XAxisLabels(t *testing.T) {
+	temp := makeTimePoints(
+		[]float64{0, 1, 2},
+		[]float64{10, 12, 14},
+	)
+
+	chart := NewLineChart(
+		WithVariant(Static),
+		WithAxisMode(Ordinal),
+		WithTimeFormat("15:04"),
+	)
+	chart.Add("Temp", temp)
+
+	layout := chart.Layout()
+
+	if layout.XAxis == nil {
+		t.Fatal("expected X axis")
+	}
+	if len(layout.XAxis.Ticks) != 3 {
+		t.Fatalf("expected 3 X ticks, got %d", len(layout.XAxis.Ticks))
+	}
+
+	wantLabels := []string{"00:00", "01:00", "02:00"}
+	for i, tick := range layout.XAxis.Ticks {
+		if tick.Label != wantLabels[i] {
+			t.Errorf("tick[%d].Label = %q, want %q", i, tick.Label, wantLabels[i])
+		}
+	}
+}
+
+func TestOrdinalLayout_LabelCount(t *testing.T) {
+	long := makeTimePoints(
+		[]float64{0, 1, 2, 3, 4},
+		[]float64{10, 12, 14, 11, 13},
+	)
+	short := makeTimePoints(
+		[]float64{0, 2},
+		[]float64{80, 70},
+	)
+
+	chart := NewLineChart(
+		WithVariant(Static),
+		WithAxisMode(Ordinal),
+		WithTimeFormat("15:04"),
+	)
+	chart.Add("Long", long)
+	chart.Add("Short", short)
+
+	layout := chart.Layout()
+
+	if layout.XAxis == nil {
+		t.Fatal("expected X axis")
+	}
+	// Tick count should equal the longest series length.
+	if len(layout.XAxis.Ticks) != 5 {
+		t.Errorf("expected 5 X ticks (longest series), got %d", len(layout.XAxis.Ticks))
+	}
+}
+
+func TestYFormatApplied(t *testing.T) {
+	chart := NewLineChart(
+		WithVariant(Static),
+		WithSize(800, 400),
+		WithYFormat("%.0f"),
+	)
+	chart.Add("A", []DataPoint{
+		{X: 0, Y: 10},
+		{X: 1, Y: 20},
+		{X: 2, Y: 30},
+	})
+
+	layout := chart.Layout()
+
+	if layout.YAxis == nil {
+		t.Fatal("expected Y axis")
+	}
+	for _, tick := range layout.YAxis.Ticks {
+		if strings.Contains(tick.Label, ".") {
+			t.Errorf("Y tick label %q should have no decimal with format %%.0f", tick.Label)
+		}
+	}
+}
+
+func TestTemporalLayout_XAxisLabels(t *testing.T) {
+	base := time.Date(2024, 6, 15, 0, 0, 0, 0, time.UTC)
+	pts := make([]DataPoint, 7)
+	for i := range pts {
+		pts[i] = DataPoint{
+			Time: base.Add(time.Duration(i*4) * time.Hour),
+			Y:    float64(10 + i),
+		}
+	}
+
+	chart := NewLineChart(
+		WithVariant(Static),
+		WithSize(800, 400),
+		WithTimeFormat("15:04"),
+	)
+	chart.Add("data", pts)
+
+	layout := chart.Layout()
+
+	if layout.XAxis == nil {
+		t.Fatal("expected X axis")
+	}
+
+	// Tick labels should be time-formatted, not scientific notation.
+	for _, tick := range layout.XAxis.Ticks {
+		if strings.Contains(tick.Label, "e+") {
+			t.Errorf("temporal tick label %q should not be scientific notation", tick.Label)
+		}
+		if !strings.Contains(tick.Label, ":") {
+			t.Errorf("temporal tick label %q should contain ':', expected HH:MM", tick.Label)
+		}
 	}
 }

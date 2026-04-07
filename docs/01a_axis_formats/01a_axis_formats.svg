@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 250" role="img" aria-labelledby="chart-title">
+  <title id="chart-title">Small integers (0–10)</title>
+  <desc>Chart: Small integers (0–10)</desc>
+  <style>
+    .tooltip { display: none; pointer-events: none; }
+    .data-point:hover .tooltip { display: block; }
+    .point { transition: r 0.15s; }
+    .data-point:hover .point { r: 5; }
+    .line { transition: stroke-width 0.2s; }
+  </style>
+  <rect x="0.00" y="0.00" width="500.00" height="250.00" fill="#ffffff"/>
+  <g class="grid">
+  <line x1="60.00" y1="200.00" x2="480.00" y2="200.00" stroke="#e0e0e0" stroke-width="0.5"/>
+  <line x1="60.00" y1="170.00" x2="480.00" y2="170.00" stroke="#e0e0e0" stroke-width="0.5"/>
+  <line x1="60.00" y1="140.00" x2="480.00" y2="140.00" stroke="#e0e0e0" stroke-width="0.5"/>
+  <line x1="60.00" y1="110.00" x2="480.00" y2="110.00" stroke="#e0e0e0" stroke-width="0.5"/>
+  <line x1="60.00" y1="80.00" x2="480.00" y2="80.00" stroke="#e0e0e0" stroke-width="0.5"/>
+  <line x1="60.00" y1="50.00" x2="480.00" y2="50.00" stroke="#e0e0e0" stroke-width="0.5"/>
+  </g>
+  <g class="y-axis">
+  <line x1="60.00" y1="50.00" x2="60.00" y2="200.00" stroke="#666666" stroke-width="1"/>
+  <line x1="56.00" y1="200.00" x2="60.00" y2="200.00" stroke="#666666" stroke-width="1"/>
+  <text x="52.00" y="204.00" text-anchor="end" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">1.0</text>
+  <line x1="56.00" y1="170.00" x2="60.00" y2="170.00" stroke="#666666" stroke-width="1"/>
+  <text x="52.00" y="174.00" text-anchor="end" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">2.0</text>
+  <line x1="56.00" y1="140.00" x2="60.00" y2="140.00" stroke="#666666" stroke-width="1"/>
+  <text x="52.00" y="144.00" text-anchor="end" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">3.0</text>
+  <line x1="56.00" y1="110.00" x2="60.00" y2="110.00" stroke="#666666" stroke-width="1"/>
+  <text x="52.00" y="114.00" text-anchor="end" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">4.0</text>
+  <line x1="56.00" y1="80.00" x2="60.00" y2="80.00" stroke="#666666" stroke-width="1"/>
+  <text x="52.00" y="84.00" text-anchor="end" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">5.0</text>
+  <line x1="56.00" y1="50.00" x2="60.00" y2="50.00" stroke="#666666" stroke-width="1"/>
+  <text x="52.00" y="54.00" text-anchor="end" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">6.0</text>
+  </g>
+  <g class="x-axis">
+  <line x1="60.00" y1="200.00" x2="480.00" y2="200.00" stroke="#666666" stroke-width="1"/>
+  <line x1="60.00" y1="200.00" x2="60.00" y2="204.00" stroke="#666666" stroke-width="1"/>
+  <text x="60.00" y="216.00" text-anchor="middle" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">1970-01-01</text>
+  <line x1="144.00" y1="200.00" x2="144.00" y2="204.00" stroke="#666666" stroke-width="1"/>
+  <text x="144.00" y="216.00" text-anchor="middle" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">1970-01-01</text>
+  <line x1="228.00" y1="200.00" x2="228.00" y2="204.00" stroke="#666666" stroke-width="1"/>
+  <text x="228.00" y="216.00" text-anchor="middle" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">1970-01-01</text>
+  <line x1="312.00" y1="200.00" x2="312.00" y2="204.00" stroke="#666666" stroke-width="1"/>
+  <text x="312.00" y="216.00" text-anchor="middle" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">1970-01-01</text>
+  <line x1="396.00" y1="200.00" x2="396.00" y2="204.00" stroke="#666666" stroke-width="1"/>
+  <text x="396.00" y="216.00" text-anchor="middle" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">1970-01-01</text>
+  <line x1="480.00" y1="200.00" x2="480.00" y2="204.00" stroke="#666666" stroke-width="1"/>
+  <text x="480.00" y="216.00" text-anchor="middle" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">1970-01-01</text>
+  </g>
+  <text x="250.00" y="30.00" text-anchor="middle" fill="#333333" font-size="16" font-weight="bold" font-family="system-ui, -apple-system, sans-serif">Small integers (0–10)</text>
+  <g class="series-0">
+  <path d="M60.00,200.00 L144.00,140.00 L228.00,170.00 L312.00,80.00 L396.00,110.00 L480.00,50.00" fill="none" stroke="#4e79a7" stroke-width="2" class="line"/>
+  <g class="data-point" aria-label="1">
+  <circle cx="60.00" cy="200.00" r="3.0" fill="#4e79a7" class="point"/>
+  <g class="tooltip">
+  <rect x="68.00" y="180.00" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
+  <text x="72.00" y="193.00" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">1</text>
+  </g>
+  </g>
+  <g class="data-point" aria-label="3">
+  <circle cx="144.00" cy="140.00" r="3.0" fill="#4e79a7" class="point"/>
+  <g class="tooltip">
+  <rect x="152.00" y="120.00" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
+  <text x="156.00" y="133.00" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">3</text>
+  </g>
+  </g>
+  <g class="data-point" aria-label="2">
+  <circle cx="228.00" cy="170.00" r="3.0" fill="#4e79a7" class="point"/>
+  <g class="tooltip">
+  <rect x="236.00" y="150.00" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
+  <text x="240.00" y="163.00" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">2</text>
+  </g>
+  </g>
+  <g class="data-point" aria-label="5">
+  <circle cx="312.00" cy="80.00" r="3.0" fill="#4e79a7" class="point"/>
+  <g class="tooltip">
+  <rect x="320.00" y="60.00" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
+  <text x="324.00" y="73.00" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">5</text>
+  </g>
+  </g>
+  <g class="data-point" aria-label="4">
+  <circle cx="396.00" cy="110.00" r="3.0" fill="#4e79a7" class="point"/>
+  <g class="tooltip">
+  <rect x="404.00" y="90.00" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
+  <text x="408.00" y="103.00" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">4</text>
+  </g>
+  </g>
+  <g class="data-point" aria-label="6">
+  <circle cx="480.00" cy="50.00" r="3.0" fill="#4e79a7" class="point"/>
+  <g class="tooltip">
+  <rect x="488.00" y="30.00" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
+  <text x="492.00" y="43.00" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">6</text>
+  </g>
+  </g>
+  </g>
+</svg>

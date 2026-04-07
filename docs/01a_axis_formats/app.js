@@ -32,7 +32,7 @@ function start() {
 
 window.wasmReady = function() {
     startBtn.disabled = false;
-    outputDiv.innerHTML = '<p class="has-text-grey">Click Start to generate a random sparkline.</p>';
+    outputDiv.innerHTML = '<p class="has-text-grey">Click Start to render axis format examples.</p>';
 };
 
 async function loadWASM() {

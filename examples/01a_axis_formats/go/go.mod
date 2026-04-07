@@ -1,4 +1,4 @@
-module codeberg.org/hum3/gogal/examples/01_sparkline
+module codeberg.org/hum3/gogal/examples/01a_axis_formats
 
 go 1.25
 

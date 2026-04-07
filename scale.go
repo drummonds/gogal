@@ -3,6 +3,7 @@ package gogal
 import (
 	"fmt"
 	"math"
+	"time"
 )
 
 // Tick represents a tick mark on an axis.
@@ -154,6 +155,32 @@ func (s *OrdinalScale) Ticks() []Tick {
 			Position: s.Map(float64(i)),
 			Label:    label,
 		}
+	}
+	return ticks
+}
+
+// TemporalScale wraps LinearScale and formats tick labels as human-readable times.
+type TemporalScale struct {
+	*LinearScale
+	timeFormat string
+}
+
+// NewTemporalScale creates a temporal scale with the given time format.
+func NewTemporalScale(ls *LinearScale, timeFormat string) *TemporalScale {
+	return &TemporalScale{LinearScale: ls, timeFormat: timeFormat}
+}
+
+func (s *TemporalScale) Ticks() []Tick {
+	step := niceStep(s.domainMax-s.domainMin, s.tickCount)
+	start := math.Ceil(s.domainMin/step) * step
+	var ticks []Tick
+	for v := start; v <= s.domainMax+step*0.001; v += step {
+		t := time.Unix(int64(v), 0).UTC()
+		ticks = append(ticks, Tick{
+			Value:    v,
+			Position: s.Map(v),
+			Label:    t.Format(s.timeFormat),
+		})
 	}
 	return ticks
 }

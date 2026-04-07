@@ -39,13 +39,13 @@
   <g class="x-axis">
   <line x1="60.00" y1="350.00" x2="780.00" y2="350.00" stroke="#666666" stroke-width="1"/>
   <line x1="149.78" y1="350.00" x2="149.78" y2="354.00" stroke="#666666" stroke-width="1"/>
-  <text x="149.78" y="366.00" text-anchor="middle" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">1.718e+09</text>
+  <text x="149.78" y="366.00" text-anchor="middle" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">02:53</text>
   <line x1="322.45" y1="350.00" x2="322.45" y2="354.00" stroke="#666666" stroke-width="1"/>
-  <text x="322.45" y="366.00" text-anchor="middle" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">1.718e+09</text>
+  <text x="322.45" y="366.00" text-anchor="middle" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">08:26</text>
   <line x1="495.11" y1="350.00" x2="495.11" y2="354.00" stroke="#666666" stroke-width="1"/>
-  <text x="495.11" y="366.00" text-anchor="middle" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">1.718e+09</text>
+  <text x="495.11" y="366.00" text-anchor="middle" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">14:00</text>
   <line x1="667.77" y1="350.00" x2="667.77" y2="354.00" stroke="#666666" stroke-width="1"/>
-  <text x="667.77" y="366.00" text-anchor="middle" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">1.718e+09</text>
+  <text x="667.77" y="366.00" text-anchor="middle" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">19:33</text>
   <text x="420.00" y="395.00" text-anchor="middle" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">Hour</text>
   </g>
   <text x="400.00" y="30.00" text-anchor="middle" fill="#333333" font-size="16" font-weight="bold" font-family="system-ui, -apple-system, sans-serif">Temperature — 15 June 2024</text>

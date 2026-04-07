@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Example 01a — Axis Formats - gogal</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <style>
+        pre {
+            background-color: #2b2b2b;
+            color: #f8f8f2;
+            padding: 1.25em 1.5em;
+            overflow-x: auto;
+        }
+        pre code {
+            color: inherit;
+            background: none;
+            padding: 0;
+            font-size: 0.875em;
+        }
+        code {
+            background-color: #f5f5f5;
+            color: #e83e8c;
+            padding: 0.125em 0.375em;
+            border-radius: 3px;
+        }
+        pre.mermaid {
+            background-color: #ffffff;
+            color: #333;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar is-primary">
+        <div class="navbar-brand">
+            <a class="navbar-item has-text-weight-bold" href="index.html">gogal</a>
+        </div>
+    </nav>
+    <section class="section">
+        <div class="container">
+            <nav class="breadcrumb" aria-label="breadcrumbs">
+                <ul>
+                    <li class="is-active"><a href="#" aria-current="page">Internal Docs</a></li>
+                    <li class="is-active"><a href="#" aria-current="page">Example 01a — Axis Formats</a></li>
+                </ul>
+            </nav>
+
+            <div class="content">
+                <h1 id="example-01a--axis-formats">Example 01a — Axis Formats</h1>
+<p>Visual test of axis tick formatting across different data ranges.</p>
+<h2 id="what-it-demonstrates">What it demonstrates</h2>
+<p>A gallery of charts showing how gogal formats axis ticks for:</p>
+<ul>
+<li><strong>Numeric</strong>: small integers, decimals, hundreds, large ranges, negative ranges, narrow ranges</li>
+<li><strong>Scientific</strong>: very small (1e-6) and very large (1e9) values</li>
+<li><strong>Temporal</strong>: hours, days, months, years</li>
+<li><strong>Ordinal</strong>: weekday labels, named categories</li>
+</ul>
+<h2 id="running">Running</h2>
+<pre><code>task example:01a
+</code></pre>
+<p>Opens at <a href="http://localhost:1339">http://localhost:1339</a>.</p>
+<h2 id="screenshot">Screenshot</h2>
+<p><img src="01a_axis_formats/01a_axis_formats.svg" alt="Axis formats"></p>
+
+            </div>
+        </div>
+    </section>
+</body>
+</html>

@@ -19,30 +19,30 @@
   <g class="y-axis">
   <line x1="60.00" y1="40.00" x2="60.00" y2="250.00" stroke="#666666" stroke-width="1"/>
   <line x1="56.00" y1="233.62" x2="60.00" y2="233.62" stroke="#666666" stroke-width="1"/>
-  <text x="52.00" y="237.62" text-anchor="end" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">10</text>
+  <text x="52.00" y="237.62" text-anchor="end" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">10°C</text>
   <line x1="56.00" y1="203.83" x2="60.00" y2="203.83" stroke="#666666" stroke-width="1"/>
-  <text x="52.00" y="207.83" text-anchor="end" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">12</text>
+  <text x="52.00" y="207.83" text-anchor="end" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">12°C</text>
   <line x1="56.00" y1="174.04" x2="60.00" y2="174.04" stroke="#666666" stroke-width="1"/>
-  <text x="52.00" y="178.04" text-anchor="end" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">14</text>
+  <text x="52.00" y="178.04" text-anchor="end" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">14°C</text>
   <line x1="56.00" y1="144.26" x2="60.00" y2="144.26" stroke="#666666" stroke-width="1"/>
-  <text x="52.00" y="148.26" text-anchor="end" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">16</text>
+  <text x="52.00" y="148.26" text-anchor="end" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">16°C</text>
   <line x1="56.00" y1="114.47" x2="60.00" y2="114.47" stroke="#666666" stroke-width="1"/>
-  <text x="52.00" y="118.47" text-anchor="end" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">18</text>
+  <text x="52.00" y="118.47" text-anchor="end" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">18°C</text>
   <line x1="56.00" y1="84.68" x2="60.00" y2="84.68" stroke="#666666" stroke-width="1"/>
-  <text x="52.00" y="88.68" text-anchor="end" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">20</text>
+  <text x="52.00" y="88.68" text-anchor="end" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">20°C</text>
   <line x1="56.00" y1="54.89" x2="60.00" y2="54.89" stroke="#666666" stroke-width="1"/>
-  <text x="52.00" y="58.89" text-anchor="end" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">22</text>
+  <text x="52.00" y="58.89" text-anchor="end" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">22°C</text>
   </g>
   <g class="x-axis">
   <line x1="60.00" y1="250.00" x2="480.00" y2="250.00" stroke="#666666" stroke-width="1"/>
   <line x1="111.63" y1="250.00" x2="111.63" y2="254.00" stroke="#666666" stroke-width="1"/>
-  <text x="111.63" y="266.00" text-anchor="middle" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">1.718e+09</text>
+  <text x="111.63" y="266.00" text-anchor="middle" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">02:53</text>
   <line x1="210.92" y1="250.00" x2="210.92" y2="254.00" stroke="#666666" stroke-width="1"/>
-  <text x="210.92" y="266.00" text-anchor="middle" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">1.718e+09</text>
+  <text x="210.92" y="266.00" text-anchor="middle" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">08:26</text>
   <line x1="310.21" y1="250.00" x2="310.21" y2="254.00" stroke="#666666" stroke-width="1"/>
-  <text x="310.21" y="266.00" text-anchor="middle" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">1.718e+09</text>
+  <text x="310.21" y="266.00" text-anchor="middle" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">14:00</text>
   <line x1="409.50" y1="250.00" x2="409.50" y2="254.00" stroke="#666666" stroke-width="1"/>
-  <text x="409.50" y="266.00" text-anchor="middle" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">1.718e+09</text>
+  <text x="409.50" y="266.00" text-anchor="middle" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">19:33</text>
   </g>
   <g class="series-0">
   <path d="M60.00,215.74 C63.97,217.73 75.39,223.94 83.83,227.66 C92.27,231.38 102.20,234.36 110.64,238.09 C119.08,241.81 126.52,248.51 134.47,250.00 C142.41,251.49 150.60,251.74 158.30,247.02 C165.99,242.30 175.43,230.14 180.64,221.70 C185.85,213.26 183.87,206.31 189.57,196.38 C195.28,186.45 207.20,173.79 214.89,162.13 C222.59,150.46 230.28,136.81 235.74,126.38 C241.21,115.96 243.69,108.01 247.66,99.57 C251.63,91.13 253.87,83.44 259.57,75.74 C265.28,68.05 274.47,59.36 281.91,53.40 C289.36,47.45 298.79,40.99 304.26,40.00 C309.72,39.01 309.22,43.23 314.68,47.45 C320.14,51.67 329.33,58.37 337.02,65.32 C344.72,72.27 353.40,79.47 360.85,89.15 C368.30,98.83 374.26,113.23 381.70,123.40 C389.15,133.58 397.59,141.77 405.53,150.21 C413.48,158.65 421.42,165.85 429.36,174.04 C437.30,182.23 444.75,193.16 453.19,199.36 C461.63,205.57 475.53,209.29 480.00,211.28" fill="none" stroke="#4e79a7" stroke-width="2" class="line"/>

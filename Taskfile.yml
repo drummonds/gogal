@@ -55,6 +55,7 @@ tasks:
       - task-plus md2html --file docs/index.md --dst docs
       # Example documentation pages
       - task-plus md2html --file examples/01_sparkline/index.md --dst docs/01_sparkline
+      - task-plus md2html --file examples/01a_axis_formats/index.md --dst docs/01a_axis_formats
       - task-plus md2html --file examples/02_static_line/index.md --dst docs/02_static_line
       - task-plus md2html --file examples/03_multi_series/index.md --dst docs/03_multi_series
       - task-plus md2html --file examples/04_bar_chart/index.md --dst docs/04_bar_chart
@@ -73,6 +74,12 @@ tasks:
       - cp "$(go env GOROOT)/lib/wasm/wasm_exec.js" docs/01_sparkline/
       - cp examples/01_sparkline/templates/index.html docs/01_sparkline/demo.html
       - cp examples/01_sparkline/templates/app.js docs/01_sparkline/
+      # Example 01a — Axis Formats
+      - mkdir -p docs/01a_axis_formats
+      - cd examples/01a_axis_formats/go && GOOS=js GOARCH=wasm go build -o ../../../docs/01a_axis_formats/main.wasm .
+      - cp "$(go env GOROOT)/lib/wasm/wasm_exec.js" docs/01a_axis_formats/
+      - cp examples/01a_axis_formats/templates/index.html docs/01a_axis_formats/demo.html
+      - cp examples/01a_axis_formats/templates/app.js docs/01a_axis_formats/
       # Example 08 — WASM Demo
       - mkdir -p docs/08_wasm
       - cd examples/08_wasm/go && GOOS=js GOARCH=wasm go build -o ../../../docs/08_wasm/main.wasm .
@@ -84,6 +91,7 @@ tasks:
     desc: Regenerate example screenshot SVGs
     cmds:
       - cd examples/01_sparkline/go && go run gen_screenshot.go
+      - cd examples/01a_axis_formats/go && go run gen_screenshot.go
       - cd examples/02_static_line/go && go run gen_screenshot.go
       - cd examples/03_multi_series/go && go run gen_screenshot.go
       - cd examples/05_htmx/go && go run gen_screenshot.go

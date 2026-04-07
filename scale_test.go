@@ -2,7 +2,9 @@ package gogal
 
 import (
 	"math"
+	"strings"
 	"testing"
+	"time"
 )
 
 func TestLinearScale_Map(t *testing.T) {
@@ -140,6 +142,78 @@ func TestOrdinalScale_Ticks(t *testing.T) {
 	for i, tick := range ticks {
 		if tick.Label != labels[i] {
 			t.Errorf("tick[%d].Label = %q, want %q", i, tick.Label, labels[i])
+		}
+	}
+}
+
+func TestOrdinalScale_MapWithIndex(t *testing.T) {
+	s := NewOrdinalScale([]string{"A", "B", "C"})
+	s.SetRange(0, 300)
+
+	// Index values should map within range.
+	for i := 0; i < 3; i++ {
+		got := s.Map(float64(i))
+		if got < 0 || got > 300 {
+			t.Errorf("Map(%d) = %v, want within [0, 300]", i, got)
+		}
+	}
+
+	// A large value (like a Unix timestamp) should map far outside range.
+	huge := s.Map(1.719e9)
+	if huge < 1000 {
+		t.Errorf("Map(1.719e9) = %v, expected far outside range", huge)
+	}
+}
+
+func TestTemporalScale_Ticks(t *testing.T) {
+	// 24 hours on 2024-06-15
+	start := time.Date(2024, 6, 15, 0, 0, 0, 0, time.UTC)
+	end := time.Date(2024, 6, 15, 23, 59, 0, 0, time.UTC)
+
+	ls := NewLinearScale(float64(start.Unix()), float64(end.Unix()))
+	ls.SetRange(0, 800)
+	ts := NewTemporalScale(ls, "15:04")
+
+	ticks := ts.Ticks()
+	if len(ticks) == 0 {
+		t.Fatal("expected ticks, got none")
+	}
+
+	// All labels should look like "HH:MM", not scientific notation.
+	for _, tick := range ticks {
+		if strings.Contains(tick.Label, "e+") || strings.Contains(tick.Label, "E+") {
+			t.Errorf("tick label %q looks like scientific notation, expected time format", tick.Label)
+		}
+		if !strings.Contains(tick.Label, ":") {
+			t.Errorf("tick label %q should contain ':', expected HH:MM format", tick.Label)
+		}
+	}
+
+	// Positions should be within range.
+	for _, tick := range ticks {
+		if tick.Position < -1 || tick.Position > 801 {
+			t.Errorf("tick position %v outside range [0, 800]", tick.Position)
+		}
+	}
+}
+
+func TestTemporalScale_YearFormat(t *testing.T) {
+	start := time.Date(2020, 1, 1, 0, 0, 0, 0, time.UTC)
+	end := time.Date(2030, 1, 1, 0, 0, 0, 0, time.UTC)
+
+	ls := NewLinearScale(float64(start.Unix()), float64(end.Unix()))
+	ls.SetRange(0, 400)
+	ts := NewTemporalScale(ls, "2006")
+
+	ticks := ts.Ticks()
+	if len(ticks) == 0 {
+		t.Fatal("expected ticks, got none")
+	}
+
+	// Labels should be 4-digit years.
+	for _, tick := range ticks {
+		if len(tick.Label) != 4 {
+			t.Errorf("tick label %q should be a 4-digit year", tick.Label)
 		}
 	}
 }

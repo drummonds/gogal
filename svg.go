@@ -3,6 +3,7 @@ package gogal
 import (
 	"fmt"
 	"io"
+	"unicode/utf8"
 )
 
 // svgWriter wraps an io.Writer for generating SVG markup.
@@ -84,20 +85,22 @@ func (sw *svgWriter) closeGroup() {
 // xmlEscape escapes special XML characters.
 func xmlEscape(s string) string {
 	var result []byte
-	for i := 0; i < len(s); i++ {
-		switch s[i] {
+	for _, r := range s {
+		switch r {
 		case '&':
-			result = append(result, []byte("&amp;")...)
+			result = append(result, "&amp;"...)
 		case '<':
-			result = append(result, []byte("&lt;")...)
+			result = append(result, "&lt;"...)
 		case '>':
-			result = append(result, []byte("&gt;")...)
+			result = append(result, "&gt;"...)
 		case '"':
-			result = append(result, []byte("&quot;")...)
+			result = append(result, "&quot;"...)
 		case '\'':
-			result = append(result, []byte("&#39;")...)
+			result = append(result, "&#39;"...)
 		default:
-			result = append(result, s[i])
+			var buf [4]byte
+			n := utf8.EncodeRune(buf[:], r)
+			result = append(result, buf[:n]...)
 		}
 	}
 	return string(result)

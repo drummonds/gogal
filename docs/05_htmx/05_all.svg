@@ -18,24 +18,24 @@
   <g class="y-axis">
   <line x1="60.00" y1="50.00" x2="60.00" y2="320.00" stroke="#666666" stroke-width="1"/>
   <line x1="56.00" y1="270.67" x2="60.00" y2="270.67" stroke="#666666" stroke-width="1"/>
-  <text x="52.00" y="274.67" text-anchor="end" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">20</text>
+  <text x="52.00" y="274.67" text-anchor="end" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">20.0</text>
   <line x1="56.00" y1="205.77" x2="60.00" y2="205.77" stroke="#666666" stroke-width="1"/>
-  <text x="52.00" y="209.77" text-anchor="end" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">40</text>
+  <text x="52.00" y="209.77" text-anchor="end" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">40.0</text>
   <line x1="56.00" y1="140.87" x2="60.00" y2="140.87" stroke="#666666" stroke-width="1"/>
-  <text x="52.00" y="144.87" text-anchor="end" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">60</text>
+  <text x="52.00" y="144.87" text-anchor="end" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">60.0</text>
   <line x1="56.00" y1="75.96" x2="60.00" y2="75.96" stroke="#666666" stroke-width="1"/>
-  <text x="52.00" y="79.96" text-anchor="end" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">80</text>
+  <text x="52.00" y="79.96" text-anchor="end" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">80.0</text>
   </g>
   <g class="x-axis">
   <line x1="60.00" y1="320.00" x2="780.00" y2="320.00" stroke="#666666" stroke-width="1"/>
   <line x1="148.51" y1="320.00" x2="148.51" y2="324.00" stroke="#666666" stroke-width="1"/>
-  <text x="148.51" y="336.00" text-anchor="middle" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">1.718e+09</text>
+  <text x="148.51" y="336.00" text-anchor="middle" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">02:53</text>
   <line x1="318.72" y1="320.00" x2="318.72" y2="324.00" stroke="#666666" stroke-width="1"/>
-  <text x="318.72" y="336.00" text-anchor="middle" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">1.718e+09</text>
+  <text x="318.72" y="336.00" text-anchor="middle" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">08:26</text>
   <line x1="488.94" y1="320.00" x2="488.94" y2="324.00" stroke="#666666" stroke-width="1"/>
-  <text x="488.94" y="336.00" text-anchor="middle" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">1.718e+09</text>
+  <text x="488.94" y="336.00" text-anchor="middle" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">14:00</text>
   <line x1="659.15" y1="320.00" x2="659.15" y2="324.00" stroke="#666666" stroke-width="1"/>
-  <text x="659.15" y="336.00" text-anchor="middle" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">1.718e+09</text>
+  <text x="659.15" y="336.00" text-anchor="middle" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">19:33</text>
   </g>
   <text x="400.00" y="30.00" text-anchor="middle" fill="#333333" font-size="16" font-weight="bold" font-family="system-ui, -apple-system, sans-serif">Weather Station</text>
   <g class="series-0">

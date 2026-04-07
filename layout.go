@@ -176,10 +176,13 @@ func computeFullLayout(result *LayoutResult, series []Series, cfg *ChartConfig, 
 	// Build scales
 	yScale := NewLinearScaleFromData(allY)
 	yScale.SetRange(result.PlotArea.Y+result.PlotArea.Height, result.PlotArea.Y)
+	if cfg.YFormat != "" {
+		yScale.SetFormat(cfg.YFormat)
+	}
 
 	var xScale Scale
 	if cfg.Axis == Ordinal || chartType == "bar" {
-		labels := collectXLabels(series)
+		labels := collectXLabels(series, cfg)
 		ordScale := NewOrdinalScale(labels)
 		ordScale.SetRange(result.PlotArea.X, result.PlotArea.X+result.PlotArea.Width)
 		xScale = ordScale
@@ -187,7 +190,11 @@ func computeFullLayout(result *LayoutResult, series []Series, cfg *ChartConfig, 
 		allX := collectXValues(series)
 		linScale := NewLinearScaleFromData(allX)
 		linScale.SetRange(result.PlotArea.X, result.PlotArea.X+result.PlotArea.Width)
-		xScale = linScale
+		if cfg.Axis == Temporal && cfg.TimeFormat != "" {
+			xScale = NewTemporalScale(linScale, cfg.TimeFormat)
+		} else {
+			xScale = linScale
+		}
 	}
 
 	// Y axis
@@ -267,18 +274,22 @@ func computeSeriesLayout(s Series, index int, xScale Scale, yScale *LinearScale,
 	}
 
 	// Build points
-	for _, p := range s.Points {
+	_, isOrdinal := xScale.(*OrdinalScale)
+	for i, p := range s.Points {
 		var px float64
 		if xScale != nil {
-			px = xScale.Map(p.X)
+			if isOrdinal {
+				px = xScale.Map(float64(i))
+			} else {
+				px = xScale.Map(p.X)
+			}
 		} else {
 			// Sparkline: linear mapping of index
 			n := float64(len(s.Points) - 1)
 			if n == 0 {
 				px = cfg.Width / 2
 			} else {
-				idx := findPointIndex(s.Points, p)
-				px = float64(idx) / n * cfg.Width
+				px = float64(i) / n * cfg.Width
 			}
 		}
 		py := yScale.Map(p.Y)
@@ -288,11 +299,16 @@ func computeSeriesLayout(s Series, index int, xScale Scale, yScale *LinearScale,
 			label = fmt.Sprintf("%.4g", p.Y)
 		}
 
+		dataX := fmt.Sprintf("%.4g", p.X)
+		if !p.Time.IsZero() && cfg.TimeFormat != "" {
+			dataX = p.Time.Format(cfg.TimeFormat)
+		}
+
 		sl.Points = append(sl.Points, PointLayout{
 			X:     px,
 			Y:     py,
 			Label: label,
-			DataX: fmt.Sprintf("%.4g", p.X),
+			DataX: dataX,
 			DataY: fmt.Sprintf("%.4g", p.Y),
 		})
 	}
@@ -305,15 +321,6 @@ func computeSeriesLayout(s Series, index int, xScale Scale, yScale *LinearScale,
 	}
 
 	return sl
-}
-
-func findPointIndex(points []DataPoint, p DataPoint) int {
-	for i, pt := range points {
-		if pt.X == p.X && pt.Y == p.Y {
-			return i
-		}
-	}
-	return 0
 }
 
 func buildLinePath(points []PointLayout) string {
@@ -422,20 +429,36 @@ func collectXValues(series []Series) []float64 {
 	return vals
 }
 
-func collectXLabels(series []Series) []string {
-	seen := make(map[string]bool)
-	var labels []string
+func collectXLabels(series []Series, cfg *ChartConfig) []string {
+	// Find the longest series to determine label count.
+	maxLen := 0
 	for _, s := range series {
-		for _, p := range s.Points {
-			label := p.Label
-			if label == "" {
-				label = fmt.Sprintf("%.4g", p.X)
-			}
-			if !seen[label] {
-				seen[label] = true
-				labels = append(labels, label)
+		if len(s.Points) > maxLen {
+			maxLen = len(s.Points)
+		}
+	}
+
+	labels := make([]string, maxLen)
+	for i := range maxLen {
+		// Use the first series that has a point at this index.
+		var label string
+		for _, s := range series {
+			if i < len(s.Points) {
+				p := s.Points[i]
+				if !p.Time.IsZero() && cfg.TimeFormat != "" {
+					label = p.Time.Format(cfg.TimeFormat)
+				} else if p.Label != "" {
+					label = p.Label
+				} else {
+					label = fmt.Sprintf("%d", i)
+				}
+				break
 			}
 		}
+		if label == "" {
+			label = fmt.Sprintf("%d", i)
+		}
+		labels[i] = label
 	}
 	return labels
 }

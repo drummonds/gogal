@@ -70,6 +70,7 @@ func ordinalChart(temp, humidity []gogal.DataPoint) *gogal.Chart {
 		gogal.WithGrid(true),
 		gogal.WithTooltips(true),
 		gogal.WithSmooth(true),
+		gogal.WithTimeFormat("15:04"),
 	)
 	chart.Add("Temperature (\u00b0C)", temp)
 	chart.Add("Humidity (%)", humidity)
