@@ -10,24 +10,24 @@
   </style>
   <rect x="0.00" y="0.00" width="800.00" height="400.00" fill="#ffffff"/>
   <g class="grid">
-  <line x1="60.00" y1="339.74" x2="780.00" y2="339.74" stroke="#e0e0e0" stroke-width="0.5"/>
-  <line x1="60.00" y1="273.71" x2="780.00" y2="273.71" stroke="#e0e0e0" stroke-width="0.5"/>
-  <line x1="60.00" y1="207.67" x2="780.00" y2="207.67" stroke="#e0e0e0" stroke-width="0.5"/>
-  <line x1="60.00" y1="141.64" x2="780.00" y2="141.64" stroke="#e0e0e0" stroke-width="0.5"/>
-  <line x1="60.00" y1="75.60" x2="780.00" y2="75.60" stroke="#e0e0e0" stroke-width="0.5"/>
+  <line x1="60.00" y1="327.76" x2="780.00" y2="327.76" stroke="#e0e0e0" stroke-width="0.5"/>
+  <line x1="60.00" y1="260.42" x2="780.00" y2="260.42" stroke="#e0e0e0" stroke-width="0.5"/>
+  <line x1="60.00" y1="193.07" x2="780.00" y2="193.07" stroke="#e0e0e0" stroke-width="0.5"/>
+  <line x1="60.00" y1="125.73" x2="780.00" y2="125.73" stroke="#e0e0e0" stroke-width="0.5"/>
+  <line x1="60.00" y1="58.39" x2="780.00" y2="58.39" stroke="#e0e0e0" stroke-width="0.5"/>
   </g>
   <g class="y-axis">
   <line x1="60.00" y1="50.00" x2="60.00" y2="350.00" stroke="#666666" stroke-width="1"/>
-  <line x1="56.00" y1="339.74" x2="60.00" y2="339.74" stroke="#666666" stroke-width="1"/>
-  <text x="52.00" y="343.74" text-anchor="end" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">30</text>
-  <line x1="56.00" y1="273.71" x2="60.00" y2="273.71" stroke="#666666" stroke-width="1"/>
-  <text x="52.00" y="277.71" text-anchor="end" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">40</text>
-  <line x1="56.00" y1="207.67" x2="60.00" y2="207.67" stroke="#666666" stroke-width="1"/>
-  <text x="52.00" y="211.67" text-anchor="end" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">50</text>
-  <line x1="56.00" y1="141.64" x2="60.00" y2="141.64" stroke="#666666" stroke-width="1"/>
-  <text x="52.00" y="145.64" text-anchor="end" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">60</text>
-  <line x1="56.00" y1="75.60" x2="60.00" y2="75.60" stroke="#666666" stroke-width="1"/>
-  <text x="52.00" y="79.60" text-anchor="end" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">70</text>
+  <line x1="56.00" y1="327.76" x2="60.00" y2="327.76" stroke="#666666" stroke-width="1"/>
+  <text x="52.00" y="331.76" text-anchor="end" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">30</text>
+  <line x1="56.00" y1="260.42" x2="60.00" y2="260.42" stroke="#666666" stroke-width="1"/>
+  <text x="52.00" y="264.42" text-anchor="end" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">40</text>
+  <line x1="56.00" y1="193.07" x2="60.00" y2="193.07" stroke="#666666" stroke-width="1"/>
+  <text x="52.00" y="197.07" text-anchor="end" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">50</text>
+  <line x1="56.00" y1="125.73" x2="60.00" y2="125.73" stroke="#666666" stroke-width="1"/>
+  <text x="52.00" y="129.73" text-anchor="end" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">60</text>
+  <line x1="56.00" y1="58.39" x2="60.00" y2="58.39" stroke="#666666" stroke-width="1"/>
+  <text x="52.00" y="62.39" text-anchor="end" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">70</text>
   </g>
   <g class="x-axis">
   <line x1="60.00" y1="350.00" x2="780.00" y2="350.00" stroke="#666666" stroke-width="1"/>
@@ -46,215 +46,215 @@
   </g>
   <text x="400.00" y="30.00" text-anchor="middle" fill="#333333" font-size="16" font-weight="bold" font-family="system-ui, -apple-system, sans-serif">Live Sensor Data</text>
   <g class="series-0">
-  <path d="M60.00,229.83 C64.14,224.29 76.55,211.57 84.83,196.62 C93.10,181.67 101.38,153.30 109.66,140.11 C117.93,126.92 126.21,129.49 134.48,117.48 C142.76,105.47 151.03,77.81 159.31,68.06 C167.59,58.30 175.86,61.95 184.14,58.95 C192.41,55.94 200.69,38.86 208.97,50.00 C217.24,61.14 225.52,114.14 233.79,125.81 C242.07,137.48 250.34,112.53 258.62,120.02 C266.90,127.50 275.17,162.57 283.45,170.70 C291.72,178.82 300.00,162.92 308.28,168.77 C316.55,174.63 324.83,189.76 333.10,205.84 C341.38,221.92 349.66,253.59 357.93,265.25 C366.21,276.91 374.48,270.85 382.76,275.79 C391.03,280.73 399.31,282.53 407.59,294.90 C415.86,307.27 424.14,346.26 432.41,350.00 C440.69,353.74 448.97,321.77 457.24,317.35 C465.52,312.94 473.79,319.73 482.07,323.49 C490.34,327.25 498.62,343.00 506.90,339.93 C515.17,336.85 523.45,325.67 531.72,305.03 C540.00,284.40 548.28,230.21 556.55,216.12 C564.83,202.02 573.10,232.08 581.38,220.47 C589.66,208.86 597.93,165.81 606.21,146.44 C614.48,127.08 622.76,114.18 631.03,104.27 C639.31,94.36 647.59,95.59 655.86,86.97 C664.14,78.35 672.41,51.14 680.69,52.55 C688.97,53.96 697.24,86.28 705.52,95.44 C713.79,104.60 722.07,107.76 730.34,107.52 C738.62,107.28 746.90,89.92 755.17,93.98 C763.45,98.03 775.86,125.54 780.00,131.85" fill="none" stroke="#4e79a7" stroke-width="2" class="line"/>
-  <g class="data-point" aria-label="46.6">
-  <circle cx="60.00" cy="229.83" r="3.0" fill="#4e79a7" class="point"/>
+  <path d="M60.00,207.56 C64.14,199.11 76.55,176.36 84.83,156.88 C93.10,137.40 101.38,96.94 109.66,90.70 C117.93,84.45 126.21,119.28 134.48,119.39 C142.76,119.51 151.03,96.41 159.31,91.39 C167.59,86.38 175.86,90.28 184.14,89.30 C192.41,88.33 200.69,91.59 208.97,85.53 C217.24,79.47 225.52,48.98 233.79,52.94 C242.07,56.89 250.34,101.05 258.62,109.26 C266.90,117.47 275.17,95.33 283.45,102.21 C291.72,109.09 300.00,129.69 308.28,150.55 C316.55,171.41 324.83,208.37 333.10,227.36 C341.38,246.35 349.66,250.09 357.93,264.49 C366.21,278.89 374.48,301.20 382.76,313.75 C391.03,326.29 399.31,341.62 407.59,339.75 C415.86,337.88 424.14,300.81 432.41,302.52 C440.69,304.22 448.97,343.11 457.24,350.00 C465.52,356.89 473.79,351.97 482.07,343.84 C490.34,335.71 498.62,308.90 506.90,301.21 C515.17,293.52 523.45,313.23 531.72,297.70 C540.00,282.17 548.28,224.69 556.55,208.02 C564.83,191.35 573.10,211.01 581.38,197.68 C589.66,184.34 597.93,138.63 606.21,128.01 C614.48,117.39 622.76,145.42 631.03,133.96 C639.31,122.50 647.59,71.73 655.86,59.26 C664.14,46.79 672.41,60.69 680.69,59.14 C688.97,57.60 697.24,48.12 705.52,50.00 C713.79,51.88 722.07,68.18 730.34,70.44 C738.62,72.69 746.90,58.68 755.17,63.53 C763.45,68.37 775.86,93.52 780.00,99.52" fill="none" stroke="#4e79a7" stroke-width="2" class="line"/>
+  <g class="data-point" aria-label="47.8">
+  <circle cx="60.00" cy="207.56" r="3.0" fill="#4e79a7" class="point"/>
   <g class="tooltip">
-  <rect x="68.00" y="209.83" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
-  <text x="72.00" y="222.83" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">46.6</text>
+  <rect x="68.00" y="187.56" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
+  <text x="72.00" y="200.56" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">47.8</text>
   </g>
   </g>
-  <g class="data-point" aria-label="51.7">
-  <circle cx="84.83" cy="196.62" r="3.0" fill="#4e79a7" class="point"/>
+  <g class="data-point" aria-label="55.4">
+  <circle cx="84.83" cy="156.88" r="3.0" fill="#4e79a7" class="point"/>
   <g class="tooltip">
-  <rect x="92.83" y="176.62" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
-  <text x="96.83" y="189.62" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">51.7</text>
-  </g>
-  </g>
-  <g class="data-point" aria-label="60.2">
-  <circle cx="109.66" cy="140.11" r="3.0" fill="#4e79a7" class="point"/>
-  <g class="tooltip">
-  <rect x="117.66" y="120.11" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
-  <text x="121.66" y="133.11" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">60.2</text>
-  </g>
-  </g>
-  <g class="data-point" aria-label="63.7">
-  <circle cx="134.48" cy="117.48" r="3.0" fill="#4e79a7" class="point"/>
-  <g class="tooltip">
-  <rect x="142.48" y="97.48" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
-  <text x="146.48" y="110.48" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">63.7</text>
-  </g>
-  </g>
-  <g class="data-point" aria-label="71.1">
-  <circle cx="159.31" cy="68.06" r="3.0" fill="#4e79a7" class="point"/>
-  <g class="tooltip">
-  <rect x="167.31" y="48.06" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
-  <text x="171.31" y="61.06" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">71.1</text>
-  </g>
-  </g>
-  <g class="data-point" aria-label="72.5">
-  <circle cx="184.14" cy="58.95" r="3.0" fill="#4e79a7" class="point"/>
-  <g class="tooltip">
-  <rect x="192.14" y="38.95" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
-  <text x="196.14" y="51.95" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">72.5</text>
-  </g>
-  </g>
-  <g class="data-point" aria-label="73.9">
-  <circle cx="208.97" cy="50.00" r="3.0" fill="#4e79a7" class="point"/>
-  <g class="tooltip">
-  <rect x="216.97" y="30.00" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
-  <text x="220.97" y="43.00" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">73.9</text>
-  </g>
-  </g>
-  <g class="data-point" aria-label="62.4">
-  <circle cx="233.79" cy="125.81" r="3.0" fill="#4e79a7" class="point"/>
-  <g class="tooltip">
-  <rect x="241.79" y="105.81" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
-  <text x="245.79" y="118.81" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">62.4</text>
-  </g>
-  </g>
-  <g class="data-point" aria-label="63.3">
-  <circle cx="258.62" cy="120.02" r="3.0" fill="#4e79a7" class="point"/>
-  <g class="tooltip">
-  <rect x="266.62" y="100.02" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
-  <text x="270.62" y="113.02" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">63.3</text>
-  </g>
-  </g>
-  <g class="data-point" aria-label="55.6">
-  <circle cx="283.45" cy="170.70" r="3.0" fill="#4e79a7" class="point"/>
-  <g class="tooltip">
-  <rect x="291.45" y="150.70" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
-  <text x="295.45" y="163.70" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">55.6</text>
-  </g>
-  </g>
-  <g class="data-point" aria-label="55.9">
-  <circle cx="308.28" cy="168.77" r="3.0" fill="#4e79a7" class="point"/>
-  <g class="tooltip">
-  <rect x="316.28" y="148.77" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
-  <text x="320.28" y="161.77" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">55.9</text>
-  </g>
-  </g>
-  <g class="data-point" aria-label="50.3">
-  <circle cx="333.10" cy="205.84" r="3.0" fill="#4e79a7" class="point"/>
-  <g class="tooltip">
-  <rect x="341.10" y="185.84" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
-  <text x="345.10" y="198.84" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">50.3</text>
-  </g>
-  </g>
-  <g class="data-point" aria-label="41.3">
-  <circle cx="357.93" cy="265.25" r="3.0" fill="#4e79a7" class="point"/>
-  <g class="tooltip">
-  <rect x="365.93" y="245.25" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
-  <text x="369.93" y="258.25" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">41.3</text>
-  </g>
-  </g>
-  <g class="data-point" aria-label="39.7">
-  <circle cx="382.76" cy="275.79" r="3.0" fill="#4e79a7" class="point"/>
-  <g class="tooltip">
-  <rect x="390.76" y="255.79" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
-  <text x="394.76" y="268.79" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">39.7</text>
-  </g>
-  </g>
-  <g class="data-point" aria-label="36.8">
-  <circle cx="407.59" cy="294.90" r="3.0" fill="#4e79a7" class="point"/>
-  <g class="tooltip">
-  <rect x="415.59" y="274.90" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
-  <text x="419.59" y="287.90" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">36.8</text>
-  </g>
-  </g>
-  <g class="data-point" aria-label="28.4">
-  <circle cx="432.41" cy="350.00" r="3.0" fill="#4e79a7" class="point"/>
-  <g class="tooltip">
-  <rect x="440.41" y="330.00" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
-  <text x="444.41" y="343.00" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">28.4</text>
-  </g>
-  </g>
-  <g class="data-point" aria-label="33.4">
-  <circle cx="457.24" cy="317.35" r="3.0" fill="#4e79a7" class="point"/>
-  <g class="tooltip">
-  <rect x="465.24" y="297.35" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
-  <text x="469.24" y="310.35" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">33.4</text>
-  </g>
-  </g>
-  <g class="data-point" aria-label="32.5">
-  <circle cx="482.07" cy="323.49" r="3.0" fill="#4e79a7" class="point"/>
-  <g class="tooltip">
-  <rect x="490.07" y="303.49" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
-  <text x="494.07" y="316.49" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">32.5</text>
-  </g>
-  </g>
-  <g class="data-point" aria-label="30.0">
-  <circle cx="506.90" cy="339.93" r="3.0" fill="#4e79a7" class="point"/>
-  <g class="tooltip">
-  <rect x="514.90" y="319.93" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
-  <text x="518.90" y="332.93" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">30.0</text>
-  </g>
-  </g>
-  <g class="data-point" aria-label="35.3">
-  <circle cx="531.72" cy="305.03" r="3.0" fill="#4e79a7" class="point"/>
-  <g class="tooltip">
-  <rect x="539.72" y="285.03" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
-  <text x="543.72" y="298.03" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">35.3</text>
-  </g>
-  </g>
-  <g class="data-point" aria-label="48.7">
-  <circle cx="556.55" cy="216.12" r="3.0" fill="#4e79a7" class="point"/>
-  <g class="tooltip">
-  <rect x="564.55" y="196.12" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
-  <text x="568.55" y="209.12" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">48.7</text>
-  </g>
-  </g>
-  <g class="data-point" aria-label="48.1">
-  <circle cx="581.38" cy="220.47" r="3.0" fill="#4e79a7" class="point"/>
-  <g class="tooltip">
-  <rect x="589.38" y="200.47" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
-  <text x="593.38" y="213.47" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">48.1</text>
-  </g>
-  </g>
-  <g class="data-point" aria-label="59.3">
-  <circle cx="606.21" cy="146.44" r="3.0" fill="#4e79a7" class="point"/>
-  <g class="tooltip">
-  <rect x="614.21" y="126.44" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
-  <text x="618.21" y="139.44" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">59.3</text>
-  </g>
-  </g>
-  <g class="data-point" aria-label="65.7">
-  <circle cx="631.03" cy="104.27" r="3.0" fill="#4e79a7" class="point"/>
-  <g class="tooltip">
-  <rect x="639.03" y="84.27" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
-  <text x="643.03" y="97.27" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">65.7</text>
-  </g>
-  </g>
-  <g class="data-point" aria-label="68.3">
-  <circle cx="655.86" cy="86.97" r="3.0" fill="#4e79a7" class="point"/>
-  <g class="tooltip">
-  <rect x="663.86" y="66.97" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
-  <text x="667.86" y="79.97" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">68.3</text>
-  </g>
-  </g>
-  <g class="data-point" aria-label="73.5">
-  <circle cx="680.69" cy="52.55" r="3.0" fill="#4e79a7" class="point"/>
-  <g class="tooltip">
-  <rect x="688.69" y="32.55" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
-  <text x="692.69" y="45.55" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">73.5</text>
-  </g>
-  </g>
-  <g class="data-point" aria-label="67.0">
-  <circle cx="705.52" cy="95.44" r="3.0" fill="#4e79a7" class="point"/>
-  <g class="tooltip">
-  <rect x="713.52" y="75.44" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
-  <text x="717.52" y="88.44" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">67.0</text>
+  <rect x="92.83" y="136.88" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
+  <text x="96.83" y="149.88" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">55.4</text>
   </g>
   </g>
   <g class="data-point" aria-label="65.2">
-  <circle cx="730.34" cy="107.52" r="3.0" fill="#4e79a7" class="point"/>
+  <circle cx="109.66" cy="90.70" r="3.0" fill="#4e79a7" class="point"/>
   <g class="tooltip">
-  <rect x="738.34" y="87.52" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
-  <text x="742.34" y="100.52" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">65.2</text>
+  <rect x="117.66" y="70.70" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
+  <text x="121.66" y="83.70" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">65.2</text>
   </g>
   </g>
-  <g class="data-point" aria-label="67.2">
-  <circle cx="755.17" cy="93.98" r="3.0" fill="#4e79a7" class="point"/>
+  <g class="data-point" aria-label="60.9">
+  <circle cx="134.48" cy="119.39" r="3.0" fill="#4e79a7" class="point"/>
   <g class="tooltip">
-  <rect x="763.17" y="73.98" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
-  <text x="767.17" y="86.98" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">67.2</text>
+  <rect x="142.48" y="99.39" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
+  <text x="146.48" y="112.39" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">60.9</text>
   </g>
   </g>
-  <g class="data-point" aria-label="61.5">
-  <circle cx="780.00" cy="131.85" r="3.0" fill="#4e79a7" class="point"/>
+  <g class="data-point" aria-label="65.1">
+  <circle cx="159.31" cy="91.39" r="3.0" fill="#4e79a7" class="point"/>
   <g class="tooltip">
-  <rect x="788.00" y="111.85" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
-  <text x="792.00" y="124.85" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">61.5</text>
+  <rect x="167.31" y="71.39" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
+  <text x="171.31" y="84.39" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">65.1</text>
+  </g>
+  </g>
+  <g class="data-point" aria-label="65.4">
+  <circle cx="184.14" cy="89.30" r="3.0" fill="#4e79a7" class="point"/>
+  <g class="tooltip">
+  <rect x="192.14" y="69.30" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
+  <text x="196.14" y="82.30" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">65.4</text>
+  </g>
+  </g>
+  <g class="data-point" aria-label="66.0">
+  <circle cx="208.97" cy="85.53" r="3.0" fill="#4e79a7" class="point"/>
+  <g class="tooltip">
+  <rect x="216.97" y="65.53" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
+  <text x="220.97" y="78.53" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">66.0</text>
+  </g>
+  </g>
+  <g class="data-point" aria-label="70.8">
+  <circle cx="233.79" cy="52.94" r="3.0" fill="#4e79a7" class="point"/>
+  <g class="tooltip">
+  <rect x="241.79" y="32.94" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
+  <text x="245.79" y="45.94" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">70.8</text>
+  </g>
+  </g>
+  <g class="data-point" aria-label="62.4">
+  <circle cx="258.62" cy="109.26" r="3.0" fill="#4e79a7" class="point"/>
+  <g class="tooltip">
+  <rect x="266.62" y="89.26" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
+  <text x="270.62" y="102.26" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">62.4</text>
+  </g>
+  </g>
+  <g class="data-point" aria-label="63.5">
+  <circle cx="283.45" cy="102.21" r="3.0" fill="#4e79a7" class="point"/>
+  <g class="tooltip">
+  <rect x="291.45" y="82.21" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
+  <text x="295.45" y="95.21" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">63.5</text>
+  </g>
+  </g>
+  <g class="data-point" aria-label="56.3">
+  <circle cx="308.28" cy="150.55" r="3.0" fill="#4e79a7" class="point"/>
+  <g class="tooltip">
+  <rect x="316.28" y="130.55" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
+  <text x="320.28" y="143.55" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">56.3</text>
+  </g>
+  </g>
+  <g class="data-point" aria-label="44.9">
+  <circle cx="333.10" cy="227.36" r="3.0" fill="#4e79a7" class="point"/>
+  <g class="tooltip">
+  <rect x="341.10" y="207.36" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
+  <text x="345.10" y="220.36" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">44.9</text>
+  </g>
+  </g>
+  <g class="data-point" aria-label="39.4">
+  <circle cx="357.93" cy="264.49" r="3.0" fill="#4e79a7" class="point"/>
+  <g class="tooltip">
+  <rect x="365.93" y="244.49" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
+  <text x="369.93" y="257.49" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">39.4</text>
+  </g>
+  </g>
+  <g class="data-point" aria-label="32.1">
+  <circle cx="382.76" cy="313.75" r="3.0" fill="#4e79a7" class="point"/>
+  <g class="tooltip">
+  <rect x="390.76" y="293.75" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
+  <text x="394.76" y="306.75" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">32.1</text>
+  </g>
+  </g>
+  <g class="data-point" aria-label="28.2">
+  <circle cx="407.59" cy="339.75" r="3.0" fill="#4e79a7" class="point"/>
+  <g class="tooltip">
+  <rect x="415.59" y="319.75" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
+  <text x="419.59" y="332.75" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">28.2</text>
+  </g>
+  </g>
+  <g class="data-point" aria-label="33.7">
+  <circle cx="432.41" cy="302.52" r="3.0" fill="#4e79a7" class="point"/>
+  <g class="tooltip">
+  <rect x="440.41" y="282.52" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
+  <text x="444.41" y="295.52" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">33.7</text>
+  </g>
+  </g>
+  <g class="data-point" aria-label="26.7">
+  <circle cx="457.24" cy="350.00" r="3.0" fill="#4e79a7" class="point"/>
+  <g class="tooltip">
+  <rect x="465.24" y="330.00" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
+  <text x="469.24" y="343.00" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">26.7</text>
+  </g>
+  </g>
+  <g class="data-point" aria-label="27.6">
+  <circle cx="482.07" cy="343.84" r="3.0" fill="#4e79a7" class="point"/>
+  <g class="tooltip">
+  <rect x="490.07" y="323.84" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
+  <text x="494.07" y="336.84" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">27.6</text>
+  </g>
+  </g>
+  <g class="data-point" aria-label="33.9">
+  <circle cx="506.90" cy="301.21" r="3.0" fill="#4e79a7" class="point"/>
+  <g class="tooltip">
+  <rect x="514.90" y="281.21" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
+  <text x="518.90" y="294.21" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">33.9</text>
+  </g>
+  </g>
+  <g class="data-point" aria-label="34.5">
+  <circle cx="531.72" cy="297.70" r="3.0" fill="#4e79a7" class="point"/>
+  <g class="tooltip">
+  <rect x="539.72" y="277.70" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
+  <text x="543.72" y="290.70" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">34.5</text>
+  </g>
+  </g>
+  <g class="data-point" aria-label="47.8">
+  <circle cx="556.55" cy="208.02" r="3.0" fill="#4e79a7" class="point"/>
+  <g class="tooltip">
+  <rect x="564.55" y="188.02" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
+  <text x="568.55" y="201.02" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">47.8</text>
+  </g>
+  </g>
+  <g class="data-point" aria-label="49.3">
+  <circle cx="581.38" cy="197.68" r="3.0" fill="#4e79a7" class="point"/>
+  <g class="tooltip">
+  <rect x="589.38" y="177.68" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
+  <text x="593.38" y="190.68" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">49.3</text>
+  </g>
+  </g>
+  <g class="data-point" aria-label="59.7">
+  <circle cx="606.21" cy="128.01" r="3.0" fill="#4e79a7" class="point"/>
+  <g class="tooltip">
+  <rect x="614.21" y="108.01" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
+  <text x="618.21" y="121.01" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">59.7</text>
+  </g>
+  </g>
+  <g class="data-point" aria-label="58.8">
+  <circle cx="631.03" cy="133.96" r="3.0" fill="#4e79a7" class="point"/>
+  <g class="tooltip">
+  <rect x="639.03" y="113.96" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
+  <text x="643.03" y="126.96" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">58.8</text>
+  </g>
+  </g>
+  <g class="data-point" aria-label="69.9">
+  <circle cx="655.86" cy="59.26" r="3.0" fill="#4e79a7" class="point"/>
+  <g class="tooltip">
+  <rect x="663.86" y="39.26" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
+  <text x="667.86" y="52.26" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">69.9</text>
+  </g>
+  </g>
+  <g class="data-point" aria-label="69.9">
+  <circle cx="680.69" cy="59.14" r="3.0" fill="#4e79a7" class="point"/>
+  <g class="tooltip">
+  <rect x="688.69" y="39.14" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
+  <text x="692.69" y="52.14" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">69.9</text>
+  </g>
+  </g>
+  <g class="data-point" aria-label="71.2">
+  <circle cx="705.52" cy="50.00" r="3.0" fill="#4e79a7" class="point"/>
+  <g class="tooltip">
+  <rect x="713.52" y="30.00" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
+  <text x="717.52" y="43.00" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">71.2</text>
+  </g>
+  </g>
+  <g class="data-point" aria-label="68.2">
+  <circle cx="730.34" cy="70.44" r="3.0" fill="#4e79a7" class="point"/>
+  <g class="tooltip">
+  <rect x="738.34" y="50.44" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
+  <text x="742.34" y="63.44" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">68.2</text>
+  </g>
+  </g>
+  <g class="data-point" aria-label="69.2">
+  <circle cx="755.17" cy="63.53" r="3.0" fill="#4e79a7" class="point"/>
+  <g class="tooltip">
+  <rect x="763.17" y="43.53" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
+  <text x="767.17" y="56.53" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">69.2</text>
+  </g>
+  </g>
+  <g class="data-point" aria-label="63.9">
+  <circle cx="780.00" cy="99.52" r="3.0" fill="#4e79a7" class="point"/>
+  <g class="tooltip">
+  <rect x="788.00" y="79.52" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
+  <text x="792.00" y="92.52" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">63.9</text>
   </g>
   </g>
   </g>
