@@ -33,7 +33,7 @@ A full line chart with all the trimmings: axes with titles, grid lines, legend, 
 </div>
 <div class="column">
 <div class="buttons">
-<a target="_blank" href="https://codeberg.org/hum3/gogal/src/branch/main/examples/02_static_line" class="button is-light">Source on Codeberg</a>
+<a target="_blank" href="https://git.bytestone.uk/hum3/gogal/src/branch/main/examples/02_static_line" class="button is-light">Source on Forgejo</a>
 </div>
 </div>
 </div>
@@ -91,7 +91,7 @@ chart.Add("Temperature", points)
 <strong>WithTimeFormat / WithYFormat</strong> control tick label formatting. <code>TimeFormat</code> uses Go's time layout; <code>YFormat</code> uses Printf syntax.
 </div>
 
-[Full source on Codeberg](https://codeberg.org/hum3/gogal/src/branch/main/examples/02_static_line/go/main.go)
+[Full source on Forgejo](https://git.bytestone.uk/hum3/gogal/src/branch/main/examples/02_static_line/go/main.go)
 
 ---
 
@@ -151,4 +151,4 @@ Outputs SVG to stdout and serves at `http://localhost:1341`.
 
 ---
 
-[Back to examples](../index.html) | [Source on Codeberg](https://codeberg.org/hum3/gogal/src/branch/main/examples/02_static_line) | [API docs](https://pkg.go.dev/codeberg.org/hum3/gogal)
+[Back to examples](../index.html) | [Source on Forgejo](https://git.bytestone.uk/hum3/gogal/src/branch/main/examples/02_static_line) | [API docs](https://pkg.go.dev/git.bytestone.uk/hum3/gogal)

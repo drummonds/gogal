@@ -80,7 +80,7 @@
 <div class="column">
 <div class="buttons">
 <a href="demo.html" class="button is-primary">Launch WASM Demo</a>
-<a target="_blank" href="https://codeberg.org/hum3/gogal/src/branch/main/examples/08_wasm" class="button is-light">Source on Codeberg</a>
+<a target="_blank" href="https://git.bytestone.uk/hum3/gogal/src/branch/main/examples/08_wasm" class="button is-light">Source on Forgejo</a>
 </div>
 </div>
 </div>
@@ -93,7 +93,7 @@ package main
 
 import (
     &quot;syscall/js&quot;
-    &quot;codeberg.org/hum3/gogal&quot;
+    &quot;git.bytestone.uk/hum3/gogal&quot;
 )
 
 func render() string {
@@ -141,7 +141,7 @@ const go = new Go();
 WebAssembly.instantiateStreaming(fetch('main.wasm'), go.importObject)
     .then(result =&gt; go.run(result.instance));
 </code></pre>
-<p><a href="https://codeberg.org/hum3/gogal/src/branch/main/examples/08_wasm/go/">Full source on Codeberg</a></p>
+<p><a href="https://git.bytestone.uk/hum3/gogal/src/branch/main/examples/08_wasm/go/">Full source on Forgejo</a></p>
 <hr>
 <h2 id="running-it">Running it</h2>
 <p>Server mode:</p>
@@ -149,7 +149,7 @@ WebAssembly.instantiateStreaming(fetch('main.wasm'), go.importObject)
 </code></pre>
 <p>WASM mode: open <code>docs/08_wasm/demo.html</code> in a browser (needs an HTTP server for WASM loading).</p>
 <hr>
-<p><a href="../index.html">Back to examples</a> | <a href="https://codeberg.org/hum3/gogal/src/branch/main/examples/08_wasm">Source on Codeberg</a> | <a href="https://pkg.go.dev/codeberg.org/hum3/gogal">API docs</a></p>
+<p><a href="../index.html">Back to examples</a> | <a href="https://git.bytestone.uk/hum3/gogal/src/branch/main/examples/08_wasm">Source on Forgejo</a> | <a href="https://pkg.go.dev/git.bytestone.uk/hum3/gogal">API docs</a></p>
 
             </div>
         </div>

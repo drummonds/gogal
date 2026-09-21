@@ -11,7 +11,7 @@ import (
 	"net/http"
 	"time"
 
-	"codeberg.org/hum3/gogal"
+	"git.bytestone.uk/hum3/gogal"
 )
 
 // sensorData returns irregularly-sampled readings from two sensors.

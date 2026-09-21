@@ -34,7 +34,7 @@ Visual test of axis tick formatting across different data ranges. This gallery s
 <div class="column">
 <div class="buttons">
 <a href="demo.html" class="button is-primary">Launch WASM Demo</a>
-<a target="_blank" href="https://codeberg.org/hum3/gogal/src/branch/main/examples/01a_axis_formats" class="button is-light">Source on Codeberg</a>
+<a target="_blank" href="https://git.bytestone.uk/hum3/gogal/src/branch/main/examples/01a_axis_formats" class="button is-light">Source on Forgejo</a>
 </div>
 </div>
 </div>
@@ -80,4 +80,4 @@ Serves at [http://localhost:1339](http://localhost:1339).
 
 ---
 
-[Back to examples](../index.html) | [Source on Codeberg](https://codeberg.org/hum3/gogal/src/branch/main/examples/01a_axis_formats)
+[Back to examples](../index.html) | [Source on Forgejo](https://git.bytestone.uk/hum3/gogal/src/branch/main/examples/01a_axis_formats)

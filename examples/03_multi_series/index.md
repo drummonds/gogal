@@ -40,7 +40,7 @@ Multiple data series on one chart with automatic colour cycling and legend. The 
 </div>
 
 <div class="buttons">
-<a target="_blank" href="https://codeberg.org/hum3/gogal/src/branch/main/examples/03_multi_series" class="button is-light">Source on Codeberg</a>
+<a target="_blank" href="https://git.bytestone.uk/hum3/gogal/src/branch/main/examples/03_multi_series" class="button is-light">Source on Forgejo</a>
 </div>
 
 ---
@@ -75,7 +75,7 @@ chart.Add("Humidity (%)", humidity)
 <strong>gogal.Ordinal</strong> — X positions are equally spaced by event index. The 1st data point is at the left edge, the last at the right, regardless of timestamps. Use this when you care about sequence, not absolute time.
 </div>
 
-[Full source on Codeberg](https://codeberg.org/hum3/gogal/src/branch/main/examples/03_multi_series/go/main.go)
+[Full source on Forgejo](https://git.bytestone.uk/hum3/gogal/src/branch/main/examples/03_multi_series/go/main.go)
 
 ---
 
@@ -157,4 +157,4 @@ Serves both charts at `http://localhost:1342`.
 
 ---
 
-[Back to examples](../index.html) | [Source on Codeberg](https://codeberg.org/hum3/gogal/src/branch/main/examples/03_multi_series) | [API docs](https://pkg.go.dev/codeberg.org/hum3/gogal)
+[Back to examples](../index.html) | [Source on Forgejo](https://git.bytestone.uk/hum3/gogal/src/branch/main/examples/03_multi_series) | [API docs](https://pkg.go.dev/git.bytestone.uk/hum3/gogal)

@@ -80,12 +80,12 @@ task docs:build     # build documentation HTML
 - Step 10: Documentation site + deploy
 
 ### Repo Setup Needed
-- Create Codeberg repo: codeberg.org/hum3/gogal
+- Create Forgejo repo: git.bytestone.uk/hum3/gogal
 - Create GitHub mirror: github.com/drummonds/gogal
 - Create statichost site: h3-gogal at https://builder.statichost.eu
 ```
 Site name: h3-gogal
-Repository: https://codeberg.org/hum3/gogal
+Repository: https://git.bytestone.uk/hum3/gogal
 Branch: main
 Publish directory: docs
 ```

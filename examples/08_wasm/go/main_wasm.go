@@ -7,7 +7,7 @@ import (
 	"syscall/js"
 	"time"
 
-	"codeberg.org/hum3/gogal"
+	"git.bytestone.uk/hum3/gogal"
 )
 
 type reading struct {

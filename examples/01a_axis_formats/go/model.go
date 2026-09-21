@@ -3,8 +3,8 @@ package main
 import (
 	"time"
 
-	"codeberg.org/hum3/gogal"
-	"codeberg.org/hum3/lofigui"
+	"git.bytestone.uk/hum3/gogal"
+	"git.bytestone.uk/hum3/lofigui"
 )
 
 type axisExample struct {

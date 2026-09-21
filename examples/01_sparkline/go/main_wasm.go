@@ -2,6 +2,6 @@
 
 package main
 
-import "codeberg.org/hum3/lofigui"
+import "git.bytestone.uk/hum3/lofigui"
 
 func main() { lofigui.RunWASM(model) }

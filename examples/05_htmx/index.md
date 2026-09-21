@@ -40,7 +40,7 @@ Toggle series visibility without a page reload. Clicking a series name fires an 
 </div>
 
 <div class="buttons">
-<a target="_blank" href="https://codeberg.org/hum3/gogal/src/branch/main/examples/05_htmx" class="button is-light">Source on Codeberg</a>
+<a target="_blank" href="https://git.bytestone.uk/hum3/gogal/src/branch/main/examples/05_htmx" class="button is-light">Source on Forgejo</a>
 </div>
 
 ---
@@ -91,7 +91,7 @@ http.HandleFunc("/chart", func(w http.ResponseWriter, r *http.Request) {
 <strong>No framework needed</strong> — the toggle logic is ~30 lines of Go. Each button computes the new <code>hidden</code> parameter (add or remove its series name) and sets <code>hx-get="/chart?hidden=..."</code>. The server does the rest.
 </div>
 
-[Full source on Codeberg](https://codeberg.org/hum3/gogal/src/branch/main/examples/05_htmx/go/main.go)
+[Full source on Forgejo](https://git.bytestone.uk/hum3/gogal/src/branch/main/examples/05_htmx/go/main.go)
 
 ---
 
@@ -114,4 +114,4 @@ Serves at `http://localhost:1344`. Click series names below the chart to toggle 
 
 ---
 
-[Back to examples](../index.html) | [Source on Codeberg](https://codeberg.org/hum3/gogal/src/branch/main/examples/05_htmx) | [API docs](https://pkg.go.dev/codeberg.org/hum3/gogal)
+[Back to examples](../index.html) | [Source on Forgejo](https://git.bytestone.uk/hum3/gogal/src/branch/main/examples/05_htmx) | [API docs](https://pkg.go.dev/git.bytestone.uk/hum3/gogal)

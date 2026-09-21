@@ -9,7 +9,7 @@
 // Server mode: http://localhost:1340
 package main
 
-import "codeberg.org/hum3/lofigui"
+import "git.bytestone.uk/hum3/lofigui"
 
 func main() {
 	app := lofigui.NewApp()

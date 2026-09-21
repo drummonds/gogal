@@ -55,4 +55,4 @@ See [ROADMAP](../ROADMAP.html) for timeline.
 
 ---
 
-[Back to examples](../index.html) | [API docs](https://pkg.go.dev/codeberg.org/hum3/gogal)
+[Back to examples](../index.html) | [API docs](https://pkg.go.dev/git.bytestone.uk/hum3/gogal)

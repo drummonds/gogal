@@ -1,3 +1,3 @@
-module codeberg.org/hum3/gogal
+module git.bytestone.uk/hum3/gogal
 
 go 1.25

@@ -34,7 +34,7 @@ A full multi-series chart rendered entirely in the browser via WebAssembly. The 
 <div class="column">
 <div class="buttons">
 <a href="demo.html" class="button is-primary">Launch WASM Demo</a>
-<a target="_blank" href="https://codeberg.org/hum3/gogal/src/branch/main/examples/08_wasm" class="button is-light">Source on Codeberg</a>
+<a target="_blank" href="https://git.bytestone.uk/hum3/gogal/src/branch/main/examples/08_wasm" class="button is-light">Source on Forgejo</a>
 </div>
 </div>
 </div>
@@ -52,7 +52,7 @@ package main
 
 import (
     "syscall/js"
-    "codeberg.org/hum3/gogal"
+    "git.bytestone.uk/hum3/gogal"
 )
 
 func render() string {
@@ -113,7 +113,7 @@ WebAssembly.instantiateStreaming(fetch('main.wasm'), go.importObject)
     .then(result => go.run(result.instance));
 ```
 
-[Full source on Codeberg](https://codeberg.org/hum3/gogal/src/branch/main/examples/08_wasm/go/)
+[Full source on Forgejo](https://git.bytestone.uk/hum3/gogal/src/branch/main/examples/08_wasm/go/)
 
 ---
 
@@ -129,4 +129,4 @@ WASM mode: open `docs/08_wasm/demo.html` in a browser (needs an HTTP server for 
 
 ---
 
-[Back to examples](../index.html) | [Source on Codeberg](https://codeberg.org/hum3/gogal/src/branch/main/examples/08_wasm) | [API docs](https://pkg.go.dev/codeberg.org/hum3/gogal)
+[Back to examples](../index.html) | [Source on Forgejo](https://git.bytestone.uk/hum3/gogal/src/branch/main/examples/08_wasm) | [API docs](https://pkg.go.dev/git.bytestone.uk/hum3/gogal)

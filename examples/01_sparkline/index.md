@@ -42,7 +42,7 @@ A sparkline is a tiny inline chart — no axes, no labels, no legend. It shows a
 
 <div class="buttons">
 <a href="demo.html" class="button is-primary">Launch WASM Demo</a>
-<a target="_blank" href="https://codeberg.org/hum3/gogal/src/branch/main/examples/01_sparkline" class="button is-light">Source on Codeberg</a>
+<a target="_blank" href="https://git.bytestone.uk/hum3/gogal/src/branch/main/examples/01_sparkline" class="button is-light">Source on Forgejo</a>
 </div>
 
 ---
@@ -84,7 +84,7 @@ func model(app *lofigui.App) {
 <strong>WithSmooth(true)</strong> enables Catmull-Rom to Bezier curve interpolation, producing smooth paths instead of straight line segments between points.
 </div>
 
-[Full source on Codeberg](https://codeberg.org/hum3/gogal/src/branch/main/examples/01_sparkline/go/model.go)
+[Full source on Forgejo](https://git.bytestone.uk/hum3/gogal/src/branch/main/examples/01_sparkline/go/model.go)
 
 ---
 
@@ -112,4 +112,4 @@ Starts the lofigui server at `http://localhost:1340`. Click Start to generate a 
 
 ---
 
-[Back to examples](../index.html) | [Source on Codeberg](https://codeberg.org/hum3/gogal/src/branch/main/examples/01_sparkline) | [API docs](https://pkg.go.dev/codeberg.org/hum3/gogal)
+[Back to examples](../index.html) | [Source on Forgejo](https://git.bytestone.uk/hum3/gogal/src/branch/main/examples/01_sparkline) | [API docs](https://pkg.go.dev/git.bytestone.uk/hum3/gogal)

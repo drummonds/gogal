@@ -5,8 +5,8 @@ import (
 	"math/rand/v2"
 	"time"
 
-	"codeberg.org/hum3/gogal"
-	"codeberg.org/hum3/lofigui"
+	"git.bytestone.uk/hum3/gogal"
+	"git.bytestone.uk/hum3/lofigui"
 )
 
 // model generates sparkline points one at a time, updating the chart

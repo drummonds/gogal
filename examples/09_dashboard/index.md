@@ -40,7 +40,7 @@ Multiple charts on one page with different sizes, themes, and configurations. Th
 </div>
 
 <div class="buttons">
-<a target="_blank" href="https://codeberg.org/hum3/gogal/src/branch/main/examples/09_dashboard" class="button is-light">Source on Codeberg</a>
+<a target="_blank" href="https://git.bytestone.uk/hum3/gogal/src/branch/main/examples/09_dashboard" class="button is-light">Source on Forgejo</a>
 </div>
 
 ---
@@ -110,7 +110,7 @@ sp.Add("Temp", temp)
 <strong>Layout is your responsibility</strong> — gogal produces SVGs, you arrange them with HTML/CSS. Use CSS Grid, Flexbox, or tables. Each chart is a self-contained block element.
 </div>
 
-[Full source on Codeberg](https://codeberg.org/hum3/gogal/src/branch/main/examples/09_dashboard/go/main.go)
+[Full source on Forgejo](https://git.bytestone.uk/hum3/gogal/src/branch/main/examples/09_dashboard/go/main.go)
 
 ---
 
@@ -136,4 +136,4 @@ Serves at `http://localhost:1348`.
 
 ---
 
-[Back to examples](../index.html) | [Source on Codeberg](https://codeberg.org/hum3/gogal/src/branch/main/examples/09_dashboard) | [API docs](https://pkg.go.dev/codeberg.org/hum3/gogal)
+[Back to examples](../index.html) | [Source on Forgejo](https://git.bytestone.uk/hum3/gogal/src/branch/main/examples/09_dashboard) | [API docs](https://pkg.go.dev/git.bytestone.uk/hum3/gogal)

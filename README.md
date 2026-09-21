@@ -9,7 +9,7 @@ Pure Go SVG chart library with CSS-only interactivity and HTMX integration.
 
 `gogal` generates pure SVG charts server-side with zero JavaScript. Interactivity is provided through CSS (hover tooltips, transitions) and HTMX (legend toggling, axis switching, live updates).
 
-Designed for use with [lofigui](https://codeberg.org/hum3/lofigui) and server-rendered web applications.
+Designed for use with [lofigui](https://git.bytestone.uk/hum3/lofigui) and server-rendered web applications.
 
 ## Key Features
 
@@ -29,7 +29,7 @@ package main
 
 import (
     "os"
-    "codeberg.org/hum3/gogal"
+    "git.bytestone.uk/hum3/gogal"
 )
 
 func main() {
@@ -65,6 +65,6 @@ See the [examples/](examples/) directory for progressively complex demos.
 | | |
 |---|---|
 | Documentation | https://h3-gogal.statichost.page/ |
-| Source (Codeberg) | https://codeberg.org/hum3/gogal |
+| Source (Forgejo) | https://git.bytestone.uk/hum3/gogal |
 | Mirror (GitHub) | https://github.com/drummonds/gogal |
 <!-- /auto:links -->

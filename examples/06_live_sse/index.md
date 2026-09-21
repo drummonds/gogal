@@ -33,7 +33,7 @@ Real-time chart updates via Server-Sent Events. The server pushes a re-rendered 
 </div>
 <div class="column">
 <div class="buttons">
-<a target="_blank" href="https://codeberg.org/hum3/gogal/src/branch/main/examples/06_live_sse" class="button is-light">Source on Codeberg</a>
+<a target="_blank" href="https://git.bytestone.uk/hum3/gogal/src/branch/main/examples/06_live_sse" class="button is-light">Source on Forgejo</a>
 </div>
 </div>
 </div>
@@ -109,7 +109,7 @@ source.onmessage = function(e) {
 <strong>Three lines of JavaScript</strong> — <code>EventSource</code> handles reconnection automatically. If the server restarts, the browser reconnects and the chart resumes.
 </div>
 
-[Full source on Codeberg](https://codeberg.org/hum3/gogal/src/branch/main/examples/06_live_sse/go/main.go)
+[Full source on Forgejo](https://git.bytestone.uk/hum3/gogal/src/branch/main/examples/06_live_sse/go/main.go)
 
 ---
 
@@ -123,4 +123,4 @@ Serves at `http://localhost:1345`. The chart starts empty and fills in over ~60 
 
 ---
 
-[Back to examples](../index.html) | [Source on Codeberg](https://codeberg.org/hum3/gogal/src/branch/main/examples/06_live_sse) | [API docs](https://pkg.go.dev/codeberg.org/hum3/gogal)
+[Back to examples](../index.html) | [Source on Forgejo](https://git.bytestone.uk/hum3/gogal/src/branch/main/examples/06_live_sse) | [API docs](https://pkg.go.dev/git.bytestone.uk/hum3/gogal)

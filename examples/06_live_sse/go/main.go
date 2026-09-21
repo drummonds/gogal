@@ -16,7 +16,7 @@ import (
 	"strings"
 	"time"
 
-	"codeberg.org/hum3/gogal"
+	"git.bytestone.uk/hum3/gogal"
 )
 
 func main() {

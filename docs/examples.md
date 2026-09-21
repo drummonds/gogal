@@ -57,7 +57,7 @@ Why would someone start from this example?
 <div class="column">
 <div class="buttons">
   [Optional: WASM demo button — only for examples with WASM builds]
-  <a target="_blank" href="https://codeberg.org/hum3/gogal/src/branch/main/examples/NN_name" class="button is-light">Source on Codeberg</a>
+  <a target="_blank" href="https://git.bytestone.uk/hum3/gogal/src/branch/main/examples/NN_name" class="button is-light">Source on Forgejo</a>
 </div>
 </div>
 </div>
@@ -77,7 +77,7 @@ with annotation boxes explaining the important parts.
 <strong>Key concept</strong> — explanation of what's happening and why.
 </div>
 
-[Full source on Codeberg](https://codeberg.org/hum3/gogal/src/branch/main/examples/NN_name/go/main.go)
+[Full source on Forgejo](https://git.bytestone.uk/hum3/gogal/src/branch/main/examples/NN_name/go/main.go)
 
 ---
 
@@ -99,7 +99,7 @@ Brief description of what happens when you run it.
 
 ---
 
-[Back to examples](../index.html) | [Source on Codeberg](https://codeberg.org/hum3/gogal/src/branch/main/examples/NN_name)
+[Back to examples](../index.html) | [Source on Forgejo](https://git.bytestone.uk/hum3/gogal/src/branch/main/examples/NN_name)
 ```
 
 ## Styling conventions
@@ -128,7 +128,7 @@ Unlike lofigui (which captures HTML pages via url2svg), gogal screenshots are th
 ```html
 <div class="buttons">
   <a href="demo.html" class="button is-primary">Launch Demo</a>           <!-- only if WASM -->
-  <a target="_blank" href="https://codeberg.org/..." class="button is-light">Source on Codeberg</a>
+  <a target="_blank" href="https://git.bytestone.uk/..." class="button is-light">Source on Forgejo</a>
 </div>
 ```
 
@@ -143,7 +143,7 @@ package main
 
 import (
     "os"
-    "codeberg.org/hum3/gogal"
+    "git.bytestone.uk/hum3/gogal"
 )
 
 func main() {
