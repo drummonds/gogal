@@ -65,6 +65,6 @@ See the [examples/](examples/) directory for progressively complex demos.
 | | |
 |---|---|
 | Documentation | https://h3-gogal.statichost.page/ |
-| Source (Forgejo) | https://git.bytestone.uk/hum3/gogal |
+| Source | https://git.bytestone.uk/hum3/gogal |
 | Mirror (GitHub) | https://github.com/drummonds/gogal |
 <!-- /auto:links -->
