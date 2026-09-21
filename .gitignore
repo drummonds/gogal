@@ -24,3 +24,6 @@ Thumbs.db
 CHANGELOG.html
 README.html
 
+
+# Per-machine task-plus config (symlink), never committed
+task-plus.local.yaml

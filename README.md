@@ -64,7 +64,7 @@ See the [examples/](examples/) directory for progressively complex demos.
 <!-- auto:links -->
 | | |
 |---|---|
-| Documentation | https://h3-gogal.statichost.page/ |
+| Documentation | https://gogal.docs.bytestone.uk/ |
 | Source | https://git.bytestone.uk/hum3/gogal |
 | Mirror (GitHub) | https://github.com/drummonds/gogal |
 <!-- /auto:links -->

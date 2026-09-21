@@ -6,8 +6,8 @@ pages_build:
     - task docs:build-wasm
     - task docs:build
 pages_deploy:
-    - site: h3-gogal
-      type: statichost
+    - type: rsync
+      site: gogal
 remotes:
     - name: origin
       forge: forgejo

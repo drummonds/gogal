@@ -82,7 +82,7 @@ task docs:build     # build documentation HTML
 ### Repo Setup Needed
 - Create Forgejo repo: git.bytestone.uk/hum3/gogal
 - Create GitHub mirror: github.com/drummonds/gogal
-- Create statichost site: h3-gogal at https://builder.statichost.eu
+- Docs site: gogal.docs.bytestone.uk (Caddy static host, rsync deploy via `tp pages deploy`; site list in ~/Cloudstation/IT/statichost)
 ```
 Site name: h3-gogal
 Repository: https://git.bytestone.uk/hum3/gogal
