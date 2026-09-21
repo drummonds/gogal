@@ -57,7 +57,10 @@ Key separation: `Layout()` returns a plain struct testable without SVG parsing.
 ```
 task check          # fmt + vet + test
 task example:01     # run sparkline example
-task docs:build     # build documentation HTML
+task docs:build     # build documentation HTML (markdown -> docs/)
+task docs:all       # screenshots + WASM demos + HTML
+task clean          # remove build artifacts (wasm, example binaries, generated HTML)
+tp pages deploy     # runs docs:all then rsyncs docs/ to the docs site
 ```
 
 ## Implementation Status
@@ -79,16 +82,19 @@ task docs:build     # build documentation HTML
 - Step 9: WASM example
 - Step 10: Documentation site + deploy
 
-### Repo Setup Needed
-- Create Forgejo repo: git.bytestone.uk/hum3/gogal
-- Create GitHub mirror: github.com/drummonds/gogal
-- Docs site: gogal.docs.bytestone.uk (Caddy static host, rsync deploy via `tp pages deploy`; site list in ~/Cloudstation/IT/statichost)
-```
-Site name: h3-gogal
-Repository: https://git.bytestone.uk/hum3/gogal
-Branch: main
-Publish directory: docs
-```
+## Docs Site & Deploy
+
+- Source: https://git.bytestone.uk/hum3/gogal (origin, Forgejo); mirror https://github.com/drummonds/gogal
+- Docs: https://gogal.docs.bytestone.uk/ — Caddy static host on woodpecker-ci, served from `/srv/sites/gogal`
+- Deploy: `tp pages deploy` runs `docs:screenshots`, `docs:build-wasm`, `docs:build` (see `pages_build` in task-plus.yml), then rsyncs `docs/` over SSH as the `deploy` user
+- Site registration lives in the Caddyfile in `~/Cloudstation/IT/statichost` (already applied for gogal)
+
+Build artifacts are never committed — they are regenerated on every deploy:
+- `docs/*/main.wasm` and `docs/*/wasm_exec.js` (from `docs:build-wasm`)
+- Native example executables in `examples/*/go/` (left behind by `go build`)
+- `docs/*.html` rendered from the top-level markdown files
+
+Committed under `docs/`: `index.md`, `examples.md`, per-example `index.html`, `demo.html`, `app.js` and screenshot SVGs.
 
 ## Reference
 - Full research: RESEARCH.md
