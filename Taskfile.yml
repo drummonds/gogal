@@ -37,6 +37,8 @@ tasks:
       - rm -rf dist/
       - rm -f docs/*.html
       - find examples -name "*.wasm" -delete 2>/dev/null || true
+      - find examples -path "*/go/[0-9]*" -type f -delete 2>/dev/null || true
+      - rm -f docs/*/main.wasm docs/*/wasm_exec.js
 
   docs:all:
     desc: Generate all assets then build docs HTML

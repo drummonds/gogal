@@ -1,6 +1,10 @@
 # Build artifacts
 *.wasm
 dist/
+# Native example executables produced by `go build` in examples/NN_name/go/
+examples/*/go/[0-9]*
+# WASM runtime shim copied from GOROOT by `task docs:build-wasm`
+docs/*/wasm_exec.js
 
 # Generated docs
 docs/*.html
