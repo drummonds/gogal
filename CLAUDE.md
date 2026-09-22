@@ -60,7 +60,7 @@ task example:01     # run sparkline example
 task docs:build     # build documentation HTML (markdown -> docs/)
 task docs:all       # screenshots + WASM demos + HTML
 task clean          # remove build artifacts (wasm, example binaries, generated HTML)
-tp pages deploy     # runs docs:all then rsyncs docs/ to the docs site
+tp pages deploy     # rsync docs/ to the docs site (run docs:all first)
 ```
 
 ## Implementation Status
@@ -86,10 +86,10 @@ tp pages deploy     # runs docs:all then rsyncs docs/ to the docs site
 
 - Source: https://git.bytestone.uk/hum3/gogal (origin, Forgejo); mirror https://github.com/drummonds/gogal
 - Docs: https://gogal.docs.bytestone.uk/ — Caddy static host on woodpecker-ci, served from `/srv/sites/gogal`
-- Deploy: `tp pages deploy` runs `docs:screenshots`, `docs:build-wasm`, `docs:build` (see `pages_build` in task-plus.yml), then rsyncs `docs/` over SSH as the `deploy` user
+- Deploy: run `task docs:all` first, then `tp pages deploy`, which only rsyncs `docs/` over SSH as the `deploy` user (it does NOT run the `pages_build` steps in task-plus.yml; those run during `tp release`)
 - Site registration lives in the Caddyfile in `~/Cloudstation/IT/statichost` (already applied for gogal)
 
-Build artifacts are never committed — they are regenerated on every deploy:
+Build artifacts are never committed — rebuild them with `task docs:all` before deploying:
 - `docs/*/main.wasm` and `docs/*/wasm_exec.js` (from `docs:build-wasm`)
 - Native example executables in `examples/*/go/` (left behind by `go build`)
 - `docs/*.html` rendered from the top-level markdown files
