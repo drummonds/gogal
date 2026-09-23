@@ -113,6 +113,17 @@ func render(w io.Writer, layout *LayoutResult) error {
 				fmt.Sprintf(` fill="none" stroke="%s" stroke-width="2" class="line"`, sl.Color))
 		}
 
+		// Bars
+		for _, b := range sl.Bars {
+			sw.rect(b.X, b.Y, b.Width, b.Height,
+				fmt.Sprintf(` fill="%s" class="bar"`, sl.Color))
+			if b.Value != "" {
+				sw.text(b.X+b.Width/2, b.Y-4, b.Value,
+					fmt.Sprintf(` text-anchor="middle" fill="%s" font-size="%.0f" font-family="%s" class="value-label"`,
+						cfg.Theme.Text, cfg.Theme.FontSize-1, cfg.Theme.Font))
+			}
+		}
+
 		// Data points
 		if cfg.Variant != Sparkline {
 			for _, p := range sl.Points {
@@ -165,6 +176,8 @@ func generateCSS(cfg *ChartConfig) string {
 	css += "    .point { transition: r 0.15s; }\n"
 	css += "    .data-point:hover .point { r: 5; }\n"
 	css += "    .line { transition: stroke-width 0.2s; }\n"
+	css += "    .bar { transition: opacity 0.15s; }\n"
+	css += "    .bar:hover { opacity: 0.8; }\n"
 
 	if cfg.Animate {
 		css += `    .line {

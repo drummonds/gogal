@@ -96,6 +96,7 @@ tasks:
       - cd examples/01a_axis_formats/go && go run gen_screenshot.go
       - cd examples/02_static_line/go && go run gen_screenshot.go
       - cd examples/03_multi_series/go && go run gen_screenshot.go
+      - cd examples/04_bar_chart/go && go run gen_screenshot.go
       - cd examples/05_htmx/go && go run gen_screenshot.go
       - cd examples/06_live_sse/go && go run gen_screenshot.go
       - cd examples/08_wasm/go && go run gen_screenshot.go

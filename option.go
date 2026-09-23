@@ -52,6 +52,7 @@ type ChartConfig struct {
 	Accessible   bool
 	Animate      bool
 	Smooth       bool // use bezier curves for line charts
+	ShowValues   bool // print each value above its bar (bar charts)
 
 	HiddenSeries []string       // series names to hide (for HTMX toggle)
 	TimeFormat   string         // Go time format for tick labels
@@ -73,6 +74,7 @@ func DefaultConfig() ChartConfig {
 		ShowGrid:     true,
 		ShowLegend:   true,
 		ShowTooltips: true,
+		ShowValues:   true,
 		Accessible:   true,
 		Margins:      Margins{Top: 40, Right: 20, Bottom: 50, Left: 60},
 		TimeFormat:   "2006-01-02",
@@ -105,6 +107,7 @@ func WithVariant(v Variant) Option {
 			c.ShowGrid = false
 			c.ShowLegend = false
 			c.ShowTooltips = false
+			c.ShowValues = false
 			c.Accessible = false
 			c.Width = 100
 			c.Height = 20
@@ -175,4 +178,9 @@ func WithYTitle(title string) Option {
 // back to time.Local when points carry no time.
 func WithLocation(loc *time.Location) Option {
 	return func(c *ChartConfig) { c.Location = loc }
+}
+
+// WithValueLabels controls whether bar charts print each value above its bar.
+func WithValueLabels(on bool) Option {
+	return func(c *ChartConfig) { c.ShowValues = on }
 }

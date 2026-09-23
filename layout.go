@@ -54,8 +54,16 @@ type SeriesLayout struct {
 	Name     string
 	Color    string
 	Points   []PointLayout
-	Path     string // SVG path d attribute
-	CSSClass string // e.g. "series-0"
+	Path     string      // SVG path d attribute
+	Bars     []BarLayout // bar charts only
+	CSSClass string      // e.g. "series-0"
+}
+
+// BarLayout positions one bar of a bar chart.
+type BarLayout struct {
+	X, Y, Width, Height float64
+	Category            string
+	Value               string // value label text; empty when value labels are off
 }
 
 // PointLayout positions a data point.
@@ -91,7 +99,7 @@ func computeLayout(cfg *ChartConfig, series []Series, chartType string) *LayoutR
 	visibleSeries := filterVisibleSeries(series, cfg.HiddenSeries)
 
 	if cfg.Variant == Sparkline {
-		computeSparklineLayout(result, visibleSeries, cfg)
+		computeSparklineLayout(result, visibleSeries, cfg, chartType)
 		return result
 	}
 
@@ -116,7 +124,7 @@ func filterVisibleSeries(series []Series, hidden []string) []Series {
 	return visible
 }
 
-func computeSparklineLayout(result *LayoutResult, series []Series, cfg *ChartConfig) {
+func computeSparklineLayout(result *LayoutResult, series []Series, cfg *ChartConfig, chartType string) {
 	result.PlotArea = Rect{X: 0, Y: 0, Width: cfg.Width, Height: cfg.Height}
 
 	if len(series) == 0 {
@@ -126,6 +134,17 @@ func computeSparklineLayout(result *LayoutResult, series []Series, cfg *ChartCon
 	// Collect all Y values for scale
 	allY := collectYValues(series)
 	if len(allY) == 0 {
+		return
+	}
+
+	if chartType == "bar" {
+		yScale := newBarScale(allY, cfg)
+		yScale.SetRange(cfg.Height, 0)
+		xScale := NewOrdinalScale(collectXLabels(series, cfg))
+		xScale.SetRange(0, cfg.Width)
+		for i, s := range series {
+			result.Series = append(result.Series, computeBarSeriesLayout(s, i, len(series), xScale, yScale, cfg))
+		}
 		return
 	}
 
@@ -175,7 +194,12 @@ func computeFullLayout(result *LayoutResult, series []Series, cfg *ChartConfig, 
 	}
 
 	// Build scales
-	yScale := NewLinearScaleFromData(allY)
+	var yScale *LinearScale
+	if chartType == "bar" {
+		yScale = newBarScale(allY, cfg)
+	} else {
+		yScale = NewLinearScaleFromData(allY)
+	}
 	yScale.SetRange(result.PlotArea.Y+result.PlotArea.Height, result.PlotArea.Y)
 	if cfg.YFormat != "" {
 		yScale.SetFormat(cfg.YFormat)
@@ -248,6 +272,10 @@ func computeFullLayout(result *LayoutResult, series []Series, cfg *ChartConfig, 
 
 	// Series layouts
 	for i, s := range series {
+		if chartType == "bar" {
+			result.Series = append(result.Series, computeBarSeriesLayout(s, i, len(series), xScale.(*OrdinalScale), yScale, cfg))
+			continue
+		}
 		sl := computeSeriesLayout(s, i, xScale, yScale, cfg)
 		result.Series = append(result.Series, sl)
 	}
@@ -488,4 +516,76 @@ func tickLocation(cfg *ChartConfig, series []Series) *time.Location {
 		}
 	}
 	return time.Local
+}
+
+// barGroupFraction is the share of each category band occupied by bars;
+// the rest is the gap between categories.
+const barGroupFraction = 0.8
+
+// barHeadroom is the extra fraction of the value range reserved above the
+// tallest bar so its value label does not collide with the plot edge.
+const barHeadroom = 0.1
+
+// newBarScale builds a Y scale whose domain always includes the zero
+// baseline, with headroom for value labels when they are shown.
+func newBarScale(values []float64, cfg *ChartConfig) *LinearScale {
+	lo, hi := 0.0, 0.0
+	for _, v := range values {
+		lo = math.Min(lo, v)
+		hi = math.Max(hi, v)
+	}
+	if cfg.ShowValues {
+		span := hi - lo
+		if hi > 0 {
+			hi += span * barHeadroom
+		}
+		if lo < 0 {
+			lo -= span * barHeadroom
+		}
+	}
+	return NewLinearScale(lo, hi)
+}
+
+// computeBarSeriesLayout lays out one series of a bar chart. Series are
+// grouped side by side within each category band; seriesCount is the
+// number of visible series sharing the band.
+func computeBarSeriesLayout(s Series, index, seriesCount int, xScale *OrdinalScale, yScale *LinearScale, cfg *ChartConfig) SeriesLayout {
+	color := s.Color
+	if color == "" {
+		color = cfg.Theme.SeriesColor(index)
+	}
+	sl := SeriesLayout{
+		Name:     s.Name,
+		Color:    color,
+		CSSClass: fmt.Sprintf("series-%d", index),
+	}
+
+	categories := xScale.labels
+	if len(categories) == 0 {
+		return sl
+	}
+	band := (xScale.rangeMax - xScale.rangeMin) / float64(len(categories))
+	groupWidth := band * barGroupFraction
+	barWidth := groupWidth / float64(seriesCount)
+	baseline := yScale.Map(0)
+
+	for i, p := range s.Points {
+		centre := xScale.Map(float64(i))
+		x := centre - groupWidth/2 + float64(index)*barWidth
+		top := yScale.Map(p.Y)
+		bar := BarLayout{
+			X:      x,
+			Y:      math.Min(top, baseline),
+			Width:  barWidth,
+			Height: math.Abs(top - baseline),
+		}
+		if i < len(categories) {
+			bar.Category = categories[i]
+		}
+		if cfg.ShowValues {
+			bar.Value = fmt.Sprintf("%.4g", p.Y)
+		}
+		sl.Bars = append(sl.Bars, bar)
+	}
+	return sl
 }

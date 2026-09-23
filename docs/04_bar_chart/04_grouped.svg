@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 260" role="img" aria-labelledby="chart-title">
+  <title id="chart-title">Quarterly sales</title>
+  <desc>Chart: Quarterly sales</desc>
+  <style>
+    .tooltip { display: none; pointer-events: none; }
+    .data-point:hover .tooltip { display: block; }
+    .point { transition: r 0.15s; }
+    .data-point:hover .point { r: 5; }
+    .line { transition: stroke-width 0.2s; }
+    .bar { transition: opacity 0.15s; }
+    .bar:hover { opacity: 0.8; }
+  </style>
+  <rect x="0.00" y="0.00" width="500.00" height="260.00" fill="#ffffff"/>
+  <g class="grid">
+  <line x1="60.00" y1="180.00" x2="480.00" y2="180.00" stroke="#e0e0e0" stroke-width="0.5"/>
+  <line x1="60.00" y1="148.06" x2="480.00" y2="148.06" stroke="#e0e0e0" stroke-width="0.5"/>
+  <line x1="60.00" y1="116.12" x2="480.00" y2="116.12" stroke="#e0e0e0" stroke-width="0.5"/>
+  <line x1="60.00" y1="84.18" x2="480.00" y2="84.18" stroke="#e0e0e0" stroke-width="0.5"/>
+  <line x1="60.00" y1="52.24" x2="480.00" y2="52.24" stroke="#e0e0e0" stroke-width="0.5"/>
+  </g>
+  <g class="y-axis">
+  <line x1="60.00" y1="50.00" x2="60.00" y2="180.00" stroke="#666666" stroke-width="1"/>
+  <line x1="56.00" y1="180.00" x2="60.00" y2="180.00" stroke="#666666" stroke-width="1"/>
+  <text x="52.00" y="184.00" text-anchor="end" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">0</text>
+  <line x1="56.00" y1="148.06" x2="60.00" y2="148.06" stroke="#666666" stroke-width="1"/>
+  <text x="52.00" y="152.06" text-anchor="end" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">50</text>
+  <line x1="56.00" y1="116.12" x2="60.00" y2="116.12" stroke="#666666" stroke-width="1"/>
+  <text x="52.00" y="120.12" text-anchor="end" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">100</text>
+  <line x1="56.00" y1="84.18" x2="60.00" y2="84.18" stroke="#666666" stroke-width="1"/>
+  <text x="52.00" y="88.18" text-anchor="end" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">150</text>
+  <line x1="56.00" y1="52.24" x2="60.00" y2="52.24" stroke="#666666" stroke-width="1"/>
+  <text x="52.00" y="56.24" text-anchor="end" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">200</text>
+  <text x="15.00" y="115.00" text-anchor="middle" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif" transform="rotate(-90 15.00 115.00)">k£</text>
+  </g>
+  <g class="x-axis">
+  <line x1="60.00" y1="180.00" x2="480.00" y2="180.00" stroke="#666666" stroke-width="1"/>
+  <line x1="112.50" y1="180.00" x2="112.50" y2="184.00" stroke="#666666" stroke-width="1"/>
+  <text x="112.50" y="196.00" text-anchor="middle" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">Q1</text>
+  <line x1="217.50" y1="180.00" x2="217.50" y2="184.00" stroke="#666666" stroke-width="1"/>
+  <text x="217.50" y="196.00" text-anchor="middle" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">Q2</text>
+  <line x1="322.50" y1="180.00" x2="322.50" y2="184.00" stroke="#666666" stroke-width="1"/>
+  <text x="322.50" y="196.00" text-anchor="middle" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">Q3</text>
+  <line x1="427.50" y1="180.00" x2="427.50" y2="184.00" stroke="#666666" stroke-width="1"/>
+  <text x="427.50" y="196.00" text-anchor="middle" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">Q4</text>
+  </g>
+  <text x="250.00" y="30.00" text-anchor="middle" fill="#333333" font-size="16" font-weight="bold" font-family="system-ui, -apple-system, sans-serif">Quarterly sales</text>
+  <g class="series-0">
+  <rect x="70.50" y="103.34" width="42.00" height="76.66" fill="#4e79a7" class="bar"/>
+  <text x="91.50" y="99.34" text-anchor="middle" fill="#333333" font-size="11" font-family="system-ui, -apple-system, sans-serif" class="value-label">120</text>
+  <rect x="175.50" y="119.31" width="42.00" height="60.69" fill="#4e79a7" class="bar"/>
+  <text x="196.50" y="115.31" text-anchor="middle" fill="#333333" font-size="11" font-family="system-ui, -apple-system, sans-serif" class="value-label">95</text>
+  <rect x="280.50" y="90.57" width="42.00" height="89.43" fill="#4e79a7" class="bar"/>
+  <text x="301.50" y="86.57" text-anchor="middle" fill="#333333" font-size="11" font-family="system-ui, -apple-system, sans-serif" class="value-label">140</text>
+  <rect x="385.50" y="77.79" width="42.00" height="102.21" fill="#4e79a7" class="bar"/>
+  <text x="406.50" y="73.79" text-anchor="middle" fill="#333333" font-size="11" font-family="system-ui, -apple-system, sans-serif" class="value-label">160</text>
+  </g>
+  <g class="series-1">
+  <rect x="112.50" y="93.76" width="42.00" height="86.24" fill="#f28e2b" class="bar"/>
+  <text x="133.50" y="89.76" text-anchor="middle" fill="#333333" font-size="11" font-family="system-ui, -apple-system, sans-serif" class="value-label">135</text>
+  <rect x="217.50" y="109.73" width="42.00" height="70.27" fill="#f28e2b" class="bar"/>
+  <text x="238.50" y="105.73" text-anchor="middle" fill="#333333" font-size="11" font-family="system-ui, -apple-system, sans-serif" class="value-label">110</text>
+  <rect x="322.50" y="84.18" width="42.00" height="95.82" fill="#f28e2b" class="bar"/>
+  <text x="343.50" y="80.18" text-anchor="middle" fill="#333333" font-size="11" font-family="system-ui, -apple-system, sans-serif" class="value-label">150</text>
+  <rect x="427.50" y="61.82" width="42.00" height="118.18" fill="#f28e2b" class="bar"/>
+  <text x="448.50" y="57.82" text-anchor="middle" fill="#333333" font-size="11" font-family="system-ui, -apple-system, sans-serif" class="value-label">185</text>
+  </g>
+  <g class="legend">
+  <rect x="60.00" y="235.00" width="12.00" height="12.00" fill="#4e79a7"/>
+  <text x="76.00" y="246.00" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">2024</text>
+  <rect x="122.00" y="235.00" width="12.00" height="12.00" fill="#f28e2b"/>
+  <text x="138.00" y="246.00" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">2025</text>
+  </g>
+</svg>

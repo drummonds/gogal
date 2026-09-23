@@ -52,7 +52,7 @@ func main() {
 | Type | Sparkline | Static | Interactive | Live |
 |------|-----------|--------|-------------|------|
 | Line | Yes | Yes | Yes | Yes |
-| Bar  | Yes | Yes | Yes | Yes |
+| Bar  | Yes | Yes | — | — |
 | Scatter | Yes | Yes | Yes | Yes |
 
 ## Examples

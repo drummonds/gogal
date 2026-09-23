@@ -17,7 +17,7 @@ Pure Go SVG chart library with CSS-only interactivity and HTMX integration.
 | [01a](01a_axis_formats/) | Axis Formats | Visual test of tick formatting across data ranges |
 | [02](02_static_line/) | Static Line | Full chart with axes, legend, CSS tooltips |
 | [03](03_multi_series/) | Multi-Series | Multiple series, color cycling, dual axis modes |
-| [04](04_bar_chart/) | Bar Chart | Vertical, horizontal, grouped, stacked *(planned)* |
+| [04](04_bar_chart/) | Bar Chart | Vertical bars, value labels, grouped series |
 | [05](05_htmx/) | Interactive HTMX | Legend toggling via HTMX + WithHiddenSeries |
 | [06](06_live_sse/) | Live SSE | Real-time chart updates via Server-Sent Events |
 | [07](07_scatter/) | Scatter | XY scatter plots *(planned)* |

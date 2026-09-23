@@ -6,6 +6,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
 ## [Unreleased]
 
+### Added
+- Bar chart: `NewBarChart`, `AddCategories`, `WithValueLabels`; vertical bars with a zero baseline, value labels, grouped multi-series and a sparkline variant (#1)
+
 ### Fixed
 - Temporal axis ticks are formatted in the data's time zone (or `WithLocation`) and stepped in calendar units (5 min, 1 h, 1 day, quarters, years) instead of raw-second multiples (#3)
 

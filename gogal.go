@@ -87,3 +87,25 @@ func (c *Chart) RenderString() (string, error) {
 	err := c.Render(&buf)
 	return buf.String(), err
 }
+
+// NewBarChart creates a new vertical bar chart with the given options.
+// Each series is drawn as one bar per category; multiple series are grouped
+// side by side within each category.
+func NewBarChart(opts ...Option) *Chart {
+	cfg := DefaultConfig()
+	for _, opt := range opts {
+		opt(&cfg)
+	}
+	return &Chart{config: cfg, chartType: "bar"}
+}
+
+// AddCategories adds a series from parallel category and value slices.
+// Categories become the X-axis labels.
+func (c *Chart) AddCategories(name string, categories []string, values []float64) *Chart {
+	n := min(len(categories), len(values))
+	points := make([]DataPoint, n)
+	for i := 0; i < n; i++ {
+		points[i] = DataPoint{X: float64(i), Label: categories[i], Y: values[i]}
+	}
+	return c.Add(name, points)
+}

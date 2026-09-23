@@ -15,7 +15,8 @@
 
 ### Phase 1 — Core
 - Line chart (all 4 variants: sparkline, static, interactive, live)
-- Bar chart (vertical, horizontal, grouped, stacked)
+- Bar chart (vertical, grouped) — done
+- Bar chart (horizontal, stacked)
 - Scatter/XY chart
 - Scale interface with TimeScale and EventScale
 - CSS-only tooltips and hover effects
