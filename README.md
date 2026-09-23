@@ -54,6 +54,7 @@ func main() {
 | Line | Yes | Yes | Yes | Yes |
 | Bar  | Yes | Yes | — | — |
 | Scatter | Yes | Yes | Yes | Yes |
+| Pie | Yes | Yes | — | — |
 
 ## Examples
 

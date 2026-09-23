@@ -18,6 +18,8 @@ type LayoutResult struct {
 	YAxis    *AxisLayout
 	Legend   *LegendLayout
 	Series   []SeriesLayout
+	Slices   []SliceLayout // pie charts only
+	Pie      *PieLayout    // pie charts only
 	Config   *ChartConfig
 }
 
@@ -80,8 +82,9 @@ type LegendLayout struct {
 	Rect    Rect
 }
 
-// LegendEntry represents one item in the legend.
+// LegendEntry represents one item in the legend, positioned by its swatch's top-left corner.
 type LegendEntry struct {
+	X, Y     float64
 	Name     string
 	Color    string
 	CSSClass string
@@ -97,6 +100,11 @@ func computeLayout(cfg *ChartConfig, series []Series, chartType string) *LayoutR
 	}
 
 	visibleSeries := filterVisibleSeries(series, cfg.HiddenSeries)
+
+	if chartType == "pie" {
+		computePieLayout(result, visibleSeries, cfg)
+		return result
+	}
 
 	if cfg.Variant == Sparkline {
 		computeSparklineLayout(result, visibleSeries, cfg, chartType)
@@ -289,7 +297,7 @@ func computeFullLayout(result *LayoutResult, series []Series, cfg *ChartConfig, 
 func computeSeriesLayout(s Series, index int, xScale Scale, yScale *LinearScale, cfg *ChartConfig) SeriesLayout {
 	color := s.Color
 	if color == "" {
-		color = cfg.Theme.SeriesColor(index)
+		color = cfg.seriesColor(index)
 	}
 
 	sl := SeriesLayout{
@@ -416,6 +424,7 @@ func computeLegendLayout(series []Series, cfg *ChartConfig) *LegendLayout {
 			Height: 20,
 		},
 	}
+	xOff := legend.Rect.X
 	for i, s := range series {
 		hidden := false
 		for _, h := range cfg.HiddenSeries {
@@ -426,14 +435,17 @@ func computeLegendLayout(series []Series, cfg *ChartConfig) *LegendLayout {
 		}
 		color := s.Color
 		if color == "" {
-			color = cfg.Theme.SeriesColor(i)
+			color = cfg.seriesColor(i)
 		}
 		legend.Entries = append(legend.Entries, LegendEntry{
+			X:        xOff,
+			Y:        legend.Rect.Y,
 			Name:     s.Name,
 			Color:    color,
 			CSSClass: fmt.Sprintf("series-%d", i),
 			Hidden:   hidden,
 		})
+		xOff += float64(len(s.Name))*8 + 30
 	}
 	return legend
 }
@@ -552,7 +564,7 @@ func newBarScale(values []float64, cfg *ChartConfig) *LinearScale {
 func computeBarSeriesLayout(s Series, index, seriesCount int, xScale *OrdinalScale, yScale *LinearScale, cfg *ChartConfig) SeriesLayout {
 	color := s.Color
 	if color == "" {
-		color = cfg.Theme.SeriesColor(index)
+		color = cfg.seriesColor(index)
 	}
 	sl := SeriesLayout{
 		Name:     s.Name,

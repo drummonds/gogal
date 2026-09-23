@@ -146,20 +146,25 @@ func render(w io.Writer, layout *LayoutResult) error {
 		sw.closeGroup()
 	}
 
+	// Pie slices
+	for _, s := range layout.Slices {
+		sw.pathWithTitle(s.Path,
+			fmt.Sprintf(` fill="%s" stroke="%s" stroke-width="1" class="slice"`, s.Color, cfg.Theme.Background),
+			fmt.Sprintf("%s: %s (%.1f%%)", s.Label, s.Value, s.Percent))
+	}
+
 	// Legend
 	if layout.Legend != nil {
 		sw.openGroup(` class="legend"`)
-		xOff := layout.Legend.Rect.X
 		for _, entry := range layout.Legend.Entries {
-			sw.rect(xOff, layout.Legend.Rect.Y, 12, 12,
+			sw.rect(entry.X, entry.Y, 12, 12,
 				fmt.Sprintf(` fill="%s"`, entry.Color))
 			textAttr := fmt.Sprintf(` fill="%s" font-size="%.0f" font-family="%s"`,
 				cfg.Theme.Text, cfg.Theme.FontSize, cfg.Theme.Font)
 			if entry.Hidden {
 				textAttr += ` text-decoration="line-through" opacity="0.5"`
 			}
-			sw.text(xOff+16, layout.Legend.Rect.Y+11, entry.Name, textAttr)
-			xOff += float64(len(entry.Name))*8 + 30
+			sw.text(entry.X+16, entry.Y+11, entry.Name, textAttr)
 		}
 		sw.closeGroup()
 	}
@@ -178,6 +183,8 @@ func generateCSS(cfg *ChartConfig) string {
 	css += "    .line { transition: stroke-width 0.2s; }\n"
 	css += "    .bar { transition: opacity 0.15s; }\n"
 	css += "    .bar:hover { opacity: 0.8; }\n"
+	css += "    .slice { transition: opacity 0.15s; }\n"
+	css += "    .slice:hover { opacity: 0.8; }\n"
 
 	if cfg.Animate {
 		css += `    .line {

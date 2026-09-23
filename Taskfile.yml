@@ -66,6 +66,7 @@ tasks:
       - task-plus md2html --label gogal --file examples/07_scatter/index.md --dst docs/07_scatter
       - task-plus md2html --label gogal --file examples/08_wasm/index.md --dst docs/08_wasm
       - task-plus md2html --label gogal --file examples/09_dashboard/index.md --dst docs/09_dashboard
+      - task-plus md2html --label gogal --file examples/10_pie_chart/index.md --dst docs/10_pie_chart
 
   docs:build-wasm:
     desc: Build WASM binaries and copy demo assets
@@ -101,6 +102,7 @@ tasks:
       - cd examples/06_live_sse/go && go run gen_screenshot.go
       - cd examples/08_wasm/go && go run gen_screenshot.go
       - cd examples/09_dashboard/go && go run gen_screenshot.go
+      - cd examples/10_pie_chart/go && go run gen_screenshot.go
 
   docs:capture:01:
     desc: Capture screenshots for example 01 documentation

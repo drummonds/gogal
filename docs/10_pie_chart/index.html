@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>10 — Pie Chart - gogal</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <style>
+        pre {
+            background-color: #2b2b2b;
+            color: #f8f8f2;
+            padding: 1.25em 1.5em;
+            overflow-x: auto;
+        }
+        pre code {
+            color: inherit;
+            background: none;
+            padding: 0;
+            font-size: 0.875em;
+        }
+        code {
+            background-color: #f5f5f5;
+            color: #e83e8c;
+            padding: 0.125em 0.375em;
+            border-radius: 3px;
+        }
+        pre.mermaid {
+            background-color: #ffffff;
+            color: #333;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar is-primary">
+        <div class="navbar-brand">
+            <a class="navbar-item has-text-weight-bold" href="../index.html">gogal</a>
+        </div>
+    </nav>
+    <section class="section">
+        <div class="container">
+            <nav class="breadcrumb" aria-label="breadcrumbs">
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li class="is-active"><a href="#" aria-current="page">10 — Pie Chart</a></li>
+                </ul>
+            </nav>
+
+            <div class="content">
+                <style>
+.annotation { border-left: 3px solid #3273dc; background: #f0f4ff; padding: 0.75em 1em; margin: 0.75em 0; border-radius: 0 4px 4px 0; font-size: 0.9em; }
+.annotation strong { color: #3273dc; }
+.screenshot { border: 1px solid #dbdbdb; border-radius: 4px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); overflow: hidden; padding: 1em; background: #fff; }
+.example-nav { background: #f5f5f5; border-radius: 4px; padding: 0.5em 1em; margin-bottom: 1.5em; font-size: 0.9em; }
+.example-nav a { margin-right: 0.75em; }
+.example-nav strong { color: #363636; }
+</style>
+<div class="example-nav">
+<a href="../01_sparkline/">01</a> |
+<a href="../01a_axis_formats/">01a</a> |
+<a href="../02_static_line/">02</a> |
+<a href="../03_multi_series/">03</a> |
+<a href="../04_bar_chart/">04</a> |
+<a href="../05_htmx/">05</a> |
+<a href="../06_live_sse/">06</a> |
+<a href="../07_scatter/">07</a> |
+<a href="../08_wasm/">08</a> |
+<a href="../09_dashboard/">09</a> |
+<strong>10</strong>
+</div>
+<h1 id="10--pie-chart">10 — Pie Chart</h1>
+<p>Proportional slices starting at 12 o'clock and sweeping clockwise, with a legend to the right listing each label and its percentage. Hovering a slice shows its value in a native tooltip.</p>
+<div class="columns">
+<div class="column is-6">
+<figure class="screenshot">
+<img src="10_theme.svg" alt="Pie chart of language popularity in theme colours">
+<figcaption class="has-text-centered has-text-grey is-size-7 mt-2">Theme palette</figcaption>
+</figure>
+</div>
+<div class="column is-6">
+<figure class="screenshot">
+<img src="10_colours.svg" alt="Pie chart of language popularity with an explicit palette">
+<figcaption class="has-text-centered has-text-grey is-size-7 mt-2">Explicit colours via WithColors</figcaption>
+</figure>
+</div>
+</div>
+<div class="buttons">
+<a target="_blank" href="https://git.bytestone.uk/hum3/gogal/src/branch/main/examples/10_pie_chart" class="button is-light">Source on Forgejo</a>
+</div>
+<hr>
+<h2 id="the-code">The code</h2>
+<pre><code class="language-go">chart := gogal.NewPieChart(
+    gogal.WithTitle(&quot;Language Popularity&quot;),
+    gogal.WithSize(450, 300),
+    gogal.WithColors(&quot;#3298dc&quot;, &quot;#48c774&quot;, &quot;#f14668&quot;, &quot;#ffdd57&quot;, &quot;#b86bff&quot;),
+)
+chart.AddSlice(&quot;Go&quot;, 35)
+chart.AddSlice(&quot;Python&quot;, 28)
+chart.AddSlice(&quot;Rust&quot;, 18)
+chart.AddSlice(&quot;JS&quot;, 12)
+chart.AddSlice(&quot;Other&quot;, 7)
+svg, _ := chart.RenderString()
+</code></pre>
+<div class="annotation">
+<strong>AddSlice(label, value)</strong> adds one slice. Percentages are computed from the total of all positive values; slices with a zero or negative value are skipped.
+</div>
+<div class="annotation">
+<strong>WithColors(...)</strong> replaces the theme palette. Slices take colours in order and cycle if there are more slices than colours. Leave it out to use the theme's ten-colour palette.
+</div>
+<div class="annotation">
+<strong>Legend and tooltips.</strong> The legend reads "Go 35.0%". Each slice carries an SVG <code>&lt;title&gt;</code>, so browsers show "Go: 35 (35.0%)" on hover with no JavaScript.
+</div>
+<p><a href="https://git.bytestone.uk/hum3/gogal/src/branch/main/examples/10_pie_chart/go/main.go">Full source on Forgejo</a></p>
+<hr>
+<h2 id="running-it">Running it</h2>
+<pre><code class="language-bash">task example:10
+</code></pre>
+<p>Outputs SVG to stdout and serves at <code>http://localhost:1349</code>.</p>
+<hr>
+<h2 id="api-reference">API reference</h2>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>NewPieChart(opts...)</code></td>
+<td>Pie chart</td>
+</tr>
+<tr>
+<td><code>AddSlice(label, value)</code></td>
+<td>One slice; values are shares of the total</td>
+</tr>
+<tr>
+<td><code>WithColors(colours...)</code></td>
+<td>Palette override, in slice order</td>
+</tr>
+<tr>
+<td><code>WithLegend(false)</code></td>
+<td>Hide the legend</td>
+</tr>
+</tbody>
+</table>
+<p>Donut charts are not yet implemented — see the <a href="../ROADMAP.html">ROADMAP</a>.</p>
+<hr>
+<p><a href="../index.html">Back to examples</a> | <a href="https://git.bytestone.uk/hum3/gogal/src/branch/main/examples/10_pie_chart">Source on Forgejo</a> | <a href="https://pkg.go.dev/git.bytestone.uk/hum3/gogal">API docs</a></p>
+
+            </div>
+        </div>
+    </section>
+</body>
+</html>

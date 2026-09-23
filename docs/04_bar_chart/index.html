@@ -51,6 +51,7 @@
                 <style>
 .annotation { border-left: 3px solid #3273dc; background: #f0f4ff; padding: 0.75em 1em; margin: 0.75em 0; border-radius: 0 4px 4px 0; font-size: 0.9em; }
 .annotation strong { color: #3273dc; }
+.screenshot { border: 1px solid #dbdbdb; border-radius: 4px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); overflow: hidden; padding: 1em; background: #fff; }
 .example-nav { background: #f5f5f5; border-radius: 4px; padding: 0.5em 1em; margin-bottom: 1.5em; font-size: 0.9em; }
 .example-nav a { margin-right: 0.75em; }
 .example-nav strong { color: #363636; }
@@ -65,55 +66,89 @@
 <a href="../06_live_sse/">06</a> |
 <a href="../07_scatter/">07</a> |
 <a href="../08_wasm/">08</a> |
-<a href="../09_dashboard/">09</a>
+<a href="../09_dashboard/">09</a> |
+<a href="../10_pie_chart/">10</a>
 </div>
 <h1 id="04--bar-chart">04 — Bar Chart</h1>
-<p><strong>Planned for Phase 2.</strong> Bar charts will add vertical, horizontal, grouped, and stacked variants using a new <code>BandScale</code> for categorical axes.</p>
+<p>A vertical bar chart: one bar per category, category labels on the X axis, the value printed above each bar, and a Y axis that always starts at zero. Adding a second series groups the bars side by side within each category.</p>
+<div class="columns">
+<div class="column is-6">
+<figure class="screenshot">
+<img src="04_fibonacci.svg" alt="Bar chart of the first ten Fibonacci numbers">
+<figcaption class="has-text-centered has-text-grey is-size-7 mt-2">Single series with value labels</figcaption>
+</figure>
+</div>
+<div class="column is-6">
+<figure class="screenshot">
+<img src="04_grouped.svg" alt="Grouped bar chart of quarterly sales for two years">
+<figcaption class="has-text-centered has-text-grey is-size-7 mt-2">Two series grouped per category</figcaption>
+</figure>
+</div>
+</div>
+<div class="buttons">
+<a target="_blank" href="https://git.bytestone.uk/hum3/gogal/src/branch/main/examples/04_bar_chart" class="button is-light">Source on Forgejo</a>
+</div>
 <hr>
-<h2 id="planned-api">Planned API</h2>
+<h2 id="the-code">The code</h2>
 <pre><code class="language-go">chart := gogal.NewBarChart(
-    gogal.WithTitle(&quot;Monthly Sales&quot;),
-    gogal.WithGrid(true),
+    gogal.WithTitle(&quot;Fibonacci (n=10)&quot;),
+    gogal.WithSize(500, 220),
+    gogal.WithYFormat(&quot;%.0f&quot;),
 )
-chart.Add(&quot;Revenue&quot;, []gogal.DataPoint{
-    {Label: &quot;Jan&quot;, Y: 120},
-    {Label: &quot;Feb&quot;, Y: 95},
-    {Label: &quot;Mar&quot;, Y: 140},
-})
+chart.AddCategories(&quot;Fibonacci&quot;,
+    []string{&quot;F1&quot;, &quot;F2&quot;, &quot;F3&quot;, &quot;F4&quot;, &quot;F5&quot;, &quot;F6&quot;, &quot;F7&quot;, &quot;F8&quot;, &quot;F9&quot;, &quot;F10&quot;},
+    []float64{1, 1, 2, 3, 5, 8, 13, 21, 34, 55})
+svg, _ := chart.RenderString()
 </code></pre>
 <div class="annotation">
-<strong>BandScale</strong> will map categorical labels to equal-width bands, with configurable padding between bars. Grouped and stacked modes will subdivide bands for multi-series data.
+<strong>AddCategories(name, categories, values)</strong> takes parallel slices. The categories become the X-axis labels; call it once per series to get grouped bars.
 </div>
-<h2 id="variants-planned">Variants planned</h2>
+<div class="annotation">
+<strong>Baseline at zero.</strong> Unlike line charts, the Y scale always includes 0 so bar heights compare honestly. Negative values hang below the baseline. A little headroom is reserved above the tallest bar for its value label.
+</div>
+<div class="annotation">
+<strong>WithValueLabels(false)</strong> turns off the value printed above each bar. Hovering a bar dims it slightly — pure CSS, no JavaScript.
+</div>
+<div class="annotation">
+<strong>Sparkline bars.</strong> <code>NewBarChart(gogal.WithVariant(gogal.Sparkline))</code> renders a bare 100×20 bar strip with no axes, for inline use in tables.
+</div>
+<p><a href="https://git.bytestone.uk/hum3/gogal/src/branch/main/examples/04_bar_chart/go/main.go">Full source on Forgejo</a></p>
+<hr>
+<h2 id="running-it">Running it</h2>
+<pre><code class="language-bash">task example:04
+</code></pre>
+<p>Outputs SVG to stdout and serves at <code>http://localhost:1343</code>.</p>
+<hr>
+<h2 id="api-reference">API reference</h2>
 <table>
 <thead>
 <tr>
-<th>Variant</th>
-<th>Description</th>
+<th>Function</th>
+<th>Purpose</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Vertical</td>
-<td>Standard column chart</td>
+<td><code>NewBarChart(opts...)</code></td>
+<td>Vertical bar chart</td>
 </tr>
 <tr>
-<td>Horizontal</td>
-<td>Rotated bars</td>
+<td><code>AddCategories(name, categories, values)</code></td>
+<td>One series; repeat for grouped bars</td>
 </tr>
 <tr>
-<td>Grouped</td>
-<td>Side-by-side bars per category</td>
+<td><code>WithValueLabels(on)</code></td>
+<td>Print each value above its bar (default on)</td>
 </tr>
 <tr>
-<td>Stacked</td>
-<td>Cumulative bars per category</td>
+<td><code>WithYFormat(fmt)</code></td>
+<td>Y-axis tick format (Printf)</td>
 </tr>
 </tbody>
 </table>
-<p>See <a href="../ROADMAP.html">ROADMAP</a> for timeline.</p>
+<p>Horizontal and stacked bars are not yet implemented — see the <a href="../ROADMAP.html">ROADMAP</a>.</p>
 <hr>
-<p><a href="../index.html">Back to examples</a> | <a href="https://pkg.go.dev/git.bytestone.uk/hum3/gogal">API docs</a></p>
+<p><a href="../index.html">Back to examples</a> | <a href="https://git.bytestone.uk/hum3/gogal/src/branch/main/examples/04_bar_chart">Source on Forgejo</a> | <a href="https://pkg.go.dev/git.bytestone.uk/hum3/gogal">API docs</a></p>
 
             </div>
         </div>

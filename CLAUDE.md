@@ -15,8 +15,11 @@ render.go           # SVG renderer (layout → io.Writer)
 svg.go              # Low-level SVG writing helpers
 series.go           # DataPoint, Series types
 theme.go            # Theme struct, ThemeLight, ThemeDark
-scale_test.go       # Scale tests (9)
-layout_test.go      # Layout + render tests (8)
+pie.go              # Pie chart layout (sectors, vertical legend)
+scale_test.go       # Scale tests (13, incl. temporal ladder)
+layout_test.go      # Layout + render tests (9)
+bar_test.go         # Bar chart tests (5)
+pie_test.go         # Pie chart tests (6)
 examples/
   01_sparkline/go/  # Minimal sparkline example
 docs/
@@ -68,14 +71,17 @@ tp pages deploy     # rsync docs/ to the docs site (run docs:all first)
 ### Done
 - Core: Scale, Layout, Render pipeline
 - Line chart (sparkline + static variants)
+- Bar chart (vertical, grouped, value labels, sparkline)
+- Pie chart (sectors, legend with percentages, WithColors)
+- Temporal ticks in calendar units, formatted in the data's location
 - CSS tooltips, hover effects, animations
 - Smooth paths (Catmull-Rom to Bezier)
 - Light/Dark themes
-- 17 tests passing
+- 33 tests passing
 
 ### Next Steps (from plan)
 - Step 4: Static line chart example (examples/02_static_line, examples/03_multi_series)
-- Step 5: Bar chart (BandScale, vertical/horizontal/grouped/stacked)
+- Step 5: Bar chart — horizontal and stacked variants
 - Step 6: Scatter chart
 - Step 7: HTMX integration (htmx.go, HandleChart, legend toggling)
 - Step 8: Live/SSE (RenderSSEHandler)

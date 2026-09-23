@@ -44,6 +44,7 @@ type ChartConfig struct {
 	Variant Variant
 	Axis    AxisMode
 	Theme   *Theme
+	Colors  []string // palette override; empty uses Theme.Colors
 	Margins Margins
 
 	ShowGrid     bool
@@ -183,4 +184,18 @@ func WithLocation(loc *time.Location) Option {
 // WithValueLabels controls whether bar charts print each value above its bar.
 func WithValueLabels(on bool) Option {
 	return func(c *ChartConfig) { c.ShowValues = on }
+}
+
+// WithColors overrides the theme palette. Series (or pie slices) take
+// colours in order, cycling when there are more series than colours.
+func WithColors(colors ...string) Option {
+	return func(c *ChartConfig) { c.Colors = colors }
+}
+
+// seriesColor returns the palette colour for index i.
+func (c *ChartConfig) seriesColor(i int) string {
+	if len(c.Colors) > 0 {
+		return c.Colors[i%len(c.Colors)]
+	}
+	return c.Theme.SeriesColor(i)
 }

@@ -17,7 +17,8 @@
 <strong>06</strong> |
 <a href="../07_scatter/">07</a> |
 <a href="../08_wasm/">08</a> |
-<a href="../09_dashboard/">09</a>
+<a href="../09_dashboard/">09</a> |
+<a href="../10_pie_chart/">10</a>
 </div>
 
 # 06 — Live SSE

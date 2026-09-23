@@ -109,3 +109,24 @@ func (c *Chart) AddCategories(name string, categories []string, values []float64
 	}
 	return c.Add(name, points)
 }
+
+// NewPieChart creates a new pie chart with the given options.
+// Slices are added with AddSlice; their colours come from WithColors or the theme palette.
+func NewPieChart(opts ...Option) *Chart {
+	cfg := DefaultConfig()
+	for _, opt := range opts {
+		opt(&cfg)
+	}
+	return &Chart{config: cfg, chartType: "pie"}
+}
+
+// AddSlice adds one slice to a pie chart. Slices with a value of zero or
+// less are not drawn.
+func (c *Chart) AddSlice(label string, value float64) *Chart {
+	point := DataPoint{Label: label, Y: value}
+	if len(c.series) == 0 {
+		c.series = append(c.series, Series{})
+	}
+	c.series[0].Points = append(c.series[0].Points, point)
+	return c
+}

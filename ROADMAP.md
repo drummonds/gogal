@@ -32,7 +32,8 @@
 
 ### Phase 3 — Extended Chart Types
 - Area chart (filled line)
-- Pie/donut
+- Pie — done
+- Donut
 - Heatmap
 - Box plot
 

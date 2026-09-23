@@ -7,6 +7,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 ## [Unreleased]
 
 ### Added
+- Pie chart: `NewPieChart`, `AddSlice`; proportional sectors, legend with percentages, hover titles (#2)
+- `WithColors` palette override for any chart type
 - Bar chart: `NewBarChart`, `AddCategories`, `WithValueLabels`; vertical bars with a zero baseline, value labels, grouped multi-series and a sparkline variant (#1)
 
 ### Fixed

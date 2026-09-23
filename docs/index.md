@@ -23,3 +23,4 @@ Pure Go SVG chart library with CSS-only interactivity and HTMX integration.
 | [07](07_scatter/) | Scatter | XY scatter plots *(planned)* |
 | [08](08_wasm/) | WASM Demo | Full chart running in the browser |
 | [09](09_dashboard/) | Dashboard | Multiple charts, themes, sizes on one page |
+| [10](10_pie_chart/) | Pie Chart | Proportional slices, legend with percentages, custom colours |

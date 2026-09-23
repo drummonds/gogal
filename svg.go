@@ -105,3 +105,8 @@ func xmlEscape(s string) string {
 	}
 	return string(result)
 }
+
+// pathWithTitle writes a path with a nested <title>, shown by browsers as a hover tooltip.
+func (sw *svgWriter) pathWithTitle(d string, attrs string, title string) {
+	sw.printf(`  <path d="%s"%s><title>%s</title></path>`+"\n", d, attrs, xmlEscape(title))
+}
