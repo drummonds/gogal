@@ -160,22 +160,32 @@ func (s *OrdinalScale) Ticks() []Tick {
 }
 
 // TemporalScale wraps LinearScale and formats tick labels as human-readable times.
+// Ticks are stepped in calendar units (seconds, minutes, hours, days, months,
+// years) and aligned to those units in loc, so a 14-minute span gives
+// 15:00, 15:05, 15:10 rather than 200-second multiples.
 type TemporalScale struct {
 	*LinearScale
 	timeFormat string
+	loc        *time.Location
 }
 
 // NewTemporalScale creates a temporal scale with the given time format.
-func NewTemporalScale(ls *LinearScale, timeFormat string) *TemporalScale {
-	return &TemporalScale{LinearScale: ls, timeFormat: timeFormat}
+// Tick labels are formatted in loc; nil means time.Local.
+func NewTemporalScale(ls *LinearScale, timeFormat string, loc *time.Location) *TemporalScale {
+	if loc == nil {
+		loc = time.Local
+	}
+	return &TemporalScale{LinearScale: ls, timeFormat: timeFormat, loc: loc}
 }
 
 func (s *TemporalScale) Ticks() []Tick {
-	step := niceStep(s.domainMax-s.domainMin, s.tickCount)
-	start := math.Ceil(s.domainMin/step) * step
+	step := temporalStep(s.domainMax-s.domainMin, s.tickCount)
+	first := time.Unix(int64(math.Ceil(s.domainMin)), 0).In(s.loc)
+	last := time.Unix(int64(math.Floor(s.domainMax)), 0).In(s.loc)
+
 	var ticks []Tick
-	for v := start; v <= s.domainMax+step*0.001; v += step {
-		t := time.Unix(int64(v), 0).UTC()
+	for t := step.align(first); !t.After(last); t = step.next(t) {
+		v := float64(t.Unix())
 		ticks = append(ticks, Tick{
 			Value:    v,
 			Position: s.Map(v),
@@ -183,6 +193,106 @@ func (s *TemporalScale) Ticks() []Tick {
 		})
 	}
 	return ticks
+}
+
+// timeStep is one rung of the temporal tick ladder: either a fixed duration
+// (sub-day steps) or a whole number of calendar months or years.
+type timeStep struct {
+	duration time.Duration // for steps below one month
+	months   int
+	years    int
+}
+
+// seconds is the nominal length of the step, used to pick a rung.
+func (st timeStep) seconds() float64 {
+	switch {
+	case st.years > 0:
+		return float64(st.years) * 365 * 86400
+	case st.months > 0:
+		return float64(st.months) * 30 * 86400
+	default:
+		return st.duration.Seconds()
+	}
+}
+
+// temporalLadder lists the tick steps to choose from, smallest first.
+var temporalLadder = func() []timeStep {
+	var ladder []timeStep
+	for _, d := range []time.Duration{
+		time.Second, 2 * time.Second, 5 * time.Second, 10 * time.Second, 15 * time.Second, 30 * time.Second,
+		time.Minute, 2 * time.Minute, 5 * time.Minute, 10 * time.Minute, 15 * time.Minute, 30 * time.Minute,
+		time.Hour, 2 * time.Hour, 3 * time.Hour, 6 * time.Hour, 12 * time.Hour,
+		24 * time.Hour, 2 * 24 * time.Hour, 7 * 24 * time.Hour, 14 * 24 * time.Hour,
+	} {
+		ladder = append(ladder, timeStep{duration: d})
+	}
+	for _, m := range []int{1, 2, 3, 6} {
+		ladder = append(ladder, timeStep{months: m})
+	}
+	for _, y := range []int{1, 2, 5, 10, 20, 50, 100} {
+		ladder = append(ladder, timeStep{years: y})
+	}
+	return ladder
+}()
+
+// temporalStep picks the smallest ladder step that yields at most
+// targetTicks intervals across a span of the given seconds.
+func temporalStep(spanSeconds float64, targetTicks int) timeStep {
+	if targetTicks <= 0 {
+		targetTicks = 1
+	}
+	for _, st := range temporalLadder {
+		if spanSeconds/st.seconds() <= float64(targetTicks) {
+			return st
+		}
+	}
+	return temporalLadder[len(temporalLadder)-1]
+}
+
+// align returns the first tick at or after t, on a step boundary in t's location.
+func (st timeStep) align(t time.Time) time.Time {
+	loc := t.Location()
+	switch {
+	case st.years > 0:
+		y := t.Year() / st.years * st.years
+		aligned := time.Date(y, 1, 1, 0, 0, 0, 0, loc)
+		if aligned.Before(t) {
+			aligned = aligned.AddDate(st.years, 0, 0)
+		}
+		return aligned
+	case st.months > 0:
+		m := (int(t.Month())-1)/st.months*st.months + 1
+		aligned := time.Date(t.Year(), time.Month(m), 1, 0, 0, 0, 0, loc)
+		if aligned.Before(t) {
+			aligned = aligned.AddDate(0, st.months, 0)
+		}
+		return aligned
+	case st.duration >= 24*time.Hour:
+		aligned := time.Date(t.Year(), t.Month(), t.Day(), 0, 0, 0, 0, loc)
+		if aligned.Before(t) {
+			aligned = aligned.AddDate(0, 0, 1)
+		}
+		return aligned
+	default:
+		// Step from local midnight so ticks land on wall-clock boundaries.
+		midnight := time.Date(t.Year(), t.Month(), t.Day(), 0, 0, 0, 0, loc)
+		n := math.Ceil(float64(t.Sub(midnight)) / float64(st.duration))
+		return midnight.Add(time.Duration(n) * st.duration)
+	}
+}
+
+// next advances t by one step.
+func (st timeStep) next(t time.Time) time.Time {
+	switch {
+	case st.years > 0:
+		return t.AddDate(st.years, 0, 0)
+	case st.months > 0:
+		return t.AddDate(0, st.months, 0)
+	case st.duration >= 24*time.Hour:
+		return t.AddDate(0, 0, int(st.duration/(24*time.Hour)))
+	default:
+		return t.Add(st.duration)
+	}
 }
 
 // niceStep calculates a "nice" step size for tick marks.

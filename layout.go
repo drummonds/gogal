@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"math"
 	"strings"
+	"time"
 )
 
 // LayoutResult holds the computed layout of a chart, ready for rendering.
@@ -191,7 +192,7 @@ func computeFullLayout(result *LayoutResult, series []Series, cfg *ChartConfig, 
 		linScale := NewLinearScaleFromData(allX)
 		linScale.SetRange(result.PlotArea.X, result.PlotArea.X+result.PlotArea.Width)
 		if cfg.Axis == Temporal && cfg.TimeFormat != "" {
-			xScale = NewTemporalScale(linScale, cfg.TimeFormat)
+			xScale = NewTemporalScale(linScale, cfg.TimeFormat, tickLocation(cfg, series))
 		} else {
 			xScale = linScale
 		}
@@ -471,4 +472,20 @@ func niceMin(value float64) float64 {
 	exp := math.Floor(math.Log10(math.Abs(value)))
 	pow := math.Pow(10, exp)
 	return math.Floor(value/pow) * pow
+}
+
+// tickLocation picks the time zone for temporal tick labels: the configured
+// location, else that of the first timed point, else time.Local.
+func tickLocation(cfg *ChartConfig, series []Series) *time.Location {
+	if cfg.Location != nil {
+		return cfg.Location
+	}
+	for _, s := range series {
+		for _, p := range s.Points {
+			if !p.Time.IsZero() {
+				return p.Time.Location()
+			}
+		}
+	}
+	return time.Local
 }

@@ -6,6 +6,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
 ## [Unreleased]
 
+### Fixed
+- Temporal axis ticks are formatted in the data's time zone (or `WithLocation`) and stepped in calendar units (5 min, 1 h, 1 day, quarters, years) instead of raw-second multiples (#3)
+
 ## [0.1.4] - 2026-09-21
 
  - Migrate module path from codeberg.org to git.bytestone.uk

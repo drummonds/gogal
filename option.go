@@ -1,5 +1,7 @@
 package gogal
 
+import "time"
+
 // Variant controls the level of chart decoration and interactivity.
 type Variant int
 
@@ -51,9 +53,10 @@ type ChartConfig struct {
 	Animate      bool
 	Smooth       bool // use bezier curves for line charts
 
-	HiddenSeries []string // series names to hide (for HTMX toggle)
-	TimeFormat   string   // Go time format for tick labels
-	YFormat      string   // printf format for Y labels
+	HiddenSeries []string       // series names to hide (for HTMX toggle)
+	TimeFormat   string         // Go time format for tick labels
+	Location     *time.Location // location for temporal tick labels; nil infers from data, else time.Local
+	YFormat      string         // printf format for Y labels
 }
 
 // Option is a functional option for configuring a chart.
@@ -165,4 +168,11 @@ func WithXTitle(title string) Option {
 
 func WithYTitle(title string) Option {
 	return func(c *ChartConfig) { c.YTitle = title }
+}
+
+// WithLocation sets the time zone used to format temporal tick labels.
+// By default the location of the first timed data point is used, falling
+// back to time.Local when points carry no time.
+func WithLocation(loc *time.Location) Option {
+	return func(c *ChartConfig) { c.Location = loc }
 }

@@ -423,3 +423,36 @@ func TestTemporalLayout_XAxisLabels(t *testing.T) {
 		}
 	}
 }
+
+// Issue #3: the chart formats temporal ticks in the location of the data
+// unless WithLocation overrides it.
+func TestTemporalLayout_UsesDataLocation(t *testing.T) {
+	bst := time.FixedZone("BST", 3600)
+	start := time.Date(2026, 9, 23, 14, 58, 34, 0, bst)
+	var times []time.Time
+	var values []float64
+	for i := 0; i < 87; i++ {
+		times = append(times, start.Add(time.Duration(i)*10*time.Second))
+		values = append(values, 26+float64(i%5)/10)
+	}
+
+	labelsOf := func(chart *Chart) string {
+		var labels []string
+		for _, tick := range chart.Layout().XAxis.Ticks {
+			labels = append(labels, tick.Label)
+		}
+		return strings.Join(labels, " ")
+	}
+
+	chart := NewLineChart(WithSize(960, 400), WithAxisMode(Temporal), WithTimeFormat("15:04"))
+	chart.AddTimeSeries("Temperature", times, values)
+	if got := labelsOf(chart); got != "15:00 15:05 15:10" {
+		t.Errorf("inferred location: labels = %q, want 15:00 15:05 15:10", got)
+	}
+
+	chart = NewLineChart(WithSize(960, 400), WithAxisMode(Temporal), WithTimeFormat("15:04"), WithLocation(time.UTC))
+	chart.AddTimeSeries("Temperature", times, values)
+	if got := labelsOf(chart); got != "14:00 14:05 14:10" {
+		t.Errorf("WithLocation(UTC): labels = %q, want 14:00 14:05 14:10", got)
+	}
+}
