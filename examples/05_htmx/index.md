@@ -41,7 +41,12 @@ Toggle series visibility without a page reload. Clicking a series name fires an 
 </div>
 
 <div class="buttons">
+<a href="demo.html" class="button is-primary">Launch WASM Demo</a>
 <a target="_blank" href="https://git.bytestone.uk/hum3/gogal/src/branch/main/examples/05_htmx" class="button is-light">Source on Forgejo</a>
+</div>
+
+<div class="annotation">
+<strong>About the WASM demo.</strong> HTMX needs a server to answer <code>hx-get</code>. The demo has none, so a few lines of JavaScript stand in for it: they keep the hidden list, call the same Go <code>renderChart</code> compiled to WASM, and swap the returned fragment into the page. The chart and toggle buttons are identical to the server version.
 </div>
 
 ---
@@ -103,6 +108,8 @@ task example:05
 ```
 
 Serves at `http://localhost:1344`. Click series names below the chart to toggle them.
+
+WASM mode: `task docs:build-wasm` then open `docs/05_htmx/demo.html` over HTTP (`tp pages`).
 
 ---
 

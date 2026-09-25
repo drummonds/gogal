@@ -83,6 +83,12 @@ tasks:
       - cp "$(go env GOROOT)/lib/wasm/wasm_exec.js" docs/01a_axis_formats/
       - cp examples/01a_axis_formats/templates/index.html docs/01a_axis_formats/demo.html
       - cp examples/01a_axis_formats/templates/app.js docs/01a_axis_formats/
+      # Example 05 — HTMX legend toggling (client-side stand-in)
+      - mkdir -p docs/05_htmx
+      - cd examples/05_htmx/go && GOOS=js GOARCH=wasm go build -o ../../../docs/05_htmx/main.wasm .
+      - cp "$(go env GOROOT)/lib/wasm/wasm_exec.js" docs/05_htmx/
+      - cp examples/05_htmx/templates/index.html docs/05_htmx/demo.html
+      - cp examples/05_htmx/templates/app.js docs/05_htmx/
       # Example 08 — WASM Demo
       - mkdir -p docs/08_wasm
       - cd examples/08_wasm/go && GOOS=js GOARCH=wasm go build -o ../../../docs/08_wasm/main.wasm .

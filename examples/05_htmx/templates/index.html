@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>gogal — 05 HTMX Demo (WASM)</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
+</head>
+<body>
+  <nav class="navbar is-primary" role="navigation">
+    <div class="navbar-brand">
+      <span class="navbar-item has-text-weight-bold">gogal — 05 Interactive Legend (WASM)</span>
+    </div>
+  </nav>
+
+  <section class="section">
+    <div class="container" style="max-width: 900px;">
+      <p class="mb-4">Click a series name below the chart to toggle it. In the server version HTMX fetches a re-rendered fragment; here the same Go code runs in your browser and the page swaps the fragment in.</p>
+      <div id="chart-container">
+        <progress class="progress is-primary" max="100">Loading WASM...</progress>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="content has-text-centered">
+      <p><a href="https://git.bytestone.uk/hum3/gogal/src/branch/main/examples/05_htmx">Source on Forgejo</a></p>
+    </div>
+  </footer>
+
+  <script src="wasm_exec.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

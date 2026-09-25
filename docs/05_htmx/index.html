@@ -86,7 +86,11 @@
 </div>
 </div>
 <div class="buttons">
+<a href="demo.html" class="button is-primary">Launch WASM Demo</a>
 <a target="_blank" href="https://git.bytestone.uk/hum3/gogal/src/branch/main/examples/05_htmx" class="button is-light">Source on Forgejo</a>
+</div>
+<div class="annotation">
+<strong>About the WASM demo.</strong> HTMX needs a server to answer <code>hx-get</code>. The demo has none, so a few lines of JavaScript stand in for it: they keep the hidden list, call the same Go <code>renderChart</code> compiled to WASM, and swap the returned fragment into the page. The chart and toggle buttons are identical to the server version.
 </div>
 <hr>
 <h2 id="the-pattern">The pattern</h2>
@@ -129,6 +133,7 @@ chart.Add(&quot;Wind Speed&quot;, wind)
 <pre><code class="language-bash">task example:05
 </code></pre>
 <p>Serves at <code>http://localhost:1344</code>. Click series names below the chart to toggle them.</p>
+<p>WASM mode: <code>task docs:build-wasm</code> then open <code>docs/05_htmx/demo.html</code> over HTTP (<code>tp pages</code>).</p>
 <hr>
 <h2 id="api-reference">API reference</h2>
 <table>
