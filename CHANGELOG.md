@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
 ## [Unreleased]
 
+## [0.1.8] - 2026-09-25
+
+ - Deterministic example 06 screenshot
+
 ### Fixed
 - Example 06 screenshot generator uses a fixed random seed, so docs builds no longer dirty the tree
 
