@@ -12,12 +12,16 @@ import (
 	"git.bytestone.uk/hum3/gogal"
 )
 
+// Fixed seed so the screenshot is reproducible and does not dirty the tree
+// on every docs build.
+var noise = rand.New(rand.NewPCG(2024, 615))
+
 func main() {
 	var points []gogal.DataPoint
 	base := time.Date(2024, 6, 15, 14, 30, 0, 0, time.UTC)
 	for i := range 30 {
 		t := base.Add(time.Duration(i*2) * time.Second)
-		y := 50 + 20*math.Sin(float64(i)*0.3) + rand.Float64()*10 - 5
+		y := 50 + 20*math.Sin(float64(i)*0.3) + noise.Float64()*10 - 5
 		points = append(points, gogal.DataPoint{
 			Time:  t,
 			Y:     y,
