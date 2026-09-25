@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
 ## [Unreleased]
 
+## [0.1.6] - 2026-09-25
+
+ - Updating htmx demo
+
 ### Added
 - Step chart: `NewStepChart` holds each value until the next point then jumps, for balances and other event-driven state; example 11
 
