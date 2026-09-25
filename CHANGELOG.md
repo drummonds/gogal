@@ -6,6 +6,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
 ## [Unreleased]
 
+### Added
+- Step chart: `NewStepChart` holds each value until the next point then jumps, for balances and other event-driven state; example 11
+
 ## [0.1.5] - 2026-09-25
 
  - Add bar and pie charts, fix temporal tick labels

@@ -161,7 +161,7 @@ func computeSparklineLayout(result *LayoutResult, series []Series, cfg *ChartCon
 	yScale.SetRange(cfg.Height-1, 1)
 
 	for i, s := range series {
-		sl := computeSeriesLayout(s, i, nil, yScale, cfg)
+		sl := computeSeriesLayout(s, i, nil, yScale, cfg, chartType)
 		result.Series = append(result.Series, sl)
 	}
 }
@@ -284,7 +284,7 @@ func computeFullLayout(result *LayoutResult, series []Series, cfg *ChartConfig, 
 			result.Series = append(result.Series, computeBarSeriesLayout(s, i, len(series), xScale.(*OrdinalScale), yScale, cfg))
 			continue
 		}
-		sl := computeSeriesLayout(s, i, xScale, yScale, cfg)
+		sl := computeSeriesLayout(s, i, xScale, yScale, cfg, chartType)
 		result.Series = append(result.Series, sl)
 	}
 
@@ -294,7 +294,7 @@ func computeFullLayout(result *LayoutResult, series []Series, cfg *ChartConfig, 
 	}
 }
 
-func computeSeriesLayout(s Series, index int, xScale Scale, yScale *LinearScale, cfg *ChartConfig) SeriesLayout {
+func computeSeriesLayout(s Series, index int, xScale Scale, yScale *LinearScale, cfg *ChartConfig, chartType string) SeriesLayout {
 	color := s.Color
 	if color == "" {
 		color = cfg.seriesColor(index)
@@ -351,9 +351,12 @@ func computeSeriesLayout(s Series, index int, xScale Scale, yScale *LinearScale,
 	}
 
 	// Build SVG path
-	if cfg.Smooth {
+	switch {
+	case chartType == "step":
+		sl.Path = buildStepPath(sl.Points)
+	case cfg.Smooth:
 		sl.Path = buildSmoothPath(sl.Points)
-	} else {
+	default:
 		sl.Path = buildLinePath(sl.Points)
 	}
 
@@ -371,6 +374,20 @@ func buildLinePath(points []PointLayout) string {
 		} else {
 			fmt.Fprintf(&b, " L%.2f,%.2f", p.X, p.Y)
 		}
+	}
+	return b.String()
+}
+
+// buildStepPath holds each value until the next point's x, then jumps to
+// the new value (a "step after" line).
+func buildStepPath(points []PointLayout) string {
+	if len(points) == 0 {
+		return ""
+	}
+	var b strings.Builder
+	fmt.Fprintf(&b, "M%.2f,%.2f", points[0].X, points[0].Y)
+	for i := 1; i < len(points); i++ {
+		fmt.Fprintf(&b, " L%.2f,%.2f L%.2f,%.2f", points[i].X, points[i-1].Y, points[i].X, points[i].Y)
 	}
 	return b.String()
 }

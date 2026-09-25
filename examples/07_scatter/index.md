@@ -17,7 +17,8 @@
 <strong>07</strong> |
 <a href="../08_wasm/">08</a> |
 <a href="../09_dashboard/">09</a> |
-<a href="../10_pie_chart/">10</a>
+<a href="../10_pie_chart/">10</a> |
+<a href="../11_balance/">11</a>
 </div>
 
 # 07 — Scatter

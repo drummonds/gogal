@@ -73,11 +73,12 @@ tp pages deploy     # rsync docs/ to the docs site (run docs:all first)
 - Line chart (sparkline + static variants)
 - Bar chart (vertical, grouped, value labels, sparkline)
 - Pie chart (sectors, legend with percentages, WithColors)
+- Step chart (balance-style hold-then-jump line)
 - Temporal ticks in calendar units, formatted in the data's location
 - CSS tooltips, hover effects, animations
 - Smooth paths (Catmull-Rom to Bezier)
 - Light/Dark themes
-- 33 tests passing
+- 36 tests passing
 
 ### Next Steps (from plan)
 - Step 4: Static line chart example (examples/02_static_line, examples/03_multi_series)

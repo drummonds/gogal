@@ -18,7 +18,8 @@
 <a href="../07_scatter/">07</a> |
 <strong>08</strong> |
 <a href="../09_dashboard/">09</a> |
-<a href="../10_pie_chart/">10</a>
+<a href="../10_pie_chart/">10</a> |
+<a href="../11_balance/">11</a>
 </div>
 
 # 08 — WASM Demo

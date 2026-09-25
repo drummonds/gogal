@@ -18,7 +18,8 @@
 <a href="../07_scatter/">07</a> |
 <a href="../08_wasm/">08</a> |
 <a href="../09_dashboard/">09</a> |
-<strong>10</strong>
+<strong>10</strong> |
+<a href="../11_balance/">11</a>
 </div>
 
 # 10 — Pie Chart

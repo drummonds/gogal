@@ -1,0 +1,135 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 320" role="img" aria-labelledby="chart-title">
+  <title id="chart-title">Current account — September 2026</title>
+  <desc>Chart: Current account — September 2026</desc>
+  <style>
+    .tooltip { display: none; pointer-events: none; }
+    .data-point:hover .tooltip { display: block; }
+    .point { transition: r 0.15s; }
+    .data-point:hover .point { r: 5; }
+    .line { transition: stroke-width 0.2s; }
+    .bar { transition: opacity 0.15s; }
+    .bar:hover { opacity: 0.8; }
+    .slice { transition: opacity 0.15s; }
+    .slice:hover { opacity: 0.8; }
+  </style>
+  <rect x="0.00" y="0.00" width="700.00" height="320.00" fill="#ffffff"/>
+  <g class="grid">
+  <line x1="60.00" y1="238.50" x2="680.00" y2="238.50" stroke="#e0e0e0" stroke-width="0.5"/>
+  <line x1="60.00" y1="188.50" x2="680.00" y2="188.50" stroke="#e0e0e0" stroke-width="0.5"/>
+  <line x1="60.00" y1="138.50" x2="680.00" y2="138.50" stroke="#e0e0e0" stroke-width="0.5"/>
+  <line x1="60.00" y1="88.50" x2="680.00" y2="88.50" stroke="#e0e0e0" stroke-width="0.5"/>
+  </g>
+  <g class="y-axis">
+  <line x1="60.00" y1="50.00" x2="60.00" y2="270.00" stroke="#666666" stroke-width="1"/>
+  <line x1="56.00" y1="238.50" x2="60.00" y2="238.50" stroke="#666666" stroke-width="1"/>
+  <text x="52.00" y="242.50" text-anchor="end" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">500</text>
+  <line x1="56.00" y1="188.50" x2="60.00" y2="188.50" stroke="#666666" stroke-width="1"/>
+  <text x="52.00" y="192.50" text-anchor="end" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">1000</text>
+  <line x1="56.00" y1="138.50" x2="60.00" y2="138.50" stroke="#666666" stroke-width="1"/>
+  <text x="52.00" y="142.50" text-anchor="end" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">1500</text>
+  <line x1="56.00" y1="88.50" x2="60.00" y2="88.50" stroke="#666666" stroke-width="1"/>
+  <text x="52.00" y="92.50" text-anchor="end" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">2000</text>
+  <text x="15.00" y="160.00" text-anchor="middle" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif" transform="rotate(-90 15.00 160.00)">£</text>
+  </g>
+  <g class="x-axis">
+  <line x1="60.00" y1="270.00" x2="680.00" y2="270.00" stroke="#666666" stroke-width="1"/>
+  <line x1="70.69" y1="270.00" x2="70.69" y2="274.00" stroke="#666666" stroke-width="1"/>
+  <text x="70.69" y="286.00" text-anchor="middle" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">2 Sep</text>
+  <line x1="220.34" y1="270.00" x2="220.34" y2="274.00" stroke="#666666" stroke-width="1"/>
+  <text x="220.34" y="286.00" text-anchor="middle" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">9 Sep</text>
+  <line x1="370.00" y1="270.00" x2="370.00" y2="274.00" stroke="#666666" stroke-width="1"/>
+  <text x="370.00" y="286.00" text-anchor="middle" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">16 Sep</text>
+  <line x1="519.66" y1="270.00" x2="519.66" y2="274.00" stroke="#666666" stroke-width="1"/>
+  <text x="519.66" y="286.00" text-anchor="middle" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">23 Sep</text>
+  <line x1="669.31" y1="270.00" x2="669.31" y2="274.00" stroke="#666666" stroke-width="1"/>
+  <text x="669.31" y="286.00" text-anchor="middle" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">30 Sep</text>
+  </g>
+  <text x="350.00" y="30.00" text-anchor="middle" fill="#333333" font-size="16" font-weight="bold" font-family="system-ui, -apple-system, sans-serif">Current account — September 2026</text>
+  <g class="series-0">
+  <path d="M60.00,168.50 L60.00,168.50 L60.00,263.50 L102.76,263.50 L102.76,270.00 L188.28,270.00 L188.28,50.00 L209.66,50.00 L209.66,81.00 L295.17,81.00 L295.17,89.50 L359.31,89.50 L359.31,100.50 L444.83,100.50 L444.83,107.00 L508.97,107.00 L508.97,115.00 L573.10,115.00 L573.10,109.00 L637.24,109.00 L637.24,174.00 L680.00,174.00 L680.00,174.00" fill="none" stroke="#4e79a7" stroke-width="2" class="line"/>
+  <g class="data-point" aria-label="Opening balance: £1200">
+  <circle cx="60.00" cy="168.50" r="3.0" fill="#4e79a7" class="point"/>
+  <g class="tooltip">
+  <rect x="68.00" y="148.50" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
+  <text x="72.00" y="161.50" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">Opening balance: £1200</text>
+  </g>
+  </g>
+  <g class="data-point" aria-label="Rent: £250">
+  <circle cx="60.00" cy="263.50" r="3.0" fill="#4e79a7" class="point"/>
+  <g class="tooltip">
+  <rect x="68.00" y="243.50" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
+  <text x="72.00" y="256.50" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">Rent: £250</text>
+  </g>
+  </g>
+  <g class="data-point" aria-label="Groceries: £185">
+  <circle cx="102.76" cy="270.00" r="3.0" fill="#4e79a7" class="point"/>
+  <g class="tooltip">
+  <rect x="110.76" y="250.00" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
+  <text x="114.76" y="263.00" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">Groceries: £185</text>
+  </g>
+  </g>
+  <g class="data-point" aria-label="Salary: £2385">
+  <circle cx="188.28" cy="50.00" r="3.0" fill="#4e79a7" class="point"/>
+  <g class="tooltip">
+  <rect x="196.28" y="30.00" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
+  <text x="200.28" y="43.00" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">Salary: £2385</text>
+  </g>
+  </g>
+  <g class="data-point" aria-label="Car insurance: £2075">
+  <circle cx="209.66" cy="81.00" r="3.0" fill="#4e79a7" class="point"/>
+  <g class="tooltip">
+  <rect x="217.66" y="61.00" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
+  <text x="221.66" y="74.00" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">Car insurance: £2075</text>
+  </g>
+  </g>
+  <g class="data-point" aria-label="Groceries: £1990">
+  <circle cx="295.17" cy="89.50" r="3.0" fill="#4e79a7" class="point"/>
+  <g class="tooltip">
+  <rect x="303.17" y="69.50" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
+  <text x="307.17" y="82.50" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">Groceries: £1990</text>
+  </g>
+  </g>
+  <g class="data-point" aria-label="Electricity: £1880">
+  <circle cx="359.31" cy="100.50" r="3.0" fill="#4e79a7" class="point"/>
+  <g class="tooltip">
+  <rect x="367.31" y="80.50" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
+  <text x="371.31" y="93.50" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">Electricity: £1880</text>
+  </g>
+  </g>
+  <g class="data-point" aria-label="Dinner out: £1815">
+  <circle cx="444.83" cy="107.00" r="3.0" fill="#4e79a7" class="point"/>
+  <g class="tooltip">
+  <rect x="452.83" y="87.00" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
+  <text x="456.83" y="100.00" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">Dinner out: £1815</text>
+  </g>
+  </g>
+  <g class="data-point" aria-label="Groceries: £1735">
+  <circle cx="508.97" cy="115.00" r="3.0" fill="#4e79a7" class="point"/>
+  <g class="tooltip">
+  <rect x="516.97" y="95.00" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
+  <text x="520.97" y="108.00" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">Groceries: £1735</text>
+  </g>
+  </g>
+  <g class="data-point" aria-label="Refund: £1795">
+  <circle cx="573.10" cy="109.00" r="3.0" fill="#4e79a7" class="point"/>
+  <g class="tooltip">
+  <rect x="581.10" y="89.00" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
+  <text x="585.10" y="102.00" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">Refund: £1795</text>
+  </g>
+  </g>
+  <g class="data-point" aria-label="Credit card: £1145">
+  <circle cx="637.24" cy="174.00" r="3.0" fill="#4e79a7" class="point"/>
+  <g class="tooltip">
+  <rect x="645.24" y="154.00" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
+  <text x="649.24" y="167.00" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">Credit card: £1145</text>
+  </g>
+  </g>
+  <g class="data-point" aria-label="Closing balance: £1145">
+  <circle cx="680.00" cy="174.00" r="3.0" fill="#4e79a7" class="point"/>
+  <g class="tooltip">
+  <rect x="688.00" y="154.00" width="60.00" height="18.00" fill="white" stroke="#ccc" rx="3"/>
+  <text x="692.00" y="167.00" fill="#333333" font-size="10" font-family="system-ui, -apple-system, sans-serif">Closing balance: £1145</text>
+  </g>
+  </g>
+  </g>
+</svg>

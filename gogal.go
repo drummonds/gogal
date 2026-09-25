@@ -130,3 +130,15 @@ func (c *Chart) AddSlice(label string, value float64) *Chart {
 	c.series[0].Points = append(c.series[0].Points, point)
 	return c
 }
+
+// NewStepChart creates a chart whose line holds each value until the next
+// data point, then jumps to the new value: the shape of an account balance
+// between transactions, a stock level, or any state that only changes at
+// discrete events.
+func NewStepChart(opts ...Option) *Chart {
+	cfg := DefaultConfig()
+	for _, opt := range opts {
+		opt(&cfg)
+	}
+	return &Chart{config: cfg, chartType: "step"}
+}
