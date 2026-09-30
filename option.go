@@ -56,6 +56,7 @@ type ChartConfig struct {
 	ShowValues   bool // print each value above its bar (bar charts)
 	ShowPoints   bool // draw a marker at each data point (line and step charts); tooltips hang off the markers
 	IntegerY     bool // step Y ticks in whole numbers, for counts
+	MaxYTicks    int  // cap on the number of labelled Y ticks; 0 leaves the default density
 	EndLabels    bool // pin labels for the first and last time to the ends of a temporal X axis
 
 	HiddenSeries []string       // series names to hide (for HTMX toggle)
@@ -201,6 +202,12 @@ func WithPoints(on bool) Option {
 // shows fractional ticks.
 func WithIntegerY(on bool) Option {
 	return func(c *ChartConfig) { c.IntegerY = on }
+}
+
+// WithMaxYTicks caps the number of labelled Y ticks at n (at least 3),
+// using the finest 1-2-5 step that fits.
+func WithMaxYTicks(n int) Option {
+	return func(c *ChartConfig) { c.MaxYTicks = n }
 }
 
 // WithEndLabels pins labels for the first and last time to the ends of a

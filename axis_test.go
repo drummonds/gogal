@@ -141,3 +141,38 @@ func TestXAxis_NumericWhenPointsCarryNoTime(t *testing.T) {
 		t.Errorf("x labels = %q, want \"0 2 4 6 8 10\"", got)
 	}
 }
+
+// WithMaxYTicks caps the number of labelled Y ticks, picking the finest
+// nice step that fits once the domain is widened to whole steps. The cap
+// is at least 3: a domain crossing zero always needs -step, 0 and +step.
+func TestYAxis_MaxTicks(t *testing.T) {
+	tests := []struct {
+		name   string
+		values []float64
+		max    int
+		want   string
+	}{
+		{"step 10", []float64{20, 52}, 5, "20 30 40 50 60"},
+		{"step 500", []float64{20, 1121}, 5, "0 500 1000 1500"},
+		{"flat", []float64{20, 20}, 5, "19 20 21"},
+		{"three", []float64{20, 142}, 3, "0 100 200"},
+		{"two floors at three", []float64{20, 142}, 2, "0 100 200"},
+	}
+	for _, tt := range tests {
+		chart := NewLineChart(WithIntegerY(true), WithYFormat("%.0f"), WithMaxYTicks(tt.max))
+		chart.AddXY("n", []float64{0, 1}, tt.values)
+		if got := strings.Join(tickLabels(chart.Layout().YAxis), " "); got != tt.want {
+			t.Errorf("%s: y labels = %q, want %q", tt.name, got, tt.want)
+		}
+	}
+
+	for hi := 1.0; hi <= 5000; hi *= 1.37 {
+		for _, limit := range []int{2, 3, 4, 5, 6} {
+			chart := NewLineChart(WithMaxYTicks(limit))
+			chart.AddXY("n", []float64{0, 1}, []float64{-hi / 3, hi})
+			if n := len(chart.Layout().YAxis.Ticks); n > max(limit, 3) || n < 2 {
+				t.Errorf("data -%.3g..%.3g, max %d: %d y ticks", hi/3, hi, limit, n)
+			}
+		}
+	}
+}

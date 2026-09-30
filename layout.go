@@ -209,6 +209,9 @@ func computeFullLayout(result *LayoutResult, series []Series, cfg *ChartConfig, 
 		yScale = NewLinearScaleFromData(allY)
 	}
 	yScale.SetIntegerTicks(cfg.IntegerY)
+	if cfg.MaxYTicks > 0 {
+		yScale.SetMaxTicks(cfg.MaxYTicks)
+	}
 	if chartType != "bar" {
 		yScale.Nice()
 	}

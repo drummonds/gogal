@@ -35,6 +35,7 @@ type LinearScale struct {
 	tickCount            int
 	format               string
 	integer              bool    // tick steps are whole numbers
+	maxTicks             int     // cap on the number of ticks once niced; 0 means no cap
 	step                 float64 // fixed tick step once the domain is niced; 0 picks one from the domain
 }
 
@@ -112,20 +113,56 @@ func (s *LinearScale) Nice() {
 	s.step = step
 }
 
+// SetMaxTicks caps the number of ticks, counted over the domain widened
+// to whole steps; n below 3 is taken as 3, since a domain crossing zero
+// always needs -step, 0 and +step.
+func (s *LinearScale) SetMaxTicks(n int) {
+	s.maxTicks = max(n, 3)
+}
+
 func (s *LinearScale) tickStep() float64 {
 	if s.step > 0 {
 		return s.step
 	}
-	step := niceStep(s.domainMax-s.domainMin, s.tickCount)
+	span := s.domainMax - s.domainMin
+	if s.maxTicks == 0 {
+		step := niceStep(span, s.tickCount)
+		if s.integer && step < 1 {
+			step = 1
+		}
+		return step
+	}
+	step := niceAtLeast(span / float64(s.maxTicks-1))
 	if s.integer && step < 1 {
 		step = 1
 	}
+	for math.Ceil(s.domainMax/step)-math.Floor(s.domainMin/step)+1 > float64(s.maxTicks) {
+		step = niceAtLeast(step * 1.01)
+	}
 	return step
+}
+
+func finite(x float64) bool {
+	return !math.IsInf(x, 0) && !math.IsNaN(x)
+}
+
+// niceAtLeast returns the smallest 1, 2 or 5 × 10^n that is at least x.
+func niceAtLeast(x float64) float64 {
+	pow := math.Pow(10, math.Floor(math.Log10(x)))
+	for _, m := range []float64{1, 2, 5, 10} {
+		if m*pow >= x*(1-1e-9) {
+			return m * pow
+		}
+	}
+	return 10 * pow
 }
 
 func (s *LinearScale) Ticks() []Tick {
 	step := s.tickStep()
 	start := math.Ceil(s.domainMin/step) * step
+	if !finite(start) || !finite(s.domainMax) || !finite(step) || step <= 0 {
+		return nil
+	}
 	var ticks []Tick
 	for i := 0; ; i++ {
 		v := start + float64(i)*step

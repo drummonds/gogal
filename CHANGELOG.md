@@ -10,7 +10,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 - `WithPoints(false)` draws no per-point markers (nor their CSS), cutting a 1100-point line from ~150 KB to ~20 KB
 - `WithIntegerY(true)` steps Y ticks in whole numbers, for counts
 - `WithEndLabels(true)` pins the first and last dates to the ends of a temporal X axis, dropping calendar ticks that would collide with them
-- `LinearScale.Nice`, `LinearScale.SetIntegerTicks`, `TemporalScale.TicksWithEnds`
+- `WithMaxYTicks(n)` caps the number of labelled Y ticks (at least 3), using the finest 1-2-5 step that fits
+- `LinearScale.Nice`, `LinearScale.SetIntegerTicks`, `LinearScale.SetMaxTicks`, `TemporalScale.TicksWithEnds`
 
 ### Changed
 - Line and step charts widen the Y domain to whole ticks, so both ends of the Y axis are labelled
@@ -18,6 +19,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 ### Fixed
 - Temporal ticks are never finer than the time format can show: a date-only format no longer repeats the same date at sub-day ticks
 - Plain XY data (no times) gets a numeric X axis instead of 1970-01-01 labels
+- `LinearScale.Ticks` returns no ticks for an infinite or NaN domain instead of appending NaN ticks until memory runs out
 
 ## [0.1.8] - 2026-09-25
 

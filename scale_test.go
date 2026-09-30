@@ -329,3 +329,14 @@ func TestTemporalScale_MonthlyAndYearlyTicks(t *testing.T) {
 		t.Errorf("yearly labels = %q", got)
 	}
 }
+
+// A domain that is not finite has no ticks, rather than an endless run of
+// NaN ones.
+func TestLinearScale_TicksNonFiniteDomain(t *testing.T) {
+	for _, d := range [][2]float64{{0, math.Inf(1)}, {math.Inf(-1), 0}, {0, math.NaN()}} {
+		s := NewLinearScale(d[0], d[1])
+		if ticks := s.Ticks(); len(ticks) != 0 {
+			t.Errorf("domain %v: %d ticks, want none", d, len(ticks))
+		}
+	}
+}
