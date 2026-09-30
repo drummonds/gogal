@@ -54,6 +54,9 @@ type ChartConfig struct {
 	Animate      bool
 	Smooth       bool // use bezier curves for line charts
 	ShowValues   bool // print each value above its bar (bar charts)
+	ShowPoints   bool // draw a marker at each data point (line and step charts); tooltips hang off the markers
+	IntegerY     bool // step Y ticks in whole numbers, for counts
+	EndLabels    bool // pin labels for the first and last time to the ends of a temporal X axis
 
 	HiddenSeries []string       // series names to hide (for HTMX toggle)
 	TimeFormat   string         // Go time format for tick labels
@@ -76,6 +79,7 @@ func DefaultConfig() ChartConfig {
 		ShowLegend:   true,
 		ShowTooltips: true,
 		ShowValues:   true,
+		ShowPoints:   true,
 		Accessible:   true,
 		Margins:      Margins{Top: 40, Right: 20, Bottom: 50, Left: 60},
 		TimeFormat:   "2006-01-02",
@@ -109,6 +113,7 @@ func WithVariant(v Variant) Option {
 			c.ShowLegend = false
 			c.ShowTooltips = false
 			c.ShowValues = false
+			c.ShowPoints = false
 			c.Accessible = false
 			c.Width = 100
 			c.Height = 20
@@ -184,6 +189,25 @@ func WithLocation(loc *time.Location) Option {
 // WithValueLabels controls whether bar charts print each value above its bar.
 func WithValueLabels(on bool) Option {
 	return func(c *ChartConfig) { c.ShowValues = on }
+}
+
+// WithPoints controls whether line and step charts draw a marker at each
+// data point. Tooltips hang off the markers, so they go too.
+func WithPoints(on bool) Option {
+	return func(c *ChartConfig) { c.ShowPoints = on }
+}
+
+// WithIntegerY steps Y ticks in whole numbers, so a count axis never
+// shows fractional ticks.
+func WithIntegerY(on bool) Option {
+	return func(c *ChartConfig) { c.IntegerY = on }
+}
+
+// WithEndLabels pins labels for the first and last time to the ends of a
+// temporal X axis; calendar ticks whose labels would collide with them are
+// dropped.
+func WithEndLabels(on bool) Option {
+	return func(c *ChartConfig) { c.EndLabels = on }
 }
 
 // WithColors overrides the theme palette. Series (or pie slices) take

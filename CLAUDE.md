@@ -20,6 +20,7 @@ scale_test.go       # Scale tests (13, incl. temporal ladder)
 layout_test.go      # Layout + render tests (9)
 bar_test.go         # Bar chart tests (5)
 pie_test.go         # Pie chart tests (6)
+axis_test.go        # Axis tick tests (6)
 examples/
   01_sparkline/go/  # Minimal sparkline example
 docs/
@@ -74,11 +75,12 @@ tp pages deploy     # rsync docs/ to the docs site (run docs:all first)
 - Bar chart (vertical, grouped, value labels, sparkline)
 - Pie chart (sectors, legend with percentages, WithColors)
 - Step chart (balance-style hold-then-jump line)
-- Temporal ticks in calendar units, formatted in the data's location
+- Temporal ticks in calendar units, formatted in the data's location, never finer than the format shows
+- Axis options for gobank's customer chart: WithPoints, WithIntegerY, WithEndLabels, nice Y domain
 - CSS tooltips, hover effects, animations
 - Smooth paths (Catmull-Rom to Bezier)
 - Light/Dark themes
-- 36 tests passing
+- 50 tests passing
 
 ### Next Steps (from plan)
 - Step 4: Static line chart example (examples/02_static_line, examples/03_multi_series)

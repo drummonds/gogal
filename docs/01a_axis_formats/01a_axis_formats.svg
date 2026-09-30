@@ -39,17 +39,17 @@
   <g class="x-axis">
   <line x1="60.00" y1="200.00" x2="480.00" y2="200.00" stroke="#666666" stroke-width="1"/>
   <line x1="60.00" y1="200.00" x2="60.00" y2="204.00" stroke="#666666" stroke-width="1"/>
-  <text x="60.00" y="216.00" text-anchor="middle" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">1970-01-01</text>
+  <text x="60.00" y="216.00" text-anchor="middle" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">0</text>
   <line x1="144.00" y1="200.00" x2="144.00" y2="204.00" stroke="#666666" stroke-width="1"/>
-  <text x="144.00" y="216.00" text-anchor="middle" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">1970-01-01</text>
+  <text x="144.00" y="216.00" text-anchor="middle" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">2</text>
   <line x1="228.00" y1="200.00" x2="228.00" y2="204.00" stroke="#666666" stroke-width="1"/>
-  <text x="228.00" y="216.00" text-anchor="middle" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">1970-01-01</text>
+  <text x="228.00" y="216.00" text-anchor="middle" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">4</text>
   <line x1="312.00" y1="200.00" x2="312.00" y2="204.00" stroke="#666666" stroke-width="1"/>
-  <text x="312.00" y="216.00" text-anchor="middle" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">1970-01-01</text>
+  <text x="312.00" y="216.00" text-anchor="middle" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">6</text>
   <line x1="396.00" y1="200.00" x2="396.00" y2="204.00" stroke="#666666" stroke-width="1"/>
-  <text x="396.00" y="216.00" text-anchor="middle" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">1970-01-01</text>
+  <text x="396.00" y="216.00" text-anchor="middle" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">8</text>
   <line x1="480.00" y1="200.00" x2="480.00" y2="204.00" stroke="#666666" stroke-width="1"/>
-  <text x="480.00" y="216.00" text-anchor="middle" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">1970-01-01</text>
+  <text x="480.00" y="216.00" text-anchor="middle" fill="#333333" font-size="12" font-family="system-ui, -apple-system, sans-serif">10</text>
   </g>
   <text x="250.00" y="30.00" text-anchor="middle" fill="#333333" font-size="16" font-weight="bold" font-family="system-ui, -apple-system, sans-serif">Small integers (0–10)</text>
   <g class="series-0">

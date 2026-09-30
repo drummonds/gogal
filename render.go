@@ -125,7 +125,7 @@ func render(w io.Writer, layout *LayoutResult) error {
 		}
 
 		// Data points
-		if cfg.Variant != Sparkline {
+		if cfg.Variant != Sparkline && cfg.ShowPoints {
 			for _, p := range sl.Points {
 				sw.openGroup(fmt.Sprintf(` class="data-point" aria-label="%s"`, xmlEscape(p.Label)))
 				sw.circle(p.X, p.Y, 3, fmt.Sprintf(` fill="%s" class="point"`, sl.Color))
@@ -176,10 +176,12 @@ func render(w io.Writer, layout *LayoutResult) error {
 // generateCSS returns the embedded CSS for chart interactivity.
 func generateCSS(cfg *ChartConfig) string {
 	css := ""
-	css += "    .tooltip { display: none; pointer-events: none; }\n"
-	css += "    .data-point:hover .tooltip { display: block; }\n"
-	css += "    .point { transition: r 0.15s; }\n"
-	css += "    .data-point:hover .point { r: 5; }\n"
+	if cfg.ShowPoints {
+		css += "    .tooltip { display: none; pointer-events: none; }\n"
+		css += "    .data-point:hover .tooltip { display: block; }\n"
+		css += "    .point { transition: r 0.15s; }\n"
+		css += "    .data-point:hover .point { r: 5; }\n"
+	}
 	css += "    .line { transition: stroke-width 0.2s; }\n"
 	css += "    .bar { transition: opacity 0.15s; }\n"
 	css += "    .bar:hover { opacity: 0.8; }\n"

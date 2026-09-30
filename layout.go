@@ -208,6 +208,10 @@ func computeFullLayout(result *LayoutResult, series []Series, cfg *ChartConfig, 
 	} else {
 		yScale = NewLinearScaleFromData(allY)
 	}
+	yScale.SetIntegerTicks(cfg.IntegerY)
+	if chartType != "bar" {
+		yScale.Nice()
+	}
 	yScale.SetRange(result.PlotArea.Y+result.PlotArea.Height, result.PlotArea.Y)
 	if cfg.YFormat != "" {
 		yScale.SetFormat(cfg.YFormat)
@@ -223,7 +227,7 @@ func computeFullLayout(result *LayoutResult, series []Series, cfg *ChartConfig, 
 		allX := collectXValues(series)
 		linScale := NewLinearScaleFromData(allX)
 		linScale.SetRange(result.PlotArea.X, result.PlotArea.X+result.PlotArea.Width)
-		if cfg.Axis == Temporal && cfg.TimeFormat != "" {
+		if cfg.Axis == Temporal && cfg.TimeFormat != "" && hasTimes(series) {
 			xScale = NewTemporalScale(linScale, cfg.TimeFormat, tickLocation(cfg, series))
 		} else {
 			xScale = linScale
@@ -258,6 +262,9 @@ func computeFullLayout(result *LayoutResult, series []Series, cfg *ChartConfig, 
 
 	// X axis
 	xTicks := xScale.Ticks()
+	if ts, ok := xScale.(*TemporalScale); ok && cfg.EndLabels {
+		xTicks = ts.TicksWithEnds(labelWidth(ts, cfg.Theme.FontSize))
+	}
 	xAxis := &AxisLayout{
 		Position: result.PlotArea.Y + result.PlotArea.Height,
 	}
@@ -529,6 +536,26 @@ func niceMin(value float64) float64 {
 	exp := math.Floor(math.Log10(math.Abs(value)))
 	pow := math.Pow(10, exp)
 	return math.Floor(value/pow) * pow
+}
+
+// labelWidth estimates the pixel width of a temporal tick label, with a
+// little padding, from the length of the format rendered at a reference time.
+func labelWidth(ts *TemporalScale, fontSize float64) float64 {
+	sample := time.Date(2006, 12, 28, 23, 59, 59, 0, time.UTC).Format(ts.timeFormat)
+	return float64(len(sample))*fontSize*0.6 + fontSize/2
+}
+
+// hasTimes reports whether any point carries a time, i.e. whether X is a
+// Unix timestamp rather than a plain number.
+func hasTimes(series []Series) bool {
+	for _, s := range series {
+		for _, p := range s.Points {
+			if !p.Time.IsZero() {
+				return true
+			}
+		}
+	}
+	return false
 }
 
 // tickLocation picks the time zone for temporal tick labels: the configured

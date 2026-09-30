@@ -3,6 +3,7 @@ package gogal
 import (
 	"fmt"
 	"math"
+	"sort"
 	"time"
 )
 
@@ -33,6 +34,8 @@ type LinearScale struct {
 	rangeMin, rangeMax   float64
 	tickCount            int
 	format               string
+	integer              bool    // tick steps are whole numbers
+	step                 float64 // fixed tick step once the domain is niced; 0 picks one from the domain
 }
 
 // NewLinearScale creates a scale from the given data domain.
@@ -95,11 +98,40 @@ func (s *LinearScale) Domain() [2]float64 {
 	return [2]float64{s.domainMin, s.domainMax}
 }
 
-func (s *LinearScale) Ticks() []Tick {
+// SetIntegerTicks makes tick steps whole numbers, for counts.
+func (s *LinearScale) SetIntegerTicks(on bool) {
+	s.integer = on
+}
+
+// Nice widens the domain outwards to whole tick steps, so the first and
+// last ticks sit on the ends of the range.
+func (s *LinearScale) Nice() {
+	step := s.tickStep()
+	s.domainMin = math.Floor(s.domainMin/step) * step
+	s.domainMax = math.Ceil(s.domainMax/step) * step
+	s.step = step
+}
+
+func (s *LinearScale) tickStep() float64 {
+	if s.step > 0 {
+		return s.step
+	}
 	step := niceStep(s.domainMax-s.domainMin, s.tickCount)
+	if s.integer && step < 1 {
+		step = 1
+	}
+	return step
+}
+
+func (s *LinearScale) Ticks() []Tick {
+	step := s.tickStep()
 	start := math.Ceil(s.domainMin/step) * step
 	var ticks []Tick
-	for v := start; v <= s.domainMax+step*0.001; v += step {
+	for i := 0; ; i++ {
+		v := start + float64(i)*step
+		if v > s.domainMax+step*0.001 {
+			break
+		}
 		ticks = append(ticks, Tick{
 			Value:    v,
 			Position: s.Map(v),
@@ -179,7 +211,7 @@ func NewTemporalScale(ls *LinearScale, timeFormat string, loc *time.Location) *T
 }
 
 func (s *TemporalScale) Ticks() []Tick {
-	step := temporalStep(s.domainMax-s.domainMin, s.tickCount)
+	step := temporalStepAtLeast(s.domainMax-s.domainMin, s.tickCount, formatResolution(s.timeFormat))
 	first := time.Unix(int64(math.Ceil(s.domainMin)), 0).In(s.loc)
 	last := time.Unix(int64(math.Floor(s.domainMax)), 0).In(s.loc)
 
@@ -193,6 +225,34 @@ func (s *TemporalScale) Ticks() []Tick {
 		})
 	}
 	return ticks
+}
+
+// TicksWithEnds returns ticks labelled with the first and last time of the
+// domain, pinned to the ends of the range, plus those calendar ticks that
+// sit at least minGap pixels from every tick already kept.
+func (s *TemporalScale) TicksWithEnds(minGap float64) []Tick {
+	endTick := func(v float64) Tick {
+		return Tick{Value: v, Position: s.Map(v), Label: time.Unix(int64(v), 0).In(s.loc).Format(s.timeFormat)}
+	}
+	kept := []Tick{endTick(s.domainMin)}
+	if last := endTick(s.domainMax); math.Abs(last.Position-kept[0].Position) >= minGap {
+		kept = append(kept, last)
+	}
+	clear := func(t Tick) bool {
+		for _, k := range kept {
+			if math.Abs(t.Position-k.Position) < minGap {
+				return false
+			}
+		}
+		return true
+	}
+	for _, t := range s.Ticks() {
+		if clear(t) {
+			kept = append(kept, t)
+		}
+	}
+	sort.Slice(kept, func(i, j int) bool { return kept[i].Value < kept[j].Value })
+	return kept
 }
 
 // timeStep is one rung of the temporal tick ladder: either a fixed duration
@@ -238,15 +298,49 @@ var temporalLadder = func() []timeStep {
 // temporalStep picks the smallest ladder step that yields at most
 // targetTicks intervals across a span of the given seconds.
 func temporalStep(spanSeconds float64, targetTicks int) timeStep {
+	return temporalStepAtLeast(spanSeconds, targetTicks, 0)
+}
+
+// temporalStepAtLeast is temporalStep restricted to steps of at least
+// minSeconds, so ticks are never finer than their labels can show.
+func temporalStepAtLeast(spanSeconds float64, targetTicks int, minSeconds float64) timeStep {
 	if targetTicks <= 0 {
 		targetTicks = 1
 	}
 	for _, st := range temporalLadder {
+		if st.seconds() < minSeconds {
+			continue
+		}
 		if spanSeconds/st.seconds() <= float64(targetTicks) {
 			return st
 		}
 	}
 	return temporalLadder[len(temporalLadder)-1]
+}
+
+// formatResolution returns, in nominal seconds, the finest calendar unit a
+// Go time format distinguishes: a date-only format resolves days, "15:04"
+// resolves minutes. It is found by formatting a reference time and the
+// same time one unit later, finest unit first.
+func formatResolution(format string) float64 {
+	ref := time.Date(2001, 2, 3, 4, 5, 6, 0, time.UTC)
+	units := []struct {
+		later   time.Time
+		seconds float64
+	}{
+		{ref.Add(time.Second), 1},
+		{ref.Add(time.Minute), 60},
+		{ref.Add(time.Hour), 3600},
+		{ref.AddDate(0, 0, 1), 86400},
+		{ref.AddDate(0, 1, 0), 30 * 86400},
+		{ref.AddDate(1, 0, 0), 365 * 86400},
+	}
+	for _, u := range units {
+		if u.later.Format(format) != ref.Format(format) {
+			return u.seconds
+		}
+	}
+	return 0
 }
 
 // align returns the first tick at or after t, on a step boundary in t's location.
