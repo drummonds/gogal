@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-09-30
+
+ - Y tick cap (WithMaxYTicks) and non-finite domain guard in LinearScale.Ticks
+
 ### Added
 - `WithPoints(false)` draws no per-point markers (nor their CSS), cutting a 1100-point line from ~150 KB to ~20 KB
 - `WithIntegerY(true)` steps Y ticks in whole numbers, for counts
